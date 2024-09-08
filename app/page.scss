@@ -1,0 +1,12 @@
+@import "../styles/_colors";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__logo {
+    fill: white;
+    padding: 1rem;
+  }
+}
