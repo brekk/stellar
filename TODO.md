@@ -1,0 +1,7 @@
+- [ ] - add `rehype-shiki` so we can add syntax highlighting via textmate grammar
+- [ ] - add `rehype-slug` / `rehype-slug-custom-id` so we can add ids to headings
+- [ ] - add `rehype-wrap` / `rehype-wrapp-all` so we can dial in our selectors for the page
+- [ ] - add `remark-code-import` / `remark-sources` so we can separate code examples?
+- [ ] - add `remark-code-extra` - https://github.com/s0/remark-code-extra - to fix our current whitespace problems?
+- [ ] - add `remark-code-title` to add custom titles to blocks of code
+- [ ] - see if this avails us: https://github.com/johackim/remark-obsidian/issues/1 && https://github.com/alfredoperez/nextjs-obsidian-starter-blog/blob/add-remark-obsidian/lib/mdx.js#L76
