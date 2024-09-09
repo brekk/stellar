@@ -8,5 +8,7 @@
   &__logo {
     fill: white;
     padding: 1rem;
+    width: calc(100% - 2rem);
+    height: auto;
   }
 }

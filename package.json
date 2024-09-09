@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "blem": "^0.0.9",
+    "fluture": "^14.0.0",
     "next": "14.2.8",
+    "ramda": "^0.30.1",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -21,7 +23,24 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
+    "react-jsx-runtime": "^1.0.0-alpha.1",
+    "rehype-format": "^5.0.0",
+    "rehype-highlight": "^7.0.0",
+    "rehype-parse": "^9.0.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-react": "^8.0.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^5.0.0",
+    "remark-obsidian": "^1.8.0",
+    "remark-parse": "^11.0.0",
+    "remark-parse-frontmatter": "^1.0.3",
+    "remark-react": "^9.0.1",
+    "remark-rehype": "^11.1.0",
+    "remark-stringify": "^11.0.0",
     "sass": "^1.78.0",
-    "typescript": "^5"
+    "slug": "^9.1.0",
+    "typescript": "^5",
+    "unified": "^11.0.5"
   }
 }
