@@ -77,7 +77,12 @@ const fixClassNames = replace(/class=/g, "className=");
 const fixEntities = replace(/&#x26;gt;/g, "&gt;");
 const untransformNewlines = replace(/\n/g, "\n\n");
 
-const postfix = pipe(fixClassNames, fixEntities, untransformNewlines);
+const postfix = pipe(
+  fixClassNames,
+  fixEntities,
+  // replace(/\<pre\>\<code\>/g, "<pre><code>{`"),
+  // replace(/\<\/pre>\<\/code\>/g, "`}</pre></code>"),
+);
 
 const readObsidian = (raw) =>
   pipe(
