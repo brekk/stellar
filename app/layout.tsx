@@ -15,11 +15,6 @@ const fontFiraCode = Fira_Code({
   weight: '400'
 })
 
-export const metadata: Metadata = {
-  title: "Madlib",
-  description: "A language designed to delight"
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
