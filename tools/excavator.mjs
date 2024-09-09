@@ -36,20 +36,19 @@ const pickaxe = (x) =>
     .use(remarkObsidian)
     .use(remarkFrontmatter, ["yaml"])
     .use(remarkParseFrontmatter)
-    .use(remarkRehype) // , { allowDangerousHtml: true })
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeHighlight)
     .use(rehypeFormat)
-    .use(rehypeStringify, { entities: { useNamedReferences: true } })
-    //.use(rehypeReact, PROD)
+    .use(rehypeStringify)
+    // .use(rehypeReact, PROD)
     .process(x);
 
 const cleanName = pipe((x) => x.slice(x.lastIndexOf("/"), -3), slug);
 
-const indentNewlines = replace("\n", "\n    ");
 const format = (x) => prettier.format(x, { semi: false, parser: "typescript" });
 const prettify = encaseP(format);
-const spotFix = replace(/\>\>/g, ">&gt;");
+// const spotFix = replace(/\>\>/g, ">&gt;");
 
 const jsxify = curry((name, raw) => {
   return `import blem from "blem"
@@ -62,18 +61,32 @@ export const DATA = ${stringifyFrontmatter(raw)}
 export const COMPONENT = () => {
   const bem = blem(NAME)
   return (<article className={bem("")}>${raw.value}</article>)
+}
+
+export default COMPONENT
 `;
 });
 
-//const spotFix = replace(/^>/g, "&gt;");
+const fixNewlines = replace(/\n/g, "");
+const spotFix = pipe(
+  replace(/=>/g, "=&gt;"),
+  replace(/>/g, "&gt;"),
+  // fixNewlines,
+);
+const fixClassNames = replace(/class=/g, "className=");
+const fixEntities = replace(/&#x26;gt;/g, "&gt;");
+const untransformNewlines = replace(/\n/g, "\n\n");
+
+const postfix = pipe(fixClassNames, fixEntities, untransformNewlines);
 
 const readObsidian = (raw) =>
   pipe(
     readFile,
-    //map(spotFix),
+    map(spotFix),
     chain(encaseP(pickaxe)),
     map(jsxify(raw)),
-    //chain(prettify),
+    map(postfix),
+    // chain(prettify),
   )(raw);
 
 const j2 = (x) => JSON.stringify(x, null, 2);
