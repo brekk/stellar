@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
+import { nodeTypes } from "@mdx-js/mdx";
 import { unified } from "unified";
 import slug from "slug";
 import * as prettier from "prettier";
 import remarkObsidian from "remark-obsidian";
 import remarkParse from "remark-parse";
 import rehypeRaw from "rehype-raw";
+// import remarkUTF8 from "remark-utf8";
 import rehypeHighlight from "rehype-highlight";
 import rehypeFormat from "rehype-format";
+// import remarkGfm from "remark-gfm";
 //import remarkStringify from "remark-stringify";
 import rehypeStringify from "rehype-stringify";
 import remarkRehype from "remark-rehype";
@@ -33,14 +36,15 @@ const trace = curry((msg, x) => {
 const pickaxe = (x) =>
   unified()
     .use(remarkParse)
+    // .use(remarkUTF8)
     .use(remarkObsidian)
     .use(remarkFrontmatter, ["yaml"])
     .use(remarkParseFrontmatter)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeRaw)
-    .use(rehypeHighlight)
+    .use(rehypeRaw, { passThrough: nodeTypes })
+    // .use(rehypeHighlight)
     .use(rehypeFormat)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     // .use(rehypeReact, PROD)
     .process(x);
 
