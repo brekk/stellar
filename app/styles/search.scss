@@ -1,0 +1,46 @@
+.Searchbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 2rem);
+  &__menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+  }
+  &__input {
+    &--text {
+      padding: 0.5rem;
+      border: 1px solid white;
+      border-radius: 4rem;
+      background-color: black;
+      &:focus {
+        border: 1px solid #ff0;
+        outline: 1px solid #fc0;
+      }
+    }
+    &--checkbox {
+      margin:0;
+      padding: 0;
+      margin-top: 0.1rem;
+      margin-right: 0.5rem;
+    }
+  }
+  &__label {
+    max-width: 6rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: Antonio, sans-serif;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    margin: 0.25rem;
+  }
+}
