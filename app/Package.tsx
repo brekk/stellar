@@ -12,14 +12,17 @@ export type PackageProps = {
   official: boolean;
   author: string;
   kind: PackageKind;
+  togglePublished: () => void;
+  toggleOfficial: () => void
 };
 
 export type TagProps = {
   name: string
+  onClick: () => void
 }
 
-export const Tag = ({ name }: TagProps) => (
-  <div className={blem("Package")("tag", [name.toLowerCase()])}>{name}</div>
+export const Tag = ({ name, onClick }: TagProps) => (
+  <div onClick={onClick} className={blem("Package")("tag", [name.toLowerCase()])}>{name}</div>
 )
 
 export const Package = ({
@@ -28,7 +31,9 @@ export const Package = ({
   published,
   official,
   version,
-  author
+  author,
+  toggleOfficial,
+  togglePublished
 }: PackageProps) => {
   const bem = blem("Package");
   return (
@@ -48,10 +53,10 @@ export const Package = ({
         />
         <div className={bem("tagbox")}>
           {official ? (
-            <Tag name="Official" />
+            <Tag name="Official" onClick={toggleOfficial} />
           ) : null}
           {published ? (
-            <Tag name="Published" />
+            <Tag name="Published" onClick={togglePublished} />
           ) : null}
         </div>
       </footer>

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import Logo from "@/app/Logo";
 import { useState } from "react";
 import Searchbar from "@/app/Searchbar";
 import blem from "blem";
 import "@/app/page.scss";
-import Packages from "@/app/Packages"
+import Packages from "@/app/Packages";
 
 const PACKAGES = [
   {
@@ -47,7 +47,7 @@ const PACKAGES = [
 ];
 
 export default function Home() {
-  const bem = blem("home")
+  const bem = blem("home");
   const [$search, $setSearch] = useState("");
   const [$official, $setOfficial] = useState(false);
   const [$published, $setPublished] = useState(false);
@@ -83,7 +83,11 @@ export default function Home() {
         search={$search}
         setSearch={$setSearch}
       />
-      <Packages packages={filteredPackages} />
+      <Packages
+        togglePublished={togglePublished}
+        toggleOfficial={toggleOfficial}
+        packages={filteredPackages}
+      />
     </main>
   );
 }

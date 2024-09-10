@@ -4,10 +4,16 @@ import Package from "@/app/Package";
 import "@/styles/packages.scss";
 
 export interface PackagesProps {
+  togglePublished: () => void;
+  toggleOfficial: () => void;
   packages: PackageProps[];
 }
 
-export const Packages = ({ packages }: PackagesProps) => {
+export const Packages = ({
+  togglePublished,
+  toggleOfficial,
+  packages,
+}: PackagesProps) => {
   const bem = blem("Packages");
   return (
     <div className={bem("")}>
@@ -16,11 +22,15 @@ export const Packages = ({ packages }: PackagesProps) => {
           <li
             key={raw.name}
             className={bem("list-item", [
-              raw.published ? "published" : "unpublished",
-              raw.official ? "official" : "unofficial",
+              `${!raw.published ? "un" : ""}published`,
+              `${!raw.official ? "un" : ""}official`,
             ])}
           >
-            <Package {...raw} />
+            <Package
+              {...raw}
+              togglePublished={togglePublished}
+              toggleOfficial={toggleOfficial}
+            />
           </li>
         ))}
       </ul>

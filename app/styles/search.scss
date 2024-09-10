@@ -1,14 +1,46 @@
+@import "./_colors";
 .Searchbar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-end;
   justify-content: center;
   width: calc(100% - 2rem);
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: black;
+    margin: 0;
+    color: $color-bg;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 100%;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.5rem;
+    position: relative;
+    &::before {
+      position: absolute;
+      content: "";
+      -webkit-mask: url(../assets/icon-star.svg) no-repeat 50% 50%;
+      mask: url(../assets/icon-star.svg) no-repeat 50% 50%;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      background-color: $color-yellow;
+      width: 1.125rem;
+      height: 1.125rem;
+      left: -0.25rem;
+      top: -0.25rem;
+      transform: rotate(360deg) scale(0.01);
+      transition: transform 0.3s ease-out;
+    }
+    &:checked::before {
+      transform: rotate(0deg) scale(1);
+    }
+  }
   &__toggles {
     display: flex;
     flex-direction: row;
     align-items: center;
-    align-self: flex-end;
+    justify-self: flex-end;
   }
   &__menu {
     display: flex;
@@ -18,7 +50,7 @@
     padding: 0;
     margin: 0;
     margin-bottom: 1rem;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
   &__input {
     &--text {
@@ -39,6 +71,7 @@
     }
   }
   &__label {
+    cursor: pointer;
     max-width: 6rem;
     display: flex;
     flex-direction: row;
@@ -48,5 +81,6 @@
     text-transform: uppercase;
     font-size: 0.875rem;
     margin: 0.25rem;
+    margin-right: 1rem;
   }
 }
