@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import blem from "blem";
 import "@/styles/search.scss";
@@ -7,41 +5,24 @@ import Packages from "@/app/Packages";
 import type { PackageProps } from "@/app/Package";
 
 interface SearchbarProps {
-  packages: PackageProps[]
+  toggleOfficial: () => void,
+  togglePublished: () => void,
+  official: boolean,
+  published: boolean,
+  search: string,
+  setSearch: (x: string) => void
 }
 
-export const Searchbar = ({ packages = [] }: SearchbarProps) => {
-  const [$searchText, $setSearchText] = useState("");
-  const [$official, $setOfficial] = useState(false);
-  const [$published, $setPublished] = useState(false);
-  //const [$packages, $setPackages] = useState(packages)
+export const Searchbar = ({ toggleOfficial, official, togglePublished, published, search, setSearch }: SearchbarProps) => {
 
-  const $filteredPackages = packages.filter((x) => {
-    if ($published && $official) { return x.published && x.official } else if ($published) {
-      return x.published
-    } else if ($official) {
-      return x.official
-    }
-    return true
-  })
   const bem = blem("Searchbar");
-  const toggleOfficial = () => {
-    const set = !$official
-    $setOfficial(set)
-    //console.log("OFFICIAL?", set)
-  };
-  const togglePublished = () => {
-    const set = !$published
-    $setPublished(set)
-    //console.log("PUBLISHED?", set)
-  };
   return (
     <div className={bem("")}>
-      <menu className={bem("menu")}>
+      <menu className={bem("menu")}><div className={bem("toggles")}>
         <label htmlFor="official" className={bem("label", ["official"])}>
           <input
             onChange={toggleOfficial}
-            checked={$official}
+            checked={official}
             className={bem("input", ["checkbox", "official"])}
             type="checkbox"
             name="official"
@@ -52,7 +33,7 @@ export const Searchbar = ({ packages = [] }: SearchbarProps) => {
         <label htmlFor="published" className={bem("label", ["published"])}>
           <input
             onChange={togglePublished}
-            checked={$published}
+            checked={published}
             className={bem("input", ["checkbox", "published"])}
             type="checkbox"
             name="published"
@@ -60,17 +41,17 @@ export const Searchbar = ({ packages = [] }: SearchbarProps) => {
           />
           Published
         </label>
+      </div>
         <input
           type="text"
           className={bem("input", ["text"])}
-          value={$searchText}
+          value={search}
           onChange={(e) => {
             e.preventDefault();
-            $setSearchText(e.target.value);
+            setSearch(e.target.value);
           }}
         />
       </menu>
-      <Packages packages={$filteredPackages} />
     </div>
   );
 };

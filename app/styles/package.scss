@@ -14,26 +14,38 @@
     align-items: center;
     justify-content: space-between;
   }
+  
   &__description {
     font-size: 0.75rem;
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &__avatar {
+    border-radius: 10rem;
+    align-self: flex-start;
+    border: 1px solid rgba(255,255,255,0.4);
   }
   &__tagbox {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-width: 100%;
+    align-self: flex-end;
   }
   &__tag {
-    text-shadow: 0 1px rgba(255,255,255, 0.35);
+    font-size: 0.75rem;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.35);
     font-family: Antonio, sans-serif;
-    text-transform:uppercase;
-    padding: 0.25rem 0.5rem 0.5rem;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem 0.35rem;
     background-color: $color-fg;
     color: $color-bg;
     border-radius: 0.5rem;
     margin-left: 0.5rem;
     &--published {
-    background-color: $color-purple;
+      background-color: $color-purple;
     }
     &--official {
       background-color: $color-yellow;

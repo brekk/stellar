@@ -1,7 +1,11 @@
+"use client"
+
 import Logo from "@/app/Logo";
+import { useState } from "react";
 import Searchbar from "@/app/Searchbar";
 import blem from "blem";
 import "@/app/page.scss";
+import Packages from "@/app/Packages"
 
 const PACKAGES = [
   {
@@ -44,10 +48,42 @@ const PACKAGES = [
 
 export default function Home() {
   const bem = blem("home")
+  const [$search, $setSearch] = useState("");
+  const [$official, $setOfficial] = useState(false);
+  const [$published, $setPublished] = useState(false);
+
+  const filteredPackages = PACKAGES.filter((x) => {
+    if ($published && $official) {
+      return x.published && x.official;
+    } else if ($published) {
+      return x.published;
+    } else if ($official) {
+      return x.official;
+    }
+    return true;
+  });
+  const toggleOfficial = () => {
+    const set = !$official;
+    $setOfficial(set);
+    //console.log("OFFICIAL?", set)
+  };
+  const togglePublished = () => {
+    const set = !$published;
+    $setPublished(set);
+    //console.log("PUBLISHED?", set)
+  };
   return (
     <main className={`${bem("")}`}>
       <Logo animate className={bem("logo", ["medium"])} />
-      <Searchbar packages={PACKAGES} />
+      <Searchbar
+        toggleOfficial={toggleOfficial}
+        official={$official}
+        togglePublished={togglePublished}
+        published={$published}
+        search={$search}
+        setSearch={$setSearch}
+      />
+      <Packages packages={filteredPackages} />
     </main>
   );
 }

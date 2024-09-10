@@ -7,15 +7,17 @@
   }
   &--large {
     width: 35.625rem;
+    max-width: 35.625rem;
     height: 6rem;
   }
   &--medium {
     width: 25rem;
+    max-width: 25rem;
     height: 4.375rem;
   }
   &--small {
     width: 18.75rem;
+    max-width: 18.75rem;
     height: 3.25rem;
   }
 }
-
