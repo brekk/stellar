@@ -12,7 +12,7 @@
     background-color: black;
     margin: 0;
     color: $color-bg;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid $color-white50;
     border-radius: 100%;
     width: 0.75rem;
     height: 0.75rem;
@@ -31,11 +31,11 @@
       left: -0.25rem;
       top: -0.25rem;
       transform: rotate(360deg) scale(0.01);
-      transition: transform 0.3s ease-out;
+      transition: transform 0.3s ease-out, background 0.3s ease-out;
     }
     &:checked::before {
       transform: rotate(0deg) scale(1);
-      background-color: $color-blue;
+      background-color: $color-fg;
     }
   }
   &__toggles {
@@ -57,7 +57,7 @@
   &__input {
     &--text {
       padding: 0.5rem;
-      border: 1px solid white;
+      border: 1px solid $color-white50;
       border-radius: 4rem;
       background-color: black;
       &:focus {
