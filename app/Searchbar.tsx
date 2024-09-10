@@ -28,7 +28,7 @@ export const Searchbar = ({ toggleOfficial, official, togglePublished, published
             name="official"
             id="official"
           />
-          Official
+          <span className={bem("label-text")}>Official</span>
         </label>
         <label htmlFor="published" className={bem("label", ["published"])}>
           <input
@@ -39,7 +39,7 @@ export const Searchbar = ({ toggleOfficial, official, togglePublished, published
             name="published"
             id="published"
           />
-          Published
+          <span className={bem("label-text")}>Published</span>
         </label>
       </div>
         <input
