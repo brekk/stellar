@@ -41,6 +41,16 @@
     "kind": "fun"
   },
   {
+    "name": "fake-plugin",
+    "repo": "https://bitbucket.com/sucks",
+    "official": true,
+    "published": true,
+    "author": "brekk",
+    "version": "14.0.0",
+    "description": "A fake plugin for testing",
+    "kind": "plugin"
+  },
+  {
     "name": "madserver",
     "repo": "https://github.com/madlib-lang/madserver",
     "official": true,
