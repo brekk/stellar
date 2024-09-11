@@ -17,7 +17,7 @@ export const Packages = ({
   const bem = blem("Packages");
   return (
     <div className={bem("")}>
-      <ul className={bem("package-listing")}>
+      {packages.length > 0 ? (<ul className={bem("package-listing")}>
         {packages.map((raw) => (
           <li
             key={raw.name}
@@ -33,7 +33,7 @@ export const Packages = ({
             />
           </li>
         ))}
-      </ul>
+      </ul>) : <div className={bem("no-packages")}>No matching packages found.<br />Try changing your search parameters.</div>}
     </div>
   );
 };
