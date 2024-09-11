@@ -7,18 +7,43 @@
   align-items: flex-start;
   justify-content: center;
   position: relative;
+  &__link--repo:hover {
+    svg {
+      fill: $color-pink;
+    }
+  }
+  &__version {
+    font-size: 0.75rem;
+  }
+  &__author-text {
+    transition: color 0.3s ease-out;
+  }
+  &__link--author {
+    .Package__author-text {
+      color: $color-fg;
+    }
+    &:hover {
+.Package__author-text {
+      color: $color-pink;
+    }
+    }
+  }
   &__repo {
+    transition: fill 0.3s ease-out;
     fill: $color-fg;
     align-self: center;
     max-width: 1.5rem;
     max-height: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
   &__content {
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: space-between;
+    align-items: center;
     justify-content: space-between;
+    height: 3rem;
   }
   &__authorbox {
     width: 30%;
@@ -43,9 +68,11 @@
     align-items: center;
     justify-content: space-between;
   }
-  
+
   &__description {
     font-size: 0.75rem;
+    margin: 0;
+    padding: 0;
   }
   &__footer {
     display: flex;
@@ -56,7 +83,7 @@
   &__avatar {
     border-radius: 10rem;
     align-self: flex-start;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
   &__tagbox {
     display: flex;
@@ -76,11 +103,15 @@
     color: $color-bg;
     border-radius: 0.5rem;
     margin-left: 0.5rem;
+    transition: background 0.3s ease-out;
     &--published {
       background-color: $color-purple;
     }
     &--official {
       background-color: $color-yellow;
+    }
+    &:hover {
+      background-color: $color-pink;
     }
   }
 }

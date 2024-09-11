@@ -1,5 +1,6 @@
 import blem from "blem";
 import "@/styles/package.scss";
+import Link from "next/link";
 import RepoGithub from "@/app/assets/icon-github.svg";
 import RepoGitlab from "@/app/assets/icon-gitlab.svg";
 import RepoIcon from "@/app/assets/icon-repo.svg";
@@ -55,16 +56,17 @@ export const Package = ({
     <div className={bem("")}>
       <header className={bem("header")}>
         <strong className={bem("name")}>{name}</strong>
-        <em className={bem("version")}>{version}</em>
+        {version ? <em className={bem("version")}>v{version}</em> : null}
       </header>
       <div className={bem("content")}>
         {description ? <p className={bem("description")}>{description}</p> : null}
-
-        <Icon className={bem("repo", [repoicon])} />
+        <a href={repo} className={bem("link", ["repo"])}>
+          <Icon className={bem("repo", [repoicon])} />
+        </a>
       </div>
       <footer className={bem("footer")}>
         <div className={bem("authorbox")}>
-          <a href={`/author/${author}`} className={bem("link", ["author"])}>
+          <Link href={`/author/${author}`} className={bem("link", ["author"])}>
             <Image
               src={`/avatar-${author}.png`}
               className={bem("avatar")}
@@ -73,7 +75,7 @@ export const Package = ({
               height={24}
             />
             <span className={bem("author-text")}>{author}</span>
-          </a>
+          </Link>
         </div>
         <div className={bem("tagbox")}>
           {official ? <Tag name="Official" onClick={toggleOfficial} /> : null}
