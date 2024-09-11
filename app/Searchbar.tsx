@@ -12,15 +12,19 @@ interface SearchbarProps {
   published: boolean;
   search: string;
   setSearch: (x: string) => void;
+  setKind: (x: number) => void;
+  packageKinds: string[];
 }
 
 export const Searchbar = ({
-  toggleOfficial,
   official,
-  togglePublished,
+  packageKinds,
   published,
   search,
+  setKind,
   setSearch,
+  toggleOfficial,
+  togglePublished,
 }: SearchbarProps) => {
   const bem = blem("Searchbar");
   return (
@@ -29,13 +33,18 @@ export const Searchbar = ({
       <menu className={bem("menu")}>
         <label htmlFor="kind" className={bem("label", ["select", "kind"])}>
           <span className={bem("label-text")}>Kind</span>
-          <select id="kind" name="kind" className={bem("select", ["kind"])}>
-            <option>All</option>
-            <option>Library</option>
-            <option>Tool</option>
-            <option>Utility</option>
-            <option>Mixed</option>
-            <option>Fun</option>
+          <select
+            id="kind"
+            name="kind"
+            className={bem("select", ["kind"])}
+            onChange={(e) => setKind(parseInt(e.target.value))}
+            defaultValue={0}
+          >
+            {packageKinds.map((k, i) => (
+              <option value={i} key={k + "-" + i}>
+                {k}
+              </option>
+            ))}
           </select>
         </label>
 

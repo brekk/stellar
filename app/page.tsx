@@ -7,52 +7,28 @@ import blem from "blem";
 import "@/app/page.scss";
 import Packages from "@/app/Packages";
 
-const PACKAGES = [
-  {
-    name: "madmarkdown-parser",
-    official: true,
-    published: true,
-    author: "madlib-lang",
-    version: "0.0.6",
-    description: "markdown parser written in madlib",
-    kind: "library",
-  },
-  {
-    name: "party-bus",
-    official: false,
-    published: true,
-    author: "brekk",
-    version: "0.0.3",
-    description: "Conditional tagged logging and side-effects",
-    kind: "library",
-  },
-  {
-    name: "gambit",
-    official: false,
-    published: false,
-    author: "brekk",
-    version: "0.0.3",
-    description: "French-suited playing card library",
-    kind: "library",
-  },
-  {
-    name: "mad-creatures",
-    official: false,
-    published: false,
-    author: "brekk",
-    version: "0.0.1",
-    description: "Random seeded creature simulation",
-    kind: "fun",
-  },
-];
+import PACKAGES from "@/app/packages.json"
+
+const PACKAGE_KINDS = [
+  "All",
+  "Library",
+  "Tool",
+  "Fun",
+  "Plugin",
+]
 
 export default function Home() {
   const bem = blem("home");
   const [$search, $setSearch] = useState("");
   const [$official, $setOfficial] = useState(false);
   const [$published, $setPublished] = useState(false);
-
+  const [$kind, $setKind] = useState(0);
   const filteredPackages = PACKAGES.filter((x) => {
+    if ($kind !== 0) {
+      return x.kind === PACKAGE_KINDS[$kind].toLowerCase()
+    }
+    return true
+  }).filter((x) => {
     if ($published && $official) {
       return x.published && x.official;
     } else if ($published) {
@@ -65,12 +41,10 @@ export default function Home() {
   const toggleOfficial = () => {
     const set = !$official;
     $setOfficial(set);
-    //console.log("OFFICIAL?", set)
   };
   const togglePublished = () => {
     const set = !$published;
     $setPublished(set);
-    //console.log("PUBLISHED?", set)
   };
   return (
     <main className={`${bem("")}`}>
@@ -82,6 +56,8 @@ export default function Home() {
         published={$published}
         search={$search}
         setSearch={$setSearch}
+        packageKinds={PACKAGE_KINDS}
+        setKind={$setKind}
       />
       <Packages
         togglePublished={togglePublished}

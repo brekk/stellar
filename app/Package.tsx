@@ -1,11 +1,15 @@
 import blem from "blem";
 import "@/styles/package.scss";
-import Image from 'next/image'
+import RepoGithub from "@/app/assets/icon-github.svg";
+import RepoGitlab from "@/app/assets/icon-gitlab.svg";
+import RepoIcon from "@/app/assets/icon-repo.svg";
+import Image from "next/image";
 
-export type PackageKind = 'library' | 'tool' | 'utility' | 'mixed' | 'fun';
+export type PackageKind = "library" | "tool" | "fun" | "plugin";
 
 export type PackageProps = {
   name: string;
+  repo: string;
   version: string;
   description: string;
   published: boolean;
@@ -13,17 +17,22 @@ export type PackageProps = {
   author: string;
   kind: PackageKind;
   togglePublished: () => void;
-  toggleOfficial: () => void
+  toggleOfficial: () => void;
 };
 
 export type TagProps = {
-  name: string
-  onClick: () => void
-}
+  name: string;
+  onClick: () => void;
+};
 
 export const Tag = ({ name, onClick }: TagProps) => (
-  <div onClick={onClick} className={blem("Package")("tag", [name.toLowerCase()])}>{name}</div>
-)
+  <div
+    onClick={onClick}
+    className={blem("Package")("tag", [name.toLowerCase()])}
+  >
+    {name}
+  </div>
+);
 
 export const Package = ({
   name,
@@ -31,10 +40,16 @@ export const Package = ({
   published,
   official,
   version,
+  repo,
   author,
   toggleOfficial,
-  togglePublished
+  togglePublished,
 }: PackageProps) => {
+  const [repoicon, Icon] = repo.includes("github")
+    ? ["github", RepoGithub]
+    : repo.includes("gitlab")
+      ? ["gitlab", RepoGitlab]
+      : ["repo", RepoIcon];
   const bem = blem("Package");
   return (
     <div className={bem("")}>
@@ -42,19 +57,26 @@ export const Package = ({
         <strong className={bem("name")}>{name}</strong>
         <em className={bem("version")}>{version}</em>
       </header>
-      {description ? <p className={bem("description")}>{description}</p> : null}
+      <div className={bem("content")}>
+        {description ? <p className={bem("description")}>{description}</p> : null}
+
+        <Icon className={bem("repo", [repoicon])} />
+      </div>
       <footer className={bem("footer")}>
-        <Image
-          src={`/avatar-${author}.png`}
-          className={bem("avatar")}
-          alt={author}
-          width={24}
-          height={24}
-        />
+        <div className={bem("authorbox")}>
+          <a href={`/author/${author}`} className={bem("link", ["author"])}>
+            <Image
+              src={`/avatar-${author}.png`}
+              className={bem("avatar")}
+              alt={author}
+              width={24}
+              height={24}
+            />
+            <span className={bem("author-text")}>{author}</span>
+          </a>
+        </div>
         <div className={bem("tagbox")}>
-          {official ? (
-            <Tag name="Official" onClick={toggleOfficial} />
-          ) : null}
+          {official ? <Tag name="Official" onClick={toggleOfficial} /> : null}
           {published ? (
             <Tag name="Published" onClick={togglePublished} />
           ) : null}

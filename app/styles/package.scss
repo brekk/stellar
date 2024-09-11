@@ -7,6 +7,33 @@
   align-items: flex-start;
   justify-content: center;
   position: relative;
+  &__repo {
+    fill: $color-fg;
+    align-self: center;
+  }
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: space-between;
+    justify-content: space-between;
+  }
+  &__authorbox {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__link--author {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.75rem;
+    align-items: center;
+  }
+  &__avatar {
+    margin-right: 0.5rem;
+  }
   &__header {
     display: flex;
     flex-direction: row;
@@ -33,6 +60,8 @@
     display: flex;
     flex-direction: row;
     align-self: flex-end;
+    width: 10rem;
+    justify-content: flex-end;
   }
   &__tag {
     font-size: 0.75rem;

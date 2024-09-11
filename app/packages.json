@@ -1,0 +1,343 @@
+[
+  {
+    "name": "madmarkdown-parser",
+    "repo": "https://github.com/madlib-lang/madmarkdown-parser",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "0.0.6",
+    "description": "markdown parser written in madlib",
+    "kind": "library"
+  },
+  {
+    "name": "party-bus",
+    "repo": "https://github.com/brekk/party-bus",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.3",
+    "description": "Conditional tagged logging and side-effects",
+    "kind": "library"
+  },
+
+  {
+    "name": "madui",
+    "repo": "https://github.com/madlib-lang/madui",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "7.0.2",
+    "description": "A library for writing web app clients",
+    "kind": "library"
+  },
+  {
+    "name": "madserver",
+    "repo": "https://github.com/madlib-lang/madserver",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "3.0.0",
+    "description": "A library for writing web app servers",
+    "kind": "library"
+  },
+  {
+    "name": "MadRaylib",
+    "repo": "https://github.com/madlib-lang/madraylib",
+    "official": true,
+    "published": false,
+    "author": "madlib-lang",
+    "version": "",
+    "description": "Raylib bindings for building 3d games in Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "MadDoc",
+    "repo": "https://github.com/madlib-lang/maddoc",
+    "official": true,
+    "published": false,
+    "author": "madlib-lang",
+    "version": "",
+    "description": "A library for automatically generating documentation",
+    "kind": "library"
+  },
+  {
+    "name": "maddoc-cli",
+    "repo": "https://github.com/madlib-lang/maddoc-cli",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "0.0.11",
+    "description": "A tool for using MadDoc on the command line",
+    "kind": "tool"
+  },
+  {
+    "name": "madpostgres",
+    "repo": "https://github.com/madlib-lang/madpostgres",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "1.0.0",
+    "description": "libpq bindings for Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "madjwt",
+    "repo": "https://github.com/madlib-lang/madjwt",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "0.0.1",
+    "description": "Library for signing and decoding JSON Web Tokens",
+    "kind": "library"
+  },
+  {
+    "name": "madampq",
+    "repo": "https://github.com/madlib-lang/madampq",
+    "official": true,
+    "published": false,
+    "author": "madlib-lang",
+    "version": "0.0.1",
+    "description": "amqp bindings for Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "vscode-madlib",
+    "repo": "https://github.com/madlib-lang/vscode-madlib",
+    "official": true,
+    "published": true,
+    "author": "madlib-lang",
+    "version": "0.0.1",
+    "description": "Madlib plugin for writing Madlib in VSCode",
+    "kind": "plugin"
+  },
+  {
+    "name": "invective",
+    "repo": "https://github.com/brekk/invective",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.9",
+    "description": "Vectors, hurled abusively",
+    "kind": "library"
+  },
+  {
+    "name": "craving",
+    "repo": "https://github.com/brekk/craving",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Dependencies graphs, done hackily",
+    "kind": "library"
+  },
+  {
+    "name": "dungeonaire",
+    "repo": "https://github.com/brekk/dungeonaire",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Dungeon and maze generation game",
+    "kind": "fun"
+  },
+  {
+    "name": "madafuda",
+    "repo": "https://github.com/brekk/madafuda",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Hanafuda card library",
+    "kind": "fun"
+  },
+  {
+    "name": "ranked",
+    "repo": "https://github.com/brekk/ranked",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.1",
+    "description": "Handle function arity as a tuple",
+    "kind": "library"
+  },
+  {
+    "name": "sane",
+    "repo": "https://github.com/brekk/sane",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "XML parsing in Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "study",
+    "repo": "https://github.com/brekk/study",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.3",
+    "description": "Library for more convenient testing",
+    "kind": "library"
+  },
+  {
+    "name": "dye",
+    "repo": "https://github.com/brekk/dye",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.10",
+    "description": "Color algorithms in Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "sleuth",
+    "repo": "https://github.com/brekk/sleuth",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Regex library in native Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "ensign",
+    "repo": "https://github.com/brekk/ensign",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.2",
+    "description": "CLI argument parsing",
+    "kind": "library"
+  },
+  {
+    "name": "rage",
+    "repo": "https://github.com/brekk/rage",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "A tool for creating Madlib projects from scratch",
+    "kind": "tool"
+  },
+  {
+    "name": "madgraph",
+    "repo": "https://github.com/brekk/madgraph",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "A library for parsing the DOT language",
+    "kind": "library"
+  },
+  {
+    "name": "diurnal",
+    "repo": "https://github.com/brekk/diurnal",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "A tool for recording daily practice in the CLI",
+    "kind": "tool"
+  },
+  {
+    "name": "jam",
+    "repo": "https://github.com/brekk/jam",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.1",
+    "description": "Save content on application exit and read content on application load",
+    "kind": "library"
+  },
+  {
+    "name": "mad-creatures",
+    "repo": "https://github.com/brekk/mad-creatures",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "An iterative and randomized creature simulation",
+    "kind": "fun"
+  },
+  {
+    "name": "graduate",
+    "repo": "https://github.com/brekk/graduate",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Sparklines in Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "spinneret",
+    "repo": "https://github.com/brekk/spinneret",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Client-side web apps in Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "pickaxe",
+    "repo": "https://github.com/brekk/pickaxe",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Tooling to convert Obsidian notes and convert them into a website",
+    "kind": "tool"
+  },
+  {
+    "name": "utter",
+    "repo": "https://github.com/brekk/utter",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Hierarchical Finite State Machines in Madlib",
+    "kind": "library"
+  },
+  {
+    "name": "nathan-brazil",
+    "repo": "https://github.com/brekk/nathan-brazil",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Markov chains",
+    "kind": "library"
+  },
+  {
+    "name": "capgras",
+    "repo": "https://github.com/brekk/capgras",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Local library linker for Madlib",
+    "kind": "tool"
+  },
+  {
+    "name": "gambit",
+    "repo": "https://github.com/brekk/gambit",
+    "official": false,
+    "published": true,
+    "author": "brekk",
+    "version": "0.0.2",
+    "description": "French-suited playing card library",
+    "kind": "library"
+  },
+  {
+    "name": "oh-madness",
+    "repo": "https://github.com/brekk/oh-madness",
+    "official": false,
+    "published": false,
+    "author": "brekk",
+    "version": "",
+    "description": "Oh Hell / Contract Whist implemented in Madlib",
+    "kind": "fun"
+  }
+]
