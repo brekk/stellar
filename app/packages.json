@@ -31,6 +31,16 @@
     "kind": "library"
   },
   {
+    "name": "fake-thing",
+    "repo": "https://gitlab.com/brekk/fake-thing",
+    "official": true,
+    "published": true,
+    "author": "brekk",
+    "version": "10.3.2",
+    "description": "A fake thing for testing",
+    "kind": "fun"
+  },
+  {
     "name": "madserver",
     "repo": "https://github.com/madlib-lang/madserver",
     "official": true,

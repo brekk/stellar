@@ -24,6 +24,13 @@ export default function Home() {
   const [$published, $setPublished] = useState(false);
   const [$kind, $setKind] = useState(0);
   const filteredPackages = PACKAGES.filter((x) => {
+    if ($search) {
+      const s = $search.toLowerCase()
+      return x.name.toLowerCase().includes(s) ||
+        x.description.toLowerCase().includes(s)
+    }
+    return true
+  }).filter((x) => {
     if ($kind !== 0) {
       return x.kind === PACKAGE_KINDS[$kind].toLowerCase()
     }

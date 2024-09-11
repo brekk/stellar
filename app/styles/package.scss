@@ -10,6 +10,8 @@
   &__repo {
     fill: $color-fg;
     align-self: center;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
   }
   &__content {
     width: 100%;
