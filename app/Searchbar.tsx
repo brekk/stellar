@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import blem from "blem";
 import "@/styles/search.scss";
 import Telescope from "@/app/assets/icon-telescope.svg";
-import Packages from "@/app/Packages";
-import type { PackageProps } from "@/app/Package";
 
 interface SearchbarProps {
   toggleOfficial: () => void;
@@ -31,24 +28,24 @@ export const Searchbar = ({
     <div className={bem("")}>
       <h1 className={bem("title")}>Packages</h1>
       <menu className={bem("menu")}>
-        <label htmlFor="kind" className={bem("label", ["select", "kind"])}>
-          <span className={bem("label-text")}>Kind</span>
-          <select
-            id="kind"
-            name="kind"
-            className={bem("select", ["kind"])}
-            onChange={(e) => setKind(parseInt(e.target.value))}
-            defaultValue={0}
-          >
-            {packageKinds.map((k, i) => (
-              <option value={i} key={k + "-" + i}>
-                {k}
-              </option>
-            ))}
-          </select>
-        </label>
 
-        <div className={bem("toggles")}>
+        <div className={bem("filters")}>
+          <label htmlFor="kind" className={bem("label", ["select", "kind"])}>
+            <span className={bem("label-text")}>Kind</span>
+            <select
+              id="kind"
+              name="kind"
+              className={bem("select", ["kind"])}
+              onChange={(e) => setKind(parseInt(e.target.value))}
+              defaultValue={0}
+            >
+              {packageKinds.map((k, i) => (
+                <option value={i} key={k + "-" + i}>
+                  {k}
+                </option>
+              ))}
+            </select>
+          </label>
           <label
             htmlFor="official"
             className={bem("label", ["checkbox", "official"])}
