@@ -1,14 +1,14 @@
-import PagePackage from "@/app/PagePackages";
-import Nav from "@/app/Nav";
+import PagePackage from "@/PagePackages";
+import Nav from "@/Nav";
 import blem from "blem";
 import "@/app/page.scss";
 
 export default function Home() {
-	const bem = blem("home");
-	return (
-		<main className={`${bem("")}`}>
-			<Nav />
-			<PagePackage />
-		</main>
-	);
+  const bem = blem("home");
+  return (
+    <main className={`${bem("")}`}>
+      <Nav />
+      <PagePackage />
+    </main>
+  );
 }

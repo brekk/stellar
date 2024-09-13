@@ -19,7 +19,7 @@
     ],
     "paths": {
       "@/*": ["./app/*"],
-      "@/assets/*": ["./app/assets/*"]
+      "@/assets/*": ["./app/assets/*"],
       "@/pages/*": ["./pages/*"]
     },
     "baseUrl": "."
