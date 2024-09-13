@@ -3,7 +3,7 @@ import path from "path";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath: "/gh-pages-test",
+  basePath: "/gh-pages",
   compilerOptions: {
     jsx: "react-jsx",
   },
