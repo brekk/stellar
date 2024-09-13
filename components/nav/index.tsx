@@ -1,6 +1,6 @@
 import blem from "blem";
-import Logo from "@/Logo";
-import "@/Nav.scss";
+import Logo from "@/components/logo";
+import "@/components/nav/style.scss";
 
 export const Nav = () => {
   const bem = blem("Nav");

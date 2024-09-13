@@ -1,36 +1,10 @@
 import blem from "blem";
-import "@/Package.scss";
+import "@/components/package/style.scss";
 import Link from "next/link";
 import RepoGithub from "@/assets/icon-github.svg";
 import RepoGitlab from "@/assets/icon-gitlab.svg";
 import RepoIcon from "@/assets/icon-repo.svg";
-
-export type PackageKind = "library" | "tool" | "fun" | "plugin";
-
-export interface RawPackageProps {
-  name: string;
-  repo: string;
-  version: string;
-  description: string;
-  published: boolean;
-  official: boolean;
-  author: string;
-  kind: string;
-}
-
-export interface PackageProps extends RawPackageProps {
-  kind: PackageKind;
-}
-
-export interface AugmentedPackageProps extends PackageProps {
-  togglePublished: () => void;
-  toggleOfficial: () => void;
-};
-
-export type TagProps = {
-  name: string;
-  onClick: () => void;
-};
+import type { AugmentedPackage as AugmentedPackageProps, Tag as TagProps } from "@/components/package/types"
 
 export const Tag = ({ name, onClick }: TagProps) => (
   <div

@@ -1,5 +1,5 @@
 import PagePackage from "@/PagePackages";
-import Nav from "@/Nav";
+import Nav from "@/components/nav";
 import blem from "blem";
 import "@/page.scss";
 

@@ -16,7 +16,7 @@ const fontFiraCode = Fira_Code({
 });
 import type { AppProps } from "next/app";
 import "@/Root.scss";
-import "@/HowTo.scss";
+import "@/page-howto.scss";
 import blem from "blem";
 
 export default function MyApp({ Component, pageProps }: AppProps) {

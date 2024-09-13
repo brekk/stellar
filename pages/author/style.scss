@@ -1,0 +1,10 @@
+@import "font";
+
+.AuthorPage {
+  min-height: 100vh;
+  padding: 1rem;
+  &__title {
+    @include fontAntonio;
+    margin-right: 1rem;
+  }
+}

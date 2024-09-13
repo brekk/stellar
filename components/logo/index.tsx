@@ -1,6 +1,6 @@
 import Raw from "@/assets/madlib-logo.svg";
 import blem from "blem";
-import "@/Logo.scss";
+import "@/components/logo/style.scss";
 
 interface LogoProps {
   animate?: boolean

@@ -19,8 +19,12 @@
     ],
     "paths": {
       "@/*": ["./app/*"],
-      "@/assets/*": ["./app/assets/*"],
-      "@/pages/*": ["./pages/*"]
+      "@/components/*": ["./components/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/data/*": ["./data/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/pages/*": ["./pages/*"],
+      "@/types/*": ["./types/*"]
     },
     "baseUrl": "."
   },

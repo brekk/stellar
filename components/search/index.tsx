@@ -1,5 +1,5 @@
 import blem from "blem";
-import "@/Searchbar.scss";
+import "@/components/search/style.scss";
 import Telescope from "@/assets/icon-telescope.svg";
 
 interface SearchbarProps {
