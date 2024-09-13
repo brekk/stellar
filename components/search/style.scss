@@ -53,7 +53,7 @@
     @include fontFira;
     width: 100%;
     option {
-    @include fontFira;
+      @include fontFira;
     }
   }
   &__filters {
@@ -178,15 +178,17 @@
     width: 100%;
     height: calc(2rem - 2px);
     padding-left: 1.75rem;
-    color: $color-white50;
     // border-radius: 0 1rem 1rem 0;
     transition:
-    color 0.3s ease-out,
+      color 0.3s ease-out,
       width 0.3s ease-out,
       box-shadow 0.3s 0.3s ease-out,
       background 0.3s 0.6s ease-out;
     background-color: transparent;
     border: 1px solid transparent;
+    &:placeholder-shown {
+      color: $color-white50;
+    }
     &:focus,
     &:active {
       color: $color-bg;
