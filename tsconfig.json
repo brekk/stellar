@@ -19,7 +19,6 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/styles/*": ["./app/styles/*"]
     },
     "baseUrl": "."
   },
