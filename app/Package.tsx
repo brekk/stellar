@@ -59,7 +59,9 @@ export const Package = ({
 				{version ? <em className={bem("version")}>v{version}</em> : null}
 			</header>
 			<div className={bem("content")}>
-				{description ? <p className={bem("description")}>{description}</p> : null}
+				{description ? (
+					<p className={bem("description")}>{description}</p>
+				) : null}
 				<a href={repo} className={bem("link", ["repo"])}>
 					<Icon className={bem("repo", [repoicon])} />
 				</a>
