@@ -1,0 +1,1 @@
+self.__BUILD_MANIFEST={__rewrites:{afterFiles:[],beforeFiles:[],fallback:[]},"/_error":["static/chunks/pages/_error-1be831200e60c5c0.js"],"/how-to/01-hello-mad-mad-world":["static/chunks/pages/how-to/01-hello-mad-mad-world-40f884d207a6ba66.js"],sortedPages:["/_app","/_error","/how-to/01-hello-mad-mad-world"]},self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB();

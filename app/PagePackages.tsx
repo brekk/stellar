@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Searchbar from "@/Searchbar";
-import blem from "blem";
 import Packages from "@/Packages";
 
 import PACKAGES from "@/packages.json";
@@ -10,7 +9,6 @@ import PACKAGES from "@/packages.json";
 const PACKAGE_KINDS = ["All", "Library", "Tool", "Fun", "Plugin"];
 
 export default function Home() {
-  const bem = blem("home");
   const [$search, $setSearch] = useState("");
   const [$official, $setOfficial] = useState(false);
   const [$published, $setPublished] = useState(false);

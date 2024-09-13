@@ -1,12 +1,12 @@
 import blem from "blem";
-import type { PackageProps } from "@/Package";
+import type { RawPackageProps, PackageKind } from "@/Package";
 import Package from "@/Package";
 import "@/Packages.scss";
 
 export interface PackagesProps {
   togglePublished: () => void;
   toggleOfficial: () => void;
-  packages: PackageProps[];
+  packages: RawPackageProps[];
 }
 
 export const Packages = ({
@@ -29,6 +29,7 @@ export const Packages = ({
             >
               <Package
                 {...raw}
+                kind={raw.kind as PackageKind}
                 togglePublished={togglePublished}
                 toggleOfficial={toggleOfficial}
               />
