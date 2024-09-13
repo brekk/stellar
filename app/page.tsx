@@ -1,7 +1,7 @@
 import PagePackage from "@/PagePackages";
 import Nav from "@/Nav";
 import blem from "blem";
-import "@/app/page.scss";
+import "@/page.scss";
 
 export default function Home() {
   const bem = blem("home");

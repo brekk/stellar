@@ -1,6 +1,6 @@
 import blem from "blem";
-import type { PackageProps } from "@/app/Package";
-import Package from "@/app/Package";
+import type { PackageProps } from "@/Package";
+import Package from "@/Package";
 import "@/Packages.scss";
 
 export interface PackagesProps {
