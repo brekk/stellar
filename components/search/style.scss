@@ -84,8 +84,8 @@
     &::before {
       position: absolute;
       content: "";
-      -webkit-mask: url(../../assets/icon-star.svg) no-repeat 50% 50%;
-      mask: url(../../assets/icon-star.svg) no-repeat 50% 50%;
+      -webkit-mask: url(icon-star.svg) no-repeat 50% 50%;
+      mask: url(icon-star.svg) no-repeat 50% 50%;
       -webkit-mask-size: cover;
       mask-size: cover;
       background-color: $color-bg;

@@ -9,7 +9,7 @@ const nextConfig = {
     jsx: "react-jsx",
   },
   sassOptions: {
-    includePaths: [path.join("styles")],
+    includePaths: ["styles", "assets"],
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports

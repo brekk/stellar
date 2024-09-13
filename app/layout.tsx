@@ -1,4 +1,4 @@
-import "@/Root.scss";
+import "@/root.scss";
 import fonts from "@/styles/fonts";
 
 export default function RootLayout({
