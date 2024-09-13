@@ -4,7 +4,6 @@ import Link from "next/link";
 import RepoGithub from "@/assets/icon-github.svg";
 import RepoGitlab from "@/assets/icon-gitlab.svg";
 import RepoIcon from "@/assets/icon-repo.svg";
-import Image from "next/image";
 
 export type PackageKind = "library" | "tool" | "fun" | "plugin";
 
@@ -76,8 +75,8 @@ export const Package = ({
       <footer className={bem("footer")}>
         <div className={bem("authorbox")}>
           <Link href={`/author/${author}`} className={bem("link", ["author"])}>
-            <Image
-              src={`/avatar-${author}.png`}
+            <img
+              src={`https://github.com/${author}.png?size=24`}
               className={bem("avatar")}
               alt={author}
               width={24}
