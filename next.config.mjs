@@ -3,8 +3,8 @@ import path from "path";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath: "/brekk",
-  assetPrefix: "/brekk",
+  basePath: "/stellar",
+  assetPrefix: "/stellar",
   compilerOptions: {
     jsx: "react-jsx",
   },
