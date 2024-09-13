@@ -3,7 +3,7 @@ import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react";
 import Searchbar from "@/components/search";
 import Packages from "@/components/package/all";
-import type { RawPackage } from "@/components/package/type"
+import type { RawPackage } from "@/components/package/types"
 import { toLower } from "ramda";
 
 import PACKAGES from "@/data/packages.json";
