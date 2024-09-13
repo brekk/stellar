@@ -1,4 +1,5 @@
-@import "./_colors";
+@import "colors";
+@import "font";
 
 .Package {
   padding: 1rem;
@@ -93,11 +94,10 @@
     justify-content: flex-end;
   }
   &__tag {
+    @include fontAntonio;
     font-size: 0.75rem;
     cursor: pointer;
     text-shadow: 0 1px rgba(255, 255, 255, 0.35);
-    font-family: Antonio, sans-serif;
-    text-transform: uppercase;
     padding: 0.25rem 0.5rem 0.35rem;
     background-color: $color-fg;
     color: $color-bg;

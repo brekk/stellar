@@ -1,6 +1,5 @@
 "use client"
 
-import Logo from "@/app/Logo";
 import { useState } from "react";
 import Searchbar from "@/app/Searchbar";
 import blem from "blem";
@@ -54,7 +53,6 @@ export default function Home() {
   };
   return (
     <>
-      <Logo animate className={bem("logo", ["medium"])} />
       <Searchbar
         toggleOfficial={toggleOfficial}
         official={$official}

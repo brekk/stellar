@@ -1,14 +1,14 @@
-@import "../styles/_colors";
+@import "colors";
 
 .home {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 0 1rem;
   &__logo {
     fill: white;
-    padding: 1rem;
-    width: calc(100% - 2rem);
+    padding: 1rem 0;
     height: auto;
   }
 }

@@ -1,4 +1,5 @@
 @import "colors";
+@import "font";
 @import "media";
 
 .HowToGuide {
@@ -45,7 +46,7 @@
     // }
   }
   code {
-    font-family: "Fira Code";
+    @include fontFira;
     background-color: #000;
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 0 0.5rem;

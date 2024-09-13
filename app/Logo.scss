@@ -1,7 +1,10 @@
-@import "./styles/_anim";
+@import "anim";
 
 .logo {
   fill: $color-fg;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.25rem;
   &--animated {
     animation: 10s infinite hum ease-in;
   }
@@ -16,8 +19,7 @@
     height: 4.375rem;
   }
   &--small {
-    width: 18.75rem;
-    max-width: 18.75rem;
-    height: 3.25rem;
+    width: 10rem;
+    max-width: 10rem;
   }
 }

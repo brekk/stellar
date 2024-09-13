@@ -26,9 +26,26 @@ export const Searchbar = ({
   const bem = blem("Searchbar");
   return (
     <div className={bem("")}>
-      <h1 className={bem("title")}>Packages</h1>
       <menu className={bem("menu")}>
-
+        <div
+          className={bem("search-wrapper", [
+            search == "" ? "waiting" : "searching",
+          ])}
+        >
+          <div className={bem("search-icon-wrapper")}>
+            <Telescope className={bem("search-icon")} alt="Search" />
+          </div>
+          <input
+            type="text"
+            className={bem("search")}
+            placeholder="Search Packages"
+            id="search-field"
+            onChange={(e) => {
+              e.preventDefault();
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
         <div className={bem("filters")}>
           <label htmlFor="kind" className={bem("label", ["select", "kind"])}>
             <span className={bem("label-text")}>Kind</span>
@@ -74,25 +91,6 @@ export const Searchbar = ({
             />
             <span className={bem("label-text")}>Published</span>
           </label>
-        </div>
-        <div
-          className={bem("search-wrapper", [
-            search == "" ? "waiting" : "searching",
-          ])}
-        >
-          <div className={bem("search-icon-wrapper")}>
-            <Telescope className={bem("search-icon")} alt="Search" />
-          </div>
-          <input
-            type="text"
-            className={bem("search")}
-            placeholder="Search Packages"
-            id="search-field"
-            onChange={(e) => {
-              e.preventDefault();
-              setSearch(e.target.value);
-            }}
-          />
         </div>
       </menu>
     </div>

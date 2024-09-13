@@ -1,4 +1,4 @@
-@import "./_colors";
+@import "colors";
 
 .Packages {
   width: 100%;
@@ -21,8 +21,7 @@
   }
   &__package-listing {
     list-style: none;
-    width: calc(100% - 2rem);
-    margin: 1rem;
+    width: 100%;
     margin-top:2rem;
     padding: 0;
   }

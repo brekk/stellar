@@ -1,4 +1,5 @@
-@import "./_colors";
+@import "colors";
+@import "font";
 
 h1,
 h2,
@@ -6,8 +7,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Antonio;
-  text-transform: uppercase;
+  @include fontAntonio;
   font-weight: 100;
 }
 h1 {
@@ -37,11 +37,11 @@ h6 {
 
 html,
 body {
+  @include fontFira;
   color: $color-fg;
   font-size: 16px;
   padding: 0;
   margin: 0;
-  font-family: "Fira Code";
   text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
   a {
     transition: color 0.9s ease-out;
