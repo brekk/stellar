@@ -11,11 +11,12 @@ import remarkParse from "remark-parse"
 import rehypeRaw from "rehype-raw"
 // import remarkUTF8 from "remark-utf8";
 import rehypeHighlight from "rehype-highlight"
-import remarkLinks from "remark-wiki-link-plus"
+//import remarkLinks from "remark-wiki-link-plus"
+import remarkLinks from "@portaljs/remark-wiki-link"
 import rehypeFormat from "rehype-format"
 import remarkBreaks from "remark-breaks"
 import remarkGfm from "remark-gfm"
-//import remarkStringify from "remark-stringify";
+import remarkStringify from "remark-stringify"
 import rehypeStringify from "rehype-stringify"
 import remarkRehype from "remark-rehype"
 import remarkFrontmatter from "remark-frontmatter"
@@ -38,20 +39,21 @@ const trace = curry((msg, x) => {
 })
 
 const pickaxe = (x) =>
-  remark()
-    .use(remarkParse)
-    .use(remarkObsidian)
+  unified()
+    .use(remarkParse, { gfm: true })
     .use(remarkBreaks)
+    .use(remarkObsidian)
     // .use(remarkUTF8)
-    //.use(remarkGfm)
-    //.use(remarkLinks)
+    .use(remarkGfm)
+    .use(remarkLinks)
     .use(remarkFrontmatter, ["yaml"])
     .use(remarkParseFrontmatter)
-    //.use(remarkRehype, { allowDangerousHtml: true })
-    //.use(rehypeRaw, { passThrough: nodeTypes })
+    //.use(remarkStringify)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw, { passThrough: nodeTypes })
     // .use(rehypeHighlight)
-    //.use(rehypeFormat)
-    //.use(rehypeStringify, { allowDangerousHtml: true })
+    .use(rehypeFormat)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     // .use(rehypeReact, PROD)
     .process(x)
 
@@ -98,11 +100,11 @@ const postfix = pipe(
 const readObsidian = (raw) =>
   pipe(
     readFile,
-    //map(spotFix),
+    map(spotFix),
     chain(encaseP(pickaxe)),
-    //map(jsxify(raw)),
-    //map(postfix),
-    //chain(prettify),
+    map(jsxify(raw)),
+    map(postfix),
+    chain(prettify),
   )(raw)
 
 const j2 = (x) => JSON.stringify(x, null, 2)
