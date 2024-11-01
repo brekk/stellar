@@ -3,6 +3,7 @@
 import { nodeTypes } from "@mdx-js/mdx"
 import { unified } from "unified"
 import { remark } from "remark"
+import path from "node:path"
 import slug from "slug"
 import * as prettier from "prettier"
 //import remarkObsidian from "@thecae/remark-obsidian"
@@ -25,9 +26,15 @@ import remarkParseFrontmatter from "remark-parse-frontmatter"
 import remarkReact from "remark-react"
 import fs from "node:fs"
 import { node, encaseP, chain, map, fork } from "fluture"
-import { replace, path, head, slice, pipe, curry } from "ramda"
+import { replace, path as Rpath, head, slice, pipe, curry } from "ramda"
 import * as PROD from "react/jsx-runtime"
 import rehypeReact from "rehype-react"
+
+import { getPermalinks } from "@portaljs/remark-wiki-link"
+const HERE = path.resolve(process.cwd(), "mad-notes/notes")
+console.log("HERE", HERE)
+const permalinks = await getPermalinks(HERE)
+console.log("PERMA LINKIES", permalinks)
 
 const utf8 = (x) => fs.promises.readFile(x, "utf8")
 
@@ -41,19 +48,23 @@ const trace = curry((msg, x) => {
 const pickaxe = (x) =>
   unified()
     .use(remarkParse, { gfm: true })
+    //.use(remarkGfm)
     .use(remarkBreaks)
-    .use(remarkObsidian)
+
+    .use(remarkLinks, {
+      pathFormat: "obsidian-short",
+      permalinks,
+    })
+    //.use(remarkObsidian)
     // .use(remarkUTF8)
-    .use(remarkGfm)
-    .use(remarkLinks)
-    .use(remarkFrontmatter, ["yaml"])
-    .use(remarkParseFrontmatter)
-    //.use(remarkStringify)
-    .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeRaw, { passThrough: nodeTypes })
+    //.use(remarkFrontmatter, ["yaml"])
+    //.use(remarkParseFrontmatter)
+    .use(remarkStringify)
+    //.use(remarkRehype, { allowDangerousHtml: true })
+    //.use(rehypeRaw, { passThrough: nodeTypes })
     // .use(rehypeHighlight)
-    .use(rehypeFormat)
-    .use(rehypeStringify, { allowDangerousHtml: true })
+    //.use(rehypeFormat)
+    //.use(rehypeStringify, { allowDangerousHtml: true })
     // .use(rehypeReact, PROD)
     .process(x)
 
@@ -100,15 +111,15 @@ const postfix = pipe(
 const readObsidian = (raw) =>
   pipe(
     readFile,
-    map(spotFix),
+    //map(spotFix),
     chain(encaseP(pickaxe)),
-    map(jsxify(raw)),
-    map(postfix),
-    chain(prettify),
+    //map(jsxify(raw)),
+    //map(postfix),
+    //chain(prettify),
   )(raw)
 
 const j2 = (x) => JSON.stringify(x, null, 2)
-const stringifyFrontmatter = pipe(path(["data", "frontmatter"]), j2)
+const stringifyFrontmatter = pipe(Rpath(["data", "frontmatter"]), j2)
 
 pipe(
   slice(2, Infinity),
