@@ -7,19 +7,27 @@ import path from "node:path"
 import slug from "slug"
 import * as prettier from "prettier"
 //import remarkObsidian from "@thecae/remark-obsidian"
+// import remarkUTF8 from "remark-utf8";
+//import remarkLinks from "remark-wiki-link-plus"
+import rehypeFormat from "rehype-format"
+import rehypeHeading from "rehype-autolink-headings"
+import rehypeHighlight from "rehype-highlight"
+import rehypePrism from "rehype-prism-plus"
+import rehypeRaw from "rehype-raw"
+import rehypeSlug from "rehype-slug"
+import rehypeStringify from "rehype-stringify"
+import remarkBreaks from "remark-breaks"
+import remarkCallouts from "@portaljs/remark-callouts"
+import remarkEmbed from "@portaljs/remark-embed"
+import remarkGfm from "remark-gfm"
+import remarkLinks from "@portaljs/remark-wiki-link"
 import remarkObsidian from "remark-parse-obsidian"
 import remarkParse from "remark-parse"
-import rehypeRaw from "rehype-raw"
-// import remarkUTF8 from "remark-utf8";
-import rehypeHighlight from "rehype-highlight"
-//import remarkLinks from "remark-wiki-link-plus"
-import remarkLinks from "@portaljs/remark-wiki-link"
-import rehypeFormat from "rehype-format"
-import remarkBreaks from "remark-breaks"
-import remarkGfm from "remark-gfm"
-import remarkStringify from "remark-stringify"
-import rehypeStringify from "rehype-stringify"
 import remarkRehype from "remark-rehype"
+import remarkSmart from "remark-smartypants"
+import remarkStringify from "remark-stringify"
+import remarkTOC from "remark-toc"
+
 import remarkFrontmatter from "remark-frontmatter"
 //import remarkMDXFrontmatter from "remark-mdx-frontmatter";
 import remarkParseFrontmatter from "remark-parse-frontmatter"
@@ -44,7 +52,7 @@ const trace = curry((msg, x) => {
   console.log(msg, x)
   return x
 })
-
+/*
 const pickaxe = (x) =>
   unified()
     .use(remarkParse, { gfm: true })
@@ -55,7 +63,7 @@ const pickaxe = (x) =>
       pathFormat: "obsidian-short",
       permalinks,
     })
-    //.use(remarkObsidian)
+    .use(remarkObsidian)
     // .use(remarkUTF8)
     //.use(remarkFrontmatter, ["yaml"])
     //.use(remarkParseFrontmatter)
@@ -66,6 +74,18 @@ const pickaxe = (x) =>
     //.use(rehypeFormat)
     //.use(rehypeStringify, { allowDangerousHtml: true })
     // .use(rehypeReact, PROD)
+    .process(x)
+*/
+const pickaxe = (x) =>
+  unified()
+    .use(remarkParse, { gfm: true })
+    .use(remarkEmbed)
+    .use(remarkGfm)
+    .use(remarkSmart, { quotes: false, dashes: "oldschool" })
+    .use(remarkCallouts)
+    .use(remarkLinks, { permalinks, pathFormat: "obsidian-short" })
+    .use(remarkTOC, { heading: "Table of Contents", tight: true })
+    .use(remarkStringify)
     .process(x)
 
 const cleanName = pipe((x) => x.slice(x.lastIndexOf("/"), -3), slug)
