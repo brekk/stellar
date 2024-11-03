@@ -60,7 +60,7 @@
     overflow: hidden;
     position: relative;
     &::before {
-      content: attr(data-language);
+      content: attr(data-lang);
       position: absolute;
       right: 0;
       top: 0;

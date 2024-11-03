@@ -23,7 +23,7 @@ export const COMPONENT = () => {
         </a>
         .
       </p>
-      <pre>
+      <pre data-lang="sh">
         <code className="language-sh">{`npm i @madlib-lang/madlib -g
 `}</code>
       </pre>
@@ -32,7 +32,7 @@ export const COMPONENT = () => {
         you should see a version number when you run{" "}
         <code>madlib --version</code>:
       </p>
-      <pre>
+      <pre data-lang="sh">
         <code className="language-sh">{`> madlib --version
 madlib@0.23.13
 `}</code>
@@ -57,6 +57,7 @@ Available commands:
   :reset          reset the state of the repl (alias :r)
 -----------------------------------------------------------
 
+>
 `}</code>
       </pre>
       <p>
@@ -68,7 +69,7 @@ Available commands:
         .
       </p>
       <h3>Basic arithmetic</h3>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> 5 + 5
 10 :: Integer
 > 10 - 100
@@ -89,7 +90,7 @@ Available commands:
         These follow the usual precedence rules, and can be changed by adding
         parentheses:
       </p>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> 3 * 4 / (5 - 6)
 -12 :: Float
 > 3 * 4 / 5 - 6
@@ -100,27 +101,26 @@ Available commands:
       </pre>
       <h2>Basic boolean logic</h2>
       <p>Here are some simple boolean expressions.</p>
-      <pre>
-        <code className="language-mad">{`> true &#x26;&#x26; false
+      <pre data-lang="mad">
+        <code className="language-mad">{`> true == false
 false :: Boolean
-> true &#x26;&#x26; true
+> true == true
 true :: Boolean
 > false || true
 true :: Boolean
-> !(false &#x26;&#x26; false)
+> !(false == false)
 true :: Boolean
 `}</code>
       </pre>
       <p>
         As you can see, we have the literals <code>true</code> and{" "}
-        <code>false</code>, as well as the logical <em>and</em> (
-        <code>&#x26;&#x26;</code>) and logical <em>or</em> (<code>||</code>)
-        operators. Finally, we have a boolean negation operator (<code>!</code>)
-        which is infixed.
+        <code>false</code>, as well as the logical <em>and</em> (<code>==</code>
+        ) and logical <em>or</em> (<code>||</code>) operators. Finally, we have
+        a boolean negation operator (<code>!</code>) which is infixed.
       </p>
       <h2>Asserting equality</h2>
       <p>Here we can assert the equality of things:</p>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> 5 == 5
 true :: Boolean
 > 1 == 0
@@ -139,7 +139,7 @@ false :: Boolean
       <p>
         What happens if we try to do something like add <code>5 + "cool"</code>?
       </p>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> 5 + "cool"
 Instance not found
 
@@ -160,7 +160,7 @@ Note: Remember that instance methods are automatically imported when the module 
         from Haskell). We'll go over everything it has to offer in more detail
         shortly, but let's start by importing <code>Math</code>:
       </p>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> import Math from "Math"
 `}</code>
       </pre>
@@ -171,7 +171,7 @@ Note: Remember that instance methods are automatically imported when the module 
         has a few functions we can play with. We won't go over everything here,
         just enough to give a general sense of how it works.
       </p>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> import Math from "Math"
 > Math.max(100, 20)
 100 :: Integer
@@ -201,7 +201,7 @@ Note: Remember that instance methods are automatically imported when the module 
         . Again, this isn't comprehensive but will give a sense of how they
         work:
       </p>
-      <pre>
+      <pre data-lang="mad">
         <code className="language-mad">{`> import List from "List"
 > List.range(0, 10)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] :: List Integer

@@ -160,9 +160,13 @@ const postfix = pipe(
   // fixEntities,
   // fixSoloChevron,
   // trace("YOOO"),
+  replace(/&#x26;/g, "="),
   replace(/<pre><code>/g, "<pre><code>{`"),
   replace(/<\/code><\/pre>/g, "`}</code></pre>"),
-  replace(/<pre><code className="(.*)">/g, '<pre><code className="$1">{`'),
+  replace(
+    /<pre><code className="language-(.*)">/g,
+    '<pre data-lang="$1"><code className="language-$1">{`',
+  ),
 )
 
 const readObsidian = (raw) =>
