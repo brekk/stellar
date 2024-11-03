@@ -8,9 +8,10 @@ export const DATA = {
   tags: ["fundamentals", "literals", "logic", "guide"],
 }
 export const COMPONENT = () => {
-  const bem = blem(NAME)
+  const bem = blem("HowToGuide")
   return (
     <article className={bem("")}>
+      <h1>01 - Hello mad, mad world</h1>
       <h2>Installation</h2>
       <p>
         There are a few ways to{" "}
@@ -23,7 +24,7 @@ export const COMPONENT = () => {
         </a>
         .
       </p>
-      <pre data-lang="sh">
+      <pre className={bem("language", "sh")} data-lang="sh">
         <code className="language-sh">{`npm i @madlib-lang/madlib -g
 `}</code>
       </pre>
@@ -32,7 +33,7 @@ export const COMPONENT = () => {
         you should see a version number when you run{" "}
         <code>madlib --version</code>:
       </p>
-      <pre data-lang="sh">
+      <pre className={bem("language", "sh")} data-lang="sh">
         <code className="language-sh">{`> madlib --version
 madlib@0.23.13
 `}</code>
@@ -47,7 +48,7 @@ madlib@0.23.13
         The REPL can be accessed with the command <code>madlib repl</code>,
         which should bring up an interactive session that looks like this:
       </p>
-      <pre>
+      <pre className={bem("language", "none")}>
         <code>{`------ REPL - Madlib@0.23.13 -------------------------------
 Available commands:
   :help           show help (alias :h)
@@ -69,7 +70,7 @@ Available commands:
         .
       </p>
       <h3>Basic arithmetic</h3>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> 5 + 5
 10 :: Integer
 > 10 - 100
@@ -90,7 +91,7 @@ Available commands:
         These follow the usual precedence rules, and can be changed by adding
         parentheses:
       </p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> 3 * 4 / (5 - 6)
 -12 :: Float
 > 3 * 4 / 5 - 6
@@ -101,7 +102,7 @@ Available commands:
       </pre>
       <h2>Basic boolean logic</h2>
       <p>Here are some simple boolean expressions.</p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> true == false
 false :: Boolean
 > true == true
@@ -120,7 +121,7 @@ true :: Boolean
       </p>
       <h2>Asserting equality</h2>
       <p>Here we can assert the equality of things:</p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> 5 == 5
 true :: Boolean
 > 1 == 0
@@ -139,7 +140,7 @@ false :: Boolean
       <p>
         What happens if we try to do something like add <code>5 + "cool"</code>?
       </p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> 5 + "cool"
 Instance not found
 
@@ -160,7 +161,7 @@ Note: Remember that instance methods are automatically imported when the module 
         from Haskell). We'll go over everything it has to offer in more detail
         shortly, but let's start by importing <code>Math</code>:
       </p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> import Math from "Math"
 `}</code>
       </pre>
@@ -171,7 +172,7 @@ Note: Remember that instance methods are automatically imported when the module 
         has a few functions we can play with. We won't go over everything here,
         just enough to give a general sense of how it works.
       </p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> import Math from "Math"
 > Math.max(100, 20)
 100 :: Integer
@@ -201,7 +202,7 @@ Note: Remember that instance methods are automatically imported when the module 
         . Again, this isn't comprehensive but will give a sense of how they
         work:
       </p>
-      <pre data-lang="mad">
+      <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> import List from "List"
 > List.range(0, 10)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] :: List Integer

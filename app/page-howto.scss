@@ -3,7 +3,8 @@
 @import "media";
 
 .HowToGuide {
-  width: 100%;
+  width: calc(100% - 2rem);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   &__header {
@@ -55,22 +56,24 @@
     position: relative;
     font-size: 0.8rem;
   }
-  pre {
+  &__language {
     width: 100%;
     overflow: hidden;
     position: relative;
-    &::before {
-      content: attr(data-lang);
-      position: absolute;
-      right: 0;
-      top: 0;
-      background-color: $color-blue;
-      color: $color-bg;
-      font-size: 0.5rem;
-      border-top-right-radius: 0.25rem;
-      border-bottom-left-radius: 0.25rem;
-      padding: 0.5em;
-      z-index: 20;
+    &:not(.HowToGuide__language--none) {
+      &::before {
+        content: attr(data-lang);
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: $color-blue;
+        color: $color-bg;
+        font-size: 0.5rem;
+        border-top-right-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+        padding: 0.5em;
+        z-index: 20;
+      }
     }
     code {
       z-index: 10;
