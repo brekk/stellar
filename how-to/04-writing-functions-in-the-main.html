@@ -1,0 +1,121 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/stellar/_next/static/media/e9156ab5fd5b91e5-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/stellar/_next/static/media/df99695897be762b-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/stellar/_next/static/css/8f5dc41a2a490b0f.css" as="style"/><link rel="stylesheet" href="/stellar/_next/static/css/8f5dc41a2a490b0f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/stellar/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/stellar/_next/static/chunks/webpack-4017b53ef4f4a551.js" defer=""></script><script src="/stellar/_next/static/chunks/framework-4be839806aa8e2d3.js" defer=""></script><script src="/stellar/_next/static/chunks/main-15ea71c676ab1bf0.js" defer=""></script><script src="/stellar/_next/static/chunks/pages/_app-6997b8cc2b26e97e.js" defer=""></script><script src="/stellar/_next/static/chunks/pages/how-to/04-writing-functions-in-the-main-86dd96fc5f5319a6.js" defer=""></script><script src="/stellar/_next/static/FJ4ddRmzL0DTa5D9F7xcn/_buildManifest.js" defer=""></script><script src="/stellar/_next/static/FJ4ddRmzL0DTa5D9F7xcn/_ssgManifest.js" defer=""></script></head><body><div id="__next"><main class="HowToGuide __variable_d67fac __variable_b2146c __className_d67fac __className_b2146c"><article class="HowToGuide"><h1 class="HowToGuide__header HowToGuide__header--main"><div class="HowToGuide__title">Writing functions, in the main</div><div class="HowToGuide__index HowToGuide__index--ordinal">04</div></h1><p>In the<!-- --> <a class="internal" href="/How-To Guides/01 - Hello mad, mad world">previous guide</a> <!-- -->we talked through the basics of<!-- --> <a class="internal" href="/How-To Guides/01 - Hello mad, mad world#installation">installing</a> <!-- -->Madlib and running the<!-- --> <a class="internal" href="/How-To Guides/01 - Hello mad, mad world#repl">REPL</a>.</p><p>In this document we&#x27;ll talk through writing our own<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">main</code> function, which will allow us to save and execute code outside of the REPL.</p><h2 class="HowToGuide__header HowToGuide__header--section">Defining functions</h2><p>Let&#x27;s step through the process of defining functions in a standalone<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">main</code> file. Open up your favorite text editor and write the following</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">import IO from &quot;IO&quot;
+
+say :: String -&gt; String -&gt; String
+say = (word, subject) =&gt; word ++ &quot; &quot; ++ subject
+
+main = () =&gt; {
+  pipe(
+    say(&quot;hello&quot;),
+    IO.putLine
+  )(&quot;world&quot;)
+}
+</code></pre><p>Save this file as <code>Say.main.mad</code> or whatever you like, as long as it ends in <code>.mad</code>.</p><p>We can run this file standalone with the command<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">madlib run</code>:</p><pre class="HowToGuide__language HowToGuide__language--sh" data-lang="sh"><code class="language-sh">&gt; madlib run Say.main.mad
+hello world
+</code></pre><p>Let&#x27;s talk through exactly what we&#x27;ve done here, as there&#x27;s a few pieces.</p><h3 class="HowToGuide__header HowToGuide__header--subsection">Type signatures</h3><p>Firstly, we&#x27;ve defined a function named<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">say</code>. It has a<!-- --> <a class="internal" href="/Reference/Type System/Type Signatures">type signature</a>,<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">say :: String -&gt; String -&gt; String</code> <!-- -->— this means that it is a binary function, taking two parameters (of type <code class="HowToGuide__code HowToGuide__code--inline">String</code>), and its return type is also a<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">String</code>. Learning to read these type signatures can take some time, but we&#x27;ll continue to articulate what they mean as we go through this process.</p><p>Let&#x27;s see a few examples of more signatures (we&#x27;re omitting the function implementations here, but they&#x27;d normally be required in order to be syntactically valid):</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">func :: Integer -&gt; String
+</code></pre><p>The function above takes an<!-- --> <a class="internal" href="/Reference/Literals/Numeric Types#integer">Integer</a> <!-- -->and returns a<!-- --> <a class="internal" href="/Reference/Literals/String">String</a>.</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">otherFunc :: Float -&gt; Float -&gt; Float -&gt; List Float
+</code></pre><p>This <code class="HowToGuide__code HowToGuide__code--inline">otherFunc</code> takes three<!-- --> <a class="internal" href="/Reference/Literals/Numeric Types#float">floating point numbers</a> <!-- -->and returns a<!-- --> <a class="internal" href="/Reference/Literals/List">List</a> <!-- -->of floating point numbers.</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">thirdFunction :: Char -&gt; String -&gt; Boolean
+</code></pre><p>This <code class="HowToGuide__code HowToGuide__code--inline">thirdFunction</code> <!-- -->takes a<!-- --> <a class="internal" href="/Reference/Literals/Char">Char</a> <!-- -->and a<!-- --> <a class="internal" href="/Reference/Literals/String">String</a> <!-- -->and returns a<!-- --> <a class="internal" href="/Reference/Literals/Boolean">Boolean</a>.</p><h3 class="HowToGuide__header HowToGuide__header--subsection">Function implementation</h3><p>Coming back to the<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">say</code> function we defined earlier, let&#x27;s talk through its actual implementation details:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">say :: String -&gt; String -&gt; String
+say = (word, subject) =&gt; word ++ &quot; &quot; ++ subject
+</code></pre><p>This definition allows us to associate a concrete implementation with the types in the signature. So<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">word</code> here is a<!-- --> <a class="internal" href="/Reference/Literals/String">String</a>, as is <code class="HowToGuide__code HowToGuide__code--inline">subject</code>. The return type is also a String, which works out nicely because the concatenation operator <code>++</code> works on Strings and Lists, so<!-- --> <code>word ++ &quot; &quot; ++ subject</code> is a String concatenated with two other Strings.</p><p>As written above, we&#x27;re using the lambda form of a function, which has an implicit <code class="HowToGuide__code HowToGuide__code--inline">return</code> <!-- -->value, after the <code class="HowToGuide__code HowToGuide__code--inline"> =&gt;</code>.</p><p>Let&#x27;s see what happens if we define the function with curly braces:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">say :: String -&gt; String -&gt; String
+say = (word, subject) =&gt; {
+  word ++ &quot; &quot; ++ subject
+}
+</code></pre><p>This causes the compiler to be unhappy:</p><pre class="HowToGuide__language HowToGuide__language--none"><code>[error]: Type error
+     ╭──▶ /how-to/Say.main.mad@6:1-8:1
+     │
+   6 │ ╭┤ say :: String -&gt; String -&gt; String
+   7 │ │  say = (verb, subject) =&gt; {
+   8 │ ├┤   verb ++ &quot; &quot; ++ subject
+     • │
+     • ╰╸ expected:
+     •      String -&gt; String -&gt; String
+     •
+     •    but found:
+     •      String -&gt; String -&gt; {}
+     •
+─────╯
+</code></pre><p>You can see from the error that this change has caused the function to no longer return a String, but instead this set of empty curly braces:<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">{}</code> — this is also known as the<!-- --> <a class="internal" href="/Reference/Literals/Unit">Unit</a> <!-- -->type.</p><p>In order to fix this we need to add the explicit<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">return</code> keyword (or change the type signature so that it returns Unit instead:<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">String -&gt; String -&gt; {}</code>)</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">say :: String -&gt; String -&gt; String
+say = (word, subject) =&gt; {
+  return word ++ &quot; &quot; ++ subject
+}
+</code></pre><h3 class="HowToGuide__header HowToGuide__header--subsection">Function invocation</h3><p>To see this in action, we need to call the function:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">main = () =&gt; {
+  pipe(
+    say(&quot;hello&quot;),
+    IO.putLine
+  )(&quot;world&quot;)
+}
+</code></pre><p>This adds a few minor wrinkles, so let&#x27;s talk through them.</p><h3 class="HowToGuide__header HowToGuide__header--subsection">A main function</h3><p>In order to call our function from the command line, we need to define a<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">main</code> function. This function is special in that it <em>must</em> be named<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">main</code> and it needs to return<!-- --> <a class="internal" href="/Reference/Literals/Unit">Unit</a> <!-- -->/ <code class="HowToGuide__code HowToGuide__code--inline">{}</code>.</p><h3 class="HowToGuide__header HowToGuide__header--subsection">Partial application and curry</h3><p>Recall earlier when we were showing <code>Math.max</code>, we passed in two parameters in the same invocation:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">&gt; Math.max(100, 20)
+100 :: Integer
+</code></pre><p>If we chose to, we could call our<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">say</code> function in this same manner</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">main = () =&gt; {
+  say(&quot;hello&quot;, &quot;world&quot;)
+}
+</code></pre><p>However, this will run but not print anything. That&#x27;s because we&#x27;ve now omitted the <code>IO.putLine</code> function, which actually prints the input.</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">main = () =&gt; {
+  IO.putLine(say(&quot;hello&quot;, &quot;world&quot;))
+}
+</code></pre><p><strong>Now</strong> this function will print correctly.</p><p><em>So why did the original version work?</em></p><p>This is because we had <em>partially-applied</em> the<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">say</code> function. Consider this bit of code:</p><pre class="HowToGuide__language HowToGuide__language--none"><code>main = () =&gt; {
+  hi = say(&quot;hello&quot;)
+  IO.putLine(hi(&quot;world&quot;)) // &quot;hello world&quot;
+  IO.putLine(hi(&quot;there&quot;)) // &quot;hello there&quot;
+  IO.putLine(hi(&quot;hey&quot;)) // &quot;hello hey&quot;
+}
+</code></pre><p>Recall that our <code class="HowToGuide__code HowToGuide__code--inline">say</code> <!-- -->function takes two parameters. Unlike some other more imperative languages, if we invoke a function with fewer parameters than it needs, in Madlib we get back a function which expects the remaining parameters. This is called currying a function. <em>All functions</em> in Madlib are curried.</p><p>If we come back to our definition, you can think of this as crossing off one of the values in the signature:</p><pre class="HowToGuide__language HowToGuide__language--none"><code>// this function is curried!
+say :: String -&gt; String -&gt; String
+say = (word, subject) =&gt; word ++ &quot; &quot; ++ subject
+
+// partial application
+hi :: String -&gt; String
+hi = say(&quot;hello&quot;)
+</code></pre><p>(Since the Madlib compiler is smart and capable, we don&#x27;t actually need to define the type definition for<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">hi</code>, but we&#x27;ve done so here for illustrative porpoises.)</p><h3 class="HowToGuide__header HowToGuide__header--subsection">Composition</h3><p>If you recall from our original example, we used the special<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">pipe</code> function:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">main = () =&gt; {
+  pipe(
+    say(&quot;hello&quot;),
+    IO.putLine
+  )(&quot;world&quot;)
+}
+</code></pre><p>This allows us to <em>compose</em> functions together. When we discussed partial application above, we named the partially applied version of<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">say</code>:</p><pre class="HowToGuide__language HowToGuide__language--none"><code>hi = say(&quot;hello&quot;)
+</code></pre><p>And we wrapped its invocation in <code>IO.putLine</code>:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">IO.putLine(hi(&quot;world&quot;))
+</code></pre><p>The <code class="HowToGuide__code HowToGuide__code--inline">pipe</code> function allows us to write things with fewer parentheses and compose operations from top to bottom:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">pipe(
+  say(&quot;hello&quot;),
+  IO.putLine
+)(&quot;world&quot;)
+</code></pre><p>This is the exact same as:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">IO.putLine(say(&quot;hello&quot;)(&quot;world&quot;))
+</code></pre><p>This may seem confusing or needless at first, but as we add more complexity you&#x27;ll start to see the utility of this alternative form.</p><h3 class="HowToGuide__header HowToGuide__header--subsection">Function application operator</h3><p>We&#x27;ve managed to articulate quite a few things with this simple example. Let&#x27;s add two more things to our understanding before we present you with a challenge.</p><p>If you recall above, we used the <code>Math.divide</code> function like so:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">&gt; Math.divide(3, 4)
+0.75 :: Float
+</code></pre><p>This is the same as using the division operator (<code>/</code>):<!-- --> <code>3 / 4</code></p><p>If we wanted to partially apply the <code>Math.divide</code> function, we&#x27;d always be passing in the numerator <code>3</code> before the denominator <code>4</code>. However, we can use the function application operator (<code>$</code>) to make this function much more valuable without changing its definition:</p><pre class="HowToGuide__language HowToGuide__language--none"><code>half = Math.divide($, 2)
+half(100) // 50
+</code></pre><h3 class="HowToGuide__header HowToGuide__header--subsection">Applying a function to a List</h3><p>When we were discussing partial application before, we had an example like this:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">main = () =&gt; {
+  hi = say(&quot;hello&quot;)
+  IO.putLine(hi(&quot;world&quot;)) // &quot;hello world&quot;
+  IO.putLine(hi(&quot;there&quot;)) // &quot;hello there&quot;
+  IO.putLine(hi(&quot;hey&quot;)) // &quot;hello hey&quot;
+}
+</code></pre><p>Using the <code class="HowToGuide__code HowToGuide__code--inline">map</code> <!-- -->function, we can re-use the same functionality while avoiding repetition:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">main = () =&gt; {
+  x = map(pipe(say(&quot;hello&quot;), IO.putLine))(
+    [&quot;world&quot;, &quot;there&quot;, &quot;hey&quot;]
+  )
+}
+</code></pre><p>However, you&#x27;ll note that as written, the resulting value<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">x</code> isn&#x27;t a List of Strings, it&#x27;s a List of<!-- --> <a class="internal" href="/Reference/Literals/Unit">Unit</a>:<!-- --> <code>[<!-- -->, <!-- -->, <!-- -->]</code>. This is because <code>IO.putLine</code> prints a value but doesn&#x27;t return it.</p><p>If we wanted to change that, we could do something like this instead, to capture the transformed map:</p><pre class="HowToGuide__language HowToGuide__language--mad" data-lang="mad"><code class="language-mad">import IO from &quot;IO&quot;
+import String from &quot;String&quot;
+
+main = () =&gt; {
+  x = map(
+    say(&quot;hello&quot;),
+    [&quot;world&quot;, &quot;there&quot;, &quot;hey&quot;]
+  )
+  pipe(
+    String.join(&quot;, &quot;),
+    IO.putLine
+  )(x) // &quot;hello world, hello there, hello hey&quot;
+}
+</code></pre><p>NB: If you try to print<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">x</code> without turning it into a String first via <code>String.join</code>, you&#x27;ll see an error similar to this:</p><pre class="HowToGuide__language HowToGuide__language--none"><code>[error]: Type error
+     ╭──▶ /how-to/Say.main.mad@30:14-30:15
+     │
+  30 │   IO.putLine(x)
+     •              ┬
+     •              ╰╸ expected:
+     •                   String
+     •
+     •                 but found:
+     •                   List String
+     •
+─────╯
+</code></pre><p>This is most easily worked around by calling<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">show</code> first, like<!-- --> <code>IO.putLine(show(x))</code> — We won&#x27;t go into too much detail for the purposes of keeping this document reasonably short, but<!-- --> <code class="HowToGuide__code HowToGuide__code--inline">show</code> is a useful and<!-- --> <a class="internal" href="/Reference/Interfaces/Show">semi-magical function</a> <!-- -->which coerces values into Strings.</p><h3 class="HowToGuide__header HowToGuide__header--subsection">Challenge:</h3><p>In order to test our understanding and comprehension, here&#x27;s a small challenge:<!-- --> <a class="internal" href="/Tutorials/Challenges/Say Anything, Say Many Things">Say Anything, Say Many Things</a></p><h3 class="HowToGuide__header HowToGuide__header--subsection">Solution:</h3><p>See a possible solution to the challenge<!-- --> <a class="internal" href="/Tutorials/Solutions/Solution - Say Anything, Say Many Things">here</a></p><h2 class="HowToGuide__header HowToGuide__header--section">Summary</h2><ul><li>Function<!-- --> <a class="internal" href="/How-To Guides/04 - Writing functions, in the main#defining-functions">definitions</a></li><li>Defining and running a<!-- --> <a class="internal" href="/How-To Guides/04 - Writing functions, in the main#a-main-function">main</a> <!-- -->function</li><li><a class="internal" href="/How-To Guides/04 - Writing functions, in the main#partial-application-and-curry">Curried</a> <!-- -->functions and their (partial)<!-- --> <a class="internal" href="/How-To Guides/04 - Writing functions, in the main#function-application-operator">applications</a></li><li><a class="internal" href="/How-To Guides/04 - Writing functions, in the main#composition">Composing</a> <!-- -->functions</li><li>Applying functions to a List with<!-- --> <a class="internal" href="/How-To Guides/04 - Writing functions, in the main#applying-a-function-to-a-list">map</a></li></ul></article></main></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{}},"page":"/how-to/04-writing-functions-in-the-main","query":{},"buildId":"FJ4ddRmzL0DTa5D9F7xcn","assetPrefix":"/stellar","nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}</script></body></html>
