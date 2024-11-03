@@ -134,20 +134,22 @@ export default COMPONENT
 //const fixNewlines = replace(/\n/g, "")
 const spotFix = pipe(
   // replace(/^>/g, "&gt;"),
-  replace(/=>/g, "=&gt;"),
-  replace(/>/g, "&gt;"),
+  // replace(/=>/g, "=&gt;"),
+  replace(/>/g, "__AMP__"),
   // fixNewlines,
 )
 const fixClassNames = replace(/class=/g, "className=")
-const fixEntities = replace(/>>/g, ">&gt;")
-const fixSoloChevron = replace(/^>/g, "&gt;")
 //const untransformNewlines = replace(/\n/g, "\n\n")
 
 const postfix = pipe(
   // trace("HUH"),
+  replace(/__AMP__/g, "&gt;"),
   fixClassNames,
-  fixEntities,
-  fixSoloChevron,
+  // replace(/^&gt;/g, "&gt;"),
+  // replace(/^&#x26;&gt;/g, "&gt;"),
+
+  // fixEntities,
+  // fixSoloChevron,
   // trace("YOOO"),
   // replace(/\<pre\>\<code\>/g, "<pre><code>{`"),
   // replace(/\<\/pre>\<\/code\>/g, "`}</pre></code>"),
@@ -161,7 +163,7 @@ const readObsidian = (raw) =>
     // map(trace("YO")),
     map(jsxify(raw)),
     map(postfix),
-    // chain(prettify),
+    chain(prettify),
   )(raw)
 
 const j2 = (x) => JSON.stringify(x, null, 2)
