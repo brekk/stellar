@@ -13,6 +13,7 @@ import rehypeFormat from "rehype-format"
 import rehypeHeading from "rehype-autolink-headings"
 import rehypeHighlight from "rehype-highlight"
 import rehypePrism from "rehype-prism-plus"
+// import rehypeParse from "rehyp
 import rehypeRaw from "rehype-raw"
 import rehypeSlug from "rehype-slug"
 import rehypeStringify from "rehype-stringify"
@@ -27,6 +28,8 @@ import remarkRehype from "remark-rehype"
 import remarkSmart from "remark-smartypants"
 import remarkStringify from "remark-stringify"
 import remarkTOC from "remark-toc"
+import * as prod from "react/jsx-runtime"
+const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs }
 
 import remarkFrontmatter from "remark-frontmatter"
 //import remarkMDXFrontmatter from "remark-mdx-frontmatter";
@@ -81,7 +84,7 @@ const pickaxe = (x) =>
 const pickaxe = (x) =>
   unified()
     .use(remarkParse)
-
+    .use(remarkBreaks)
     .use(remarkObsidian)
     .use(remarkLinks, { permalinks, pathFormat: "obsidian-short" })
 
@@ -91,12 +94,17 @@ const pickaxe = (x) =>
 
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw, { passThrough: nodeTypes })
+    // .use(rehypeParse, { fragment: true })
+
+    // https://github.com/SassDoc/prism-scss-sassdoc/blob/master/prism-scss-sassdoc.js
+    // .use(rehypePrism)
     // .use(remarkEmbed)
     // .use(remarkGfm)
     // .use(remarkSmart, { quotes: false, dashes: "oldschool" })
     // .use(remarkCallouts)
     // .use(remarkTOC, { heading: "Table of Contents", tight: true })
     // .use(remarkStringify)
+    // .use(rehypeReact, production)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(x)
 
@@ -125,23 +133,22 @@ export default COMPONENT
 
 //const fixNewlines = replace(/\n/g, "")
 const spotFix = pipe(
+  // replace(/^>/g, "&gt;"),
   replace(/=>/g, "=&gt;"),
   replace(/>/g, "&gt;"),
   // fixNewlines,
 )
-const fixClassNames = replace(/class/g, "className")
-const fixEntities = replace(
-  />>/g,
-  ">&gt;",
-  // /<pre><code class="language-mad">>/g,
-  // '<pre>code> class="language-mad">&gt;',
-)
+const fixClassNames = replace(/class=/g, "className=")
+const fixEntities = replace(/>>/g, ">&gt;")
+const fixSoloChevron = replace(/^>/g, "&gt;")
 //const untransformNewlines = replace(/\n/g, "\n\n")
 
 const postfix = pipe(
-  trace("HUH"),
+  // trace("HUH"),
   fixClassNames,
   fixEntities,
+  fixSoloChevron,
+  // trace("YOOO"),
   // replace(/\<pre\>\<code\>/g, "<pre><code>{`"),
   // replace(/\<\/pre>\<\/code\>/g, "`}</pre></code>"),
 )
@@ -149,11 +156,12 @@ const postfix = pipe(
 const readObsidian = (raw) =>
   pipe(
     readFile,
-    // map(spotFix),
+    map(spotFix),
     chain(encaseP(pickaxe)),
+    // map(trace("YO")),
     map(jsxify(raw)),
     map(postfix),
-    chain(prettify),
+    // chain(prettify),
   )(raw)
 
 const j2 = (x) => JSON.stringify(x, null, 2)
