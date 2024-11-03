@@ -41,8 +41,10 @@ import rehypeReact from "rehype-react"
 import { getPermalinks } from "@portaljs/remark-wiki-link"
 const HERE = path.resolve(process.cwd(), "mad-notes/notes")
 console.log("HERE", HERE)
-const permalinks = await getPermalinks(HERE)
-console.log("PERMA LINKIES", permalinks)
+const _permalinks = await getPermalinks(HERE)
+console.log("PERMA LINKIES", _permalinks)
+const permalinks = _permalinks.map((z) => z.slice(z.lastIndexOf("/") + 1))
+console.log("PERMA STINKIES", permalinks)
 
 const utf8 = (x) => fs.promises.readFile(x, "utf8")
 
