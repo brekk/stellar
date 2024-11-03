@@ -11,8 +11,11 @@ export const COMPONENT = () => {
   const bem = blem("HowToGuide")
   return (
     <article className={bem("")}>
-      <h1>01 - Hello mad, mad world</h1>
-      <h2>Installation</h2>
+      <h1 className={bem("header", "main")}>
+        <div className={bem("title")}>Hello mad, mad world</div>
+        <div className={bem("index", "ordinal")}>01</div>
+      </h1>
+      <h2 className={bem("header", "section")}>Installation</h2>
       <p>
         There are a few ways to{" "}
         <a className="internal" href="/Reference/Installation">
@@ -38,7 +41,7 @@ export const COMPONENT = () => {
 madlib@0.23.13
 `}</code>
       </pre>
-      <h2>REPL</h2>
+      <h2 className={bem("header", "section")}>REPL</h2>
       <p>
         For lightweight or exploratory work, you can work within the Madlib REPL
         (Read-Eval-Print-Loop). This is a sandbox where you can write code as
@@ -69,7 +72,7 @@ Available commands:
         </a>
         .
       </p>
-      <h3>Basic arithmetic</h3>
+      <h3 className={bem("header", "subsection")}>Basic arithmetic</h3>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> 5 + 5
 10 :: Integer
@@ -100,7 +103,7 @@ Available commands:
 -3.5999999999999996 :: Float
 `}</code>
       </pre>
-      <h2>Basic boolean logic</h2>
+      <h2 className={bem("header", "section")}>Basic boolean logic</h2>
       <p>Here are some simple boolean expressions.</p>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> true == false
@@ -119,7 +122,7 @@ true :: Boolean
         ) and logical <em>or</em> (<code>||</code>) operators. Finally, we have
         a boolean negation operator (<code>!</code>) which is infixed.
       </p>
-      <h2>Asserting equality</h2>
+      <h2 className={bem("header", "section")}>Asserting equality</h2>
       <p>Here we can assert the equality of things:</p>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> 5 == 5
@@ -136,7 +139,7 @@ false :: Boolean
         Here we've shown the equality operator ( <code>==</code>) as well as the
         inequality operator (<code>!=</code>).
       </p>
-      <h2>Try mixing types</h2>
+      <h2 className={bem("header", "section")}>Try mixing types</h2>
       <p>
         What happens if we try to do something like add <code>5 + "cool"</code>?
       </p>
@@ -155,7 +158,9 @@ Note: Remember that instance methods are automatically imported when the module 
         Here Madlib is saying that "cool" is not a number and so it doesn't know
         how to add 5 to it. We'll discuss this kind of error more later on.
       </p>
-      <h2>Import functions from Prelude</h2>
+      <h2 className={bem("header", "section")}>
+        Import functions from Prelude
+      </h2>
       <p>
         In Madlib, we call our standard library <em>Prelude</em> (a name taken
         from Haskell). We'll go over everything it has to offer in more detail
@@ -213,7 +218,7 @@ Note: Remember that instance methods are automatically imported when the module 
 639 :: Integer
 `}</code>
       </pre>
-      <h5>Summary</h5>
+      <h5 className={bem("header", "summary")}>Summary</h5>
       <p>In this document, we've discussed:</p>
       <ul>
         <li>

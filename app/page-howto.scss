@@ -1,27 +1,141 @@
 @import "colors";
 @import "font";
 @import "media";
+@import "mixins";
+
+code {
+  @include fontFira;
+  background-color: #000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  position: relative;
+  font-size: 0.8rem;
+}
 
 .HowToGuide {
   width: calc(100% - 2rem);
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  &__index--ordinal {
+    @include fontFira;
+    font-size: 1rem;
+    vertical-align: middle;
+    margin: 0;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+    background-color: $color-green;
+    color: $color-bg;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    line-height: 1rem;
+  }
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    line-height: 1em;
+  }
   &__header {
     width: 100%;
-    &--title {
+    &--main {
+      color: $color-fg;
+      font-size: 2.5rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &--section,
+    &--subsection,
+    &--example,
+    &--summary {
+      border-bottom: 1px solid $color-white50;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.75rem;
+      position: relative;
+      code {
+        padding: 0;
+        font-size: 1em;
+        background-color: transparent;
+        border: none;
+        @include fontAntonio;
+        color: $color-orange;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        border-bottom: 0.25rem solid $color-fg;
+        box-shadow: 0 0 10px $color-fg;
+        width: 4rem;
+        height: 1px;
+        right: 0;
+        bottom: -4px;
+      }
+    }
+    &--section,
+    &--subsection {
+      &::before {
+        content: "✦";
+        position: absolute;
+        color: currentColor;
+        left: -1rem;
+        // bottom: -3.5rem;
+        font-size: 0.35em;
+        padding-bottom: 0.5rem;
+        vertical-align: top;
+        margin-right: 0.5rem;
+      }
+    }
+    &--section {
       // @include skewed;
       color: $color-pink;
-      margin: 2rem 10%;
-      width: 80%;
-      text-align: center;
+      font-size: 2rem;
+      &::before {
+        color: $color-yellow;
+        text-shadow: -0.75rem -0.25rem $color-pink;
+      }
+      &::after {
+        border-bottom-color: $color-pink;
+        box-shadow: 0 0 10px $color-pink;
+      }
     }
-    &--block {
+    &--subsection {
       // @include skewed;
-      font-size: 2.4rem;
       color: $color-yellow;
-      text-align: center;
-      margin: 2rem 0 2rem;
+      font-size: 1.8rem;
+
+      &::after {
+        border-bottom: 0.25rem solid $color-yellow;
+        box-shadow: 0 0 10px $color-yellow;
+      }
+    }
+    &--example {
+      // @include skewed;
+      color: $color-orange;
+      font-size: 1.6rem;
+      &::before {
+        font-size: 0.75rem;
+      }
+      &::after {
+        border-bottom-color: $color-orange;
+        box-shadow: 0 0 10px $color-orange;
+      }
+    }
+    &--summary {
+      // @include skewed;
+      color: $color-blue;
+      font-size: 2rem;
+      &::after {
+        border-bottom-color: $color-blue;
+        box-shadow: 0 0 10px $color-blue;
+      }
     }
   }
   &__content {
@@ -46,33 +160,29 @@
     //   width: calc((100% / 3) - 1rem);
     // }
   }
-  code {
-    @include fontFira;
-    background-color: #000;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0 0.5rem;
-    border-radius: 0.25rem;
-    display: inline-block;
-    position: relative;
-    font-size: 0.8rem;
-  }
+
   &__language {
     width: 100%;
     overflow: hidden;
     position: relative;
     &:not(.HowToGuide__language--none) {
       &::before {
+        @include fontAntonio;
         content: attr(data-lang);
         position: absolute;
         right: 0;
         top: 0;
-        background-color: $color-blue;
-        color: $color-bg;
-        font-size: 0.5rem;
+        background-color: $color-bg;
+        color: $color-blue;
+        border: 1px solid $color-blue;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        font-size: 0.75rem;
         border-top-right-radius: 0.25rem;
         border-bottom-left-radius: 0.25rem;
         padding: 0.5em;
         z-index: 20;
+        text-shadow: none;
       }
     }
     code {
