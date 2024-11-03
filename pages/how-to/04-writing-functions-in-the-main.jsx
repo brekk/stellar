@@ -62,8 +62,10 @@ main = () => {
 `}</code>
       </pre>
       <p>
-        Save this file as <code>Say.main.mad</code> or whatever you like, as
-        long as it ends in <code>.mad</code>.
+        Save this file as{" "}
+        <code className={bem("code", "inline")}>{`Say.main.mad`}</code> or
+        whatever you like, as long as it ends in{" "}
+        <code className={bem("code", "inline")}>{`.mad`}</code>.
       </p>
       <p>
         We can run this file standalone with the command{" "}
@@ -175,9 +177,13 @@ say = (word, subject) => word ++ " " ++ subject
         </a>
         , as is <code className={bem("code", "inline")}>{`subject`}</code>. The
         return type is also a String, which works out nicely because the
-        concatenation operator <code>++</code> works on Strings and Lists, so{" "}
-        <code>word ++ " " ++ subject</code> is a String concatenated with two
-        other Strings.
+        concatenation operator{" "}
+        <code className={bem("code", "inline")}>{`++`}</code> works on Strings
+        and Lists, so{" "}
+        <code
+          className={bem("code", "inline")}
+        >{`word ++ " " ++ subject`}</code>{" "}
+        is a String concatenated with two other Strings.
       </p>
       <p>
         As written above, we're using the lambda form of a function, which has
@@ -264,8 +270,9 @@ say = (word, subject) => {
         Partial application and curry
       </h3>
       <p>
-        Recall earlier when we were showing <code>Math.max</code>, we passed in
-        two parameters in the same invocation:
+        Recall earlier when we were showing{" "}
+        <code className={bem("code", "inline")}>{`Math.max`}</code>, we passed
+        in two parameters in the same invocation:
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> Math.max(100, 20)
@@ -285,8 +292,9 @@ say = (word, subject) => {
       </pre>
       <p>
         However, this will run but not print anything. That's because we've now
-        omitted the <code>IO.putLine</code> function, which actually prints the
-        input.
+        omitted the{" "}
+        <code className={bem("code", "inline")}>{`IO.putLine`}</code> function,
+        which actually prints the input.
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`main = () => {
@@ -366,7 +374,8 @@ hi = say("hello")
 `}</code>
       </pre>
       <p>
-        And we wrapped its invocation in <code>IO.putLine</code>:
+        And we wrapped its invocation in{" "}
+        <code className={bem("code", "inline")}>{`IO.putLine`}</code>:
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`IO.putLine(hi("world"))
@@ -402,8 +411,9 @@ hi = say("hello")
         with a challenge.
       </p>
       <p>
-        If you recall above, we used the <code>Math.divide</code> function like
-        so:
+        If you recall above, we used the{" "}
+        <code className={bem("code", "inline")}>{`Math.divide`}</code> function
+        like so:
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
         <code className="language-mad">{`> Math.divide(3, 4)
@@ -411,15 +421,19 @@ hi = say("hello")
 `}</code>
       </pre>
       <p>
-        This is the same as using the division operator (<code>/</code>):{" "}
-        <code>3 / 4</code>
+        This is the same as using the division operator (
+        <code className={bem("code", "inline")}>{`/`}</code>):{" "}
+        <code className={bem("code", "inline")}>{`3 / 4`}</code>
       </p>
       <p>
-        If we wanted to partially apply the <code>Math.divide</code> function,
-        we'd always be passing in the numerator <code>3</code> before the
-        denominator <code>4</code>. However, we can use the function application
-        operator (<code>$</code>) to make this function much more valuable
-        without changing its definition:
+        If we wanted to partially apply the{" "}
+        <code className={bem("code", "inline")}>{`Math.divide`}</code> function,
+        we'd always be passing in the numerator{" "}
+        <code className={bem("code", "inline")}>{`3`}</code> before the
+        denominator <code className={bem("code", "inline")}>{`4`}</code>.
+        However, we can use the function application operator (
+        <code className={bem("code", "inline")}>{`$`}</code>) to make this
+        function much more valuable without changing its definition:
       </p>
       <pre className={bem("language", "none")}>
         <code>{`half = Math.divide($, 2)
@@ -462,12 +476,9 @@ half(100) // 50
         <a className="internal" href="/Reference/Literals/Unit">
           Unit
         </a>
-        :{" "}
-        <code>
-          [{}, {}, {}]
-        </code>
-        . This is because <code>IO.putLine</code> prints a value but doesn't
-        return it.
+        : <code className={bem("code", "inline")}>{`[{}, {}, {}]`}</code>. This
+        is because <code className={bem("code", "inline")}>{`IO.putLine`}</code>{" "}
+        prints a value but doesn't return it.
       </p>
       <p>
         If we wanted to change that, we could do something like this instead, to
@@ -492,8 +503,9 @@ main = () => {
       <p>
         NB: If you try to print{" "}
         <code className={bem("code", "inline")}>{`x`}</code> without turning it
-        into a String first via <code>String.join</code>, you'll see an error
-        similar to this:
+        into a String first via{" "}
+        <code className={bem("code", "inline")}>{`String.join`}</code>, you'll
+        see an error similar to this:
       </p>
       <pre className={bem("language", "none")}>
         <code>{`[error]: Type error
@@ -513,8 +525,9 @@ main = () => {
       <p>
         This is most easily worked around by calling{" "}
         <code className={bem("code", "inline")}>{`show`}</code> first, like{" "}
-        <code>IO.putLine(show(x))</code> — We won't go into too much detail for
-        the purposes of keeping this document reasonably short, but{" "}
+        <code className={bem("code", "inline")}>{`IO.putLine(show(x))`}</code> —
+        We won't go into too much detail for the purposes of keeping this
+        document reasonably short, but{" "}
         <code className={bem("code", "inline")}>{`show`}</code> is a useful and{" "}
         <a className="internal" href="/Reference/Interfaces/Show">
           semi-magical function

@@ -128,6 +128,33 @@ const blockWalker = curry((tag, select, ast) => {
   // return ast
 })
 
+function fixCodeBlocks() {
+  const settings = {
+    quoteSmart: false,
+    closeSelfClosing: false,
+    omitOptionalTags: false,
+    entities: { useShortestReferences: true },
+  }
+
+  return (tree) => {
+    // same recursion findCodeBlocks as above
+    const codeBlocks = findCodeBlocks(tree)
+
+    for (let block of codeBlocks) {
+      // copy position info for the whole <pre> so we can fake it later
+      const position = {
+        start: block.children[0].position.start,
+        end: block.children[block.children.length - 1].position.end,
+      }
+
+      // replace children with my fakes
+      block.children = []
+    }
+
+    return tree
+  }
+}
+
 const pickaxe = (x) =>
   unified()
     .use(remarkParse)
@@ -200,7 +227,7 @@ const fixCode = pipe(
   ),
 
   replace(
-    /<code>([A-Za-z:\s\-=<>{}]*)<\/code>/g,
+    /<code>(.*?)<\/code>/g,
     `<code className={bem("code", "inline")}>{\`$1\`}</code>`,
   ),
 )

@@ -198,6 +198,7 @@ code {
       overflow-x: auto;
       display: block;
       padding: 0.5rem;
+      // box-decoration-break: clone;
     }
   }
 }
