@@ -37,7 +37,15 @@ import remarkParseFrontmatter from "remark-parse-frontmatter"
 import remarkReact from "remark-react"
 import fs from "node:fs"
 import { node, encaseP, chain, map, fork } from "fluture"
-import { replace, path as Rpath, head, slice, pipe, curry } from "ramda"
+import {
+  replace,
+  path as Rpath,
+  head,
+  slice,
+  pipe,
+  curry,
+  identity as I,
+} from "ramda"
 import * as PROD from "react/jsx-runtime"
 import rehypeReact from "rehype-react"
 
@@ -135,7 +143,8 @@ export default COMPONENT
 const spotFix = pipe(
   // replace(/^>/g, "&gt;"),
   // replace(/=>/g, "=&gt;"),
-  replace(/>/g, "__AMP__"),
+  // replace(/>/g, "__AMP__"),
+  I,
   // fixNewlines,
 )
 const fixClassNames = replace(/class=/g, "className=")
@@ -143,7 +152,7 @@ const fixClassNames = replace(/class=/g, "className=")
 
 const postfix = pipe(
   // trace("HUH"),
-  replace(/__AMP__/g, "&gt;"),
+  // replace(/__AMP__/g, "&gt;"),
   fixClassNames,
   // replace(/^&gt;/g, "&gt;"),
   // replace(/^&#x26;&gt;/g, "&gt;"),

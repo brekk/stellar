@@ -28,11 +28,12 @@ export const COMPONENT = () => {
 `}</code>
       </pre>
       <p>
-        This should make the 𝚖𝚊𝚍𝚕𝚒𝚋 binary globally accessible, so you should
-        see a version number when you run 𝚖𝚊𝚍𝚕𝚒𝚋 --𝚟𝚎𝚛𝚜𝚒𝚘𝚗:
+        This should make the <code>madlib</code> binary globally accessible, so
+        you should see a version number when you run{" "}
+        <code>madlib --version</code>:
       </p>
       <pre>
-        <code className="language-sh">{`&gt; madlib --version
+        <code className="language-sh">{`> madlib --version
 madlib@0.23.13
 `}</code>
       </pre>
@@ -43,8 +44,8 @@ madlib@0.23.13
         you learn more about Madlib.
       </p>
       <p>
-        The REPL can be accessed with the command 𝚖𝚊𝚍𝚕𝚒𝚋 𝚛𝚎𝚙𝚕, which should
-        bring up an interactive session that looks like this:
+        The REPL can be accessed with the command <code>madlib repl</code>,
+        which should bring up an interactive session that looks like this:
       </p>
       <pre>
         <code>{`------ REPL - Madlib@0.23.13 -------------------------------
@@ -68,74 +69,78 @@ Available commands:
       </p>
       <h3>Basic arithmetic</h3>
       <pre>
-        <code className="language-mad">{`&gt; 5 + 5
+        <code className="language-mad">{`> 5 + 5
 10 :: Integer
-&gt; 10 - 100
+> 10 - 100
 -90 :: Integer
-&gt; 42 * 10
+> 42 * 10
 420 :: Integer
-&gt; 9 / 6
+> 9 / 6
 1.5 :: Float
 `}</code>
       </pre>
       <p>
         As you can see, we're not doing anything complex here — but this
         illustrates the way we can write an expression and see the result, along
-        with its type. The type is indicated by the double-colon / :: , which
-        can be read as "has type of".
+        with its type. The type is indicated by the double-colon /{" "}
+        <code>::</code> , which can be read as "has type of".
       </p>
       <p>
         These follow the usual precedence rules, and can be changed by adding
         parentheses:
       </p>
       <pre>
-        <code className="language-mad">{`&gt; 3 * 4 / (5 - 6)
+        <code className="language-mad">{`> 3 * 4 / (5 - 6)
 -12 :: Float
-&gt; 3 * 4 / 5 - 6
+> 3 * 4 / 5 - 6
 -3.6 :: Float
-&gt; 3 * (4 / 5) - 6
+> 3 * (4 / 5) - 6
 -3.5999999999999996 :: Float
 `}</code>
       </pre>
       <h2>Basic boolean logic</h2>
       <p>Here are some simple boolean expressions.</p>
       <pre>
-        <code className="language-mad">{`&gt; true &#x26;&#x26; false
+        <code className="language-mad">{`> true &#x26;&#x26; false
 false :: Boolean
-&gt; true &#x26;&#x26; true
+> true &#x26;&#x26; true
 true :: Boolean
-&gt; false || true
+> false || true
 true :: Boolean
-&gt; !(false &#x26;&#x26; false)
+> !(false &#x26;&#x26; false)
 true :: Boolean
 `}</code>
       </pre>
       <p>
-        As you can see, we have the literals 𝚝𝚛𝚞𝚎 and 𝚏𝚊𝚕𝚜𝚎, as well as the
-        logical 𝘢𝘯𝘥 (&#x26;&#x26;) and logical 𝘰𝘳 (||) operators. Finally, we
-        have a boolean negation operator (!) which is infixed.
+        As you can see, we have the literals <code>true</code> and{" "}
+        <code>false</code>, as well as the logical <em>and</em> (
+        <code>&#x26;&#x26;</code>) and logical <em>or</em> (<code>||</code>)
+        operators. Finally, we have a boolean negation operator (<code>!</code>)
+        which is infixed.
       </p>
       <h2>Asserting equality</h2>
       <p>Here we can assert the equality of things:</p>
       <pre>
-        <code className="language-mad">{`&gt; 5 == 5
+        <code className="language-mad">{`> 5 == 5
 true :: Boolean
-&gt; 1 == 0
+> 1 == 0
 false :: Boolean
-&gt; 7 != 0
+> 7 != 0
 true :: Boolean
-&gt; "hello" == "world"
+> "hello" == "world"
 false :: Boolean
 `}</code>
       </pre>
       <p>
-        Here we've shown the equality operator ( ==) as well as the inequality
-        operator (!=).
+        Here we've shown the equality operator ( <code>==</code>) as well as the
+        inequality operator (<code>!=</code>).
       </p>
       <h2>Try mixing types</h2>
-      <p>What happens if we try to do something like add 𝟻 + "𝚌𝚘𝚘𝚕"?</p>
+      <p>
+        What happens if we try to do something like add <code>5 + "cool"</code>?
+      </p>
       <pre>
-        <code className="language-mad">{`&gt; 5 + "cool"
+        <code className="language-mad">{`> 5 + "cool"
 Instance not found
 
 No instance for 'Number String' was found.
@@ -151,12 +156,12 @@ Note: Remember that instance methods are automatically imported when the module 
       </p>
       <h2>Import functions from Prelude</h2>
       <p>
-        In Madlib, we call our standard library 𝘗𝘳𝘦𝘭𝘶𝘥𝘦 (a name taken from
-        Haskell). We'll go over everything it has to offer in more detail
-        shortly, but let's start by importing 𝙼𝚊𝚝𝚑:
+        In Madlib, we call our standard library <em>Prelude</em> (a name taken
+        from Haskell). We'll go over everything it has to offer in more detail
+        shortly, but let's start by importing <code>Math</code>:
       </p>
       <pre>
-        <code className="language-mad">{`&gt; import Math from "Math"
+        <code className="language-mad">{`> import Math from "Math"
 `}</code>
       </pre>
       <p>
@@ -167,26 +172,26 @@ Note: Remember that instance methods are automatically imported when the module 
         just enough to give a general sense of how it works.
       </p>
       <pre>
-        <code className="language-mad">{`&gt; import Math from "Math"
-&gt; Math.max(100, 20)
+        <code className="language-mad">{`> import Math from "Math"
+> Math.max(100, 20)
 100 :: Integer
-&gt; Math.min(100, 20)
+> Math.min(100, 20)
 20 :: Integer
-&gt; x = Math.divide(3, 4)
+> x = Math.divide(3, 4)
 0.75 :: Float
-&gt; y = Math.sqrt(100)
+> y = Math.sqrt(100)
 10 :: Float
-&gt; z = Math.abs(-1000)
+> z = Math.abs(-1000)
 1000 :: Integer
-&gt; x
+> x
 0.75 :: Float
 `}</code>
       </pre>
       <p>
         As you can see, functions are invoked by passing them parameters within
-        parentheses. We've also assigned some of these results to variables (𝚡,
-        𝚢, 𝚣) and we've shown that the REPL will remember these values in
-        memory.
+        parentheses. We've also assigned some of these results to variables (
+        <code>x</code>, <code>y</code>, <code>z</code>) and we've shown that the
+        REPL will remember these values in memory.
       </p>
       <p>
         We'll also try playing with a few of the functions defined in{" "}
@@ -197,13 +202,13 @@ Note: Remember that instance methods are automatically imported when the module 
         work:
       </p>
       <pre>
-        <code className="language-mad">{`&gt; import List from "List"
-&gt; List.range(0, 10)
+        <code className="language-mad">{`> import List from "List"
+> List.range(0, 10)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] :: List Integer
-&gt; nums = [1,2,3,4,500,7,92,30]
-&gt; List.reduce(Math.max, -1, nums)
+> nums = [1,2,3,4,500,7,92,30]
+> List.reduce(Math.max, -1, nums)
 500 :: Integer
-&gt; List.reduce((a, b) =&gt; a + b, 0, nums)
+> List.reduce((a, b) => a + b, 0, nums)
 639 :: Integer
 `}</code>
       </pre>
