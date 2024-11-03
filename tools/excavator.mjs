@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { nodeTypes } from "@mdx-js/mdx"
+import util from "node:util"
 import { unified } from "unified"
 import { remark } from "remark"
 import path from "node:path"
@@ -38,6 +39,9 @@ import remarkParseFrontmatter from "remark-parse-frontmatter"
 import fs from "node:fs"
 import { node, encaseP, chain, map, fork } from "fluture"
 import {
+  ifElse,
+  filter,
+  includes,
   split,
   replace,
   path as Rpath,
@@ -62,9 +66,66 @@ const utf8 = (x) => fs.promises.readFile(x, "utf8")
 
 const readFile = encaseP(utf8)
 
-const trace = curry((msg, x) => {
-  console.log(msg, x)
+/*
+https://swizec.com/blog/how-to-debug-unified-rehype-or-remark-and-fix-bugs-in-markdown-processing/
+function debugCodeBlocks() {
+  function findCodeBlocks(node) {
+    let nodes = []
+
+    if (node.tagName === "pre") {
+      nodes.push(node) // <pre> nodes are code blocks
+    } else if (node.children) {
+      // recursively walk through child nodes
+      for (let child of node.children) {
+        nodes.push(...findCodeBlocks(child))
+      }
+    }
+
+    return nodes
+  }
+
+  return (tree) => {
+    const codeBlocks = findCodeBlocks(tree)
+
+    // deep print the codeBlocks array
+    console.log(require("util").inspect(tree, false, null, true))
+
+    return tree
+  }
+}*/
+
+const xtraceWhen = curry((check, effect, msg, x) => {
+  if (check(msg, x)) {
+    effect(msg, x)
+  }
   return x
+})
+const xtrace = xtraceWhen(() => true)
+
+const trace = xtrace(console.log)
+
+/*
+const walkChildren = curry((check, agg, node) =>
+  filter(I, [
+    // keep the aggregate
+    ...agg,
+    // add this node maybe
+    check(node) ? node : false,
+    // call walkChildren on the children
+    ...map(walkChildren(check, agg))(node?.children ?? []),
+  ]),
+)
+*/
+
+import { visit } from "unist-util-visit"
+
+const blockWalker = curry((tag, select, ast) => {
+  visit(ast, select, (node) => {
+    console.log(tag)
+    console.log(util.inspect(node, false, null, true))
+  })
+  // if you want to eschew everything
+  // return ast
 })
 
 const pickaxe = (x) =>
@@ -77,7 +138,8 @@ const pickaxe = (x) =>
     .use(remarkParseFrontmatter)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw, { passThrough: nodeTypes })
-    /* these don't seem to work
+    // .use(blockWalker("HYPE PRE", "code"))
+    /* these don't seem to work:
     .use(rehypeSlug)
     .use(rehypeHeading)
   */
@@ -90,13 +152,24 @@ const format = (x) => prettier.format(x, { semi: false, parser: "typescript" })
 const prettify = encaseP(format)
 // const spotFix = replace(/\>\>/g, ">&gt;");
 
+const renderTitle = (title) => `<div className={bem("title")}>${title}</div>`
+
+const renderOrdinal = (index) =>
+  `<div className={bem("index", "ordinal")}>${index}</div>`
+
 const renderName = pipe(
   (x) => x.slice(x.lastIndexOf("/") + 1, x.lastIndexOf(".")),
-  split(" - "),
-  ([_1, _2]) =>
-    `<div className={bem("title")}>${_2}</div>
-<div className={bem("index", "ordinal")}>${_1}</div>
+  ifElse(
+    includes(" - "),
+    pipe(
+      split(" - "),
+      ([_1, _2]) =>
+        `${renderTitle(_2)}
+${renderOrdinal(_1)}
 `,
+    ),
+    renderTitle,
+  ),
   (x) => `<h1 className={bem("header", "main")}>${x}</h1>`,
 )
 

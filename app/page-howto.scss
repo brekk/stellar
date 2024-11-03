@@ -30,10 +30,17 @@ code {
     color: $color-bg;
     width: 2rem;
     height: 2rem;
+
+    min-width: 2rem;
+    min-height: 2rem;
+
+    max-width: 2rem;
+    min-height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: flex-end;
+    justify-self: flex-start;
     line-height: 1rem;
   }
   &__title {
