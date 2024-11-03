@@ -7,7 +7,7 @@ import path from "node:path"
 import slug from "slug"
 import * as prettier from "prettier"
 //import remarkObsidian from "@thecae/remark-obsidian"
-// import remarkUTF8 from "remark-utf8";
+import remarkUTF8 from "remark-utf8"
 //import remarkLinks from "remark-wiki-link-plus"
 import rehypeFormat from "rehype-format"
 import rehypeHeading from "rehype-autolink-headings"
@@ -40,11 +40,11 @@ import rehypeReact from "rehype-react"
 
 import { getPermalinks } from "@portaljs/remark-wiki-link"
 const HERE = path.resolve(process.cwd(), "mad-notes/notes")
-console.log("HERE", HERE)
-const _permalinks = await getPermalinks(HERE)
-console.log("PERMA LINKIES", _permalinks)
-const permalinks = _permalinks.map((z) => z.slice(z.lastIndexOf("/") + 1))
-console.log("PERMA STINKIES", permalinks)
+// console.log("HERE", HERE)
+const permalinks = await getPermalinks(HERE)
+// console.log("PERMA LINKIES", _permalinks)
+// const permalinks = _permalinks.map((z) => z.slice(z.lastIndexOf("/") + 1))
+// console.log("PERMA STINKIES", permalinks)
 
 const utf8 = (x) => fs.promises.readFile(x, "utf8")
 
@@ -80,14 +80,24 @@ const pickaxe = (x) =>
 */
 const pickaxe = (x) =>
   unified()
-    .use(remarkParse, { gfm: true })
-    .use(remarkEmbed)
-    .use(remarkGfm)
-    .use(remarkSmart, { quotes: false, dashes: "oldschool" })
-    .use(remarkCallouts)
+    .use(remarkParse)
+
+    .use(remarkObsidian)
     .use(remarkLinks, { permalinks, pathFormat: "obsidian-short" })
-    .use(remarkTOC, { heading: "Table of Contents", tight: true })
-    .use(remarkStringify)
+
+    .use(remarkUTF8)
+    .use(remarkFrontmatter, ["yaml"])
+    .use(remarkParseFrontmatter)
+
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw, { passThrough: nodeTypes })
+    // .use(remarkEmbed)
+    // .use(remarkGfm)
+    // .use(remarkSmart, { quotes: false, dashes: "oldschool" })
+    // .use(remarkCallouts)
+    // .use(remarkTOC, { heading: "Table of Contents", tight: true })
+    // .use(remarkStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(x)
 
 const cleanName = pipe((x) => x.slice(x.lastIndexOf("/"), -3), slug)
@@ -119,11 +129,17 @@ const spotFix = pipe(
   replace(/>/g, "&gt;"),
   // fixNewlines,
 )
-const fixClassNames = replace(/class=/g, "className=")
-const fixEntities = replace(/&#x26;gt;/g, "&gt;")
+const fixClassNames = replace(/class/g, "className")
+const fixEntities = replace(
+  />>/g,
+  ">&gt;",
+  // /<pre><code class="language-mad">>/g,
+  // '<pre>code> class="language-mad">&gt;',
+)
 //const untransformNewlines = replace(/\n/g, "\n\n")
 
 const postfix = pipe(
+  trace("HUH"),
   fixClassNames,
   fixEntities,
   // replace(/\<pre\>\<code\>/g, "<pre><code>{`"),
@@ -133,11 +149,11 @@ const postfix = pipe(
 const readObsidian = (raw) =>
   pipe(
     readFile,
-    //map(spotFix),
+    // map(spotFix),
     chain(encaseP(pickaxe)),
-    //map(jsxify(raw)),
-    //map(postfix),
-    //chain(prettify),
+    map(jsxify(raw)),
+    map(postfix),
+    chain(prettify),
   )(raw)
 
 const j2 = (x) => JSON.stringify(x, null, 2)
