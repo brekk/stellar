@@ -88,7 +88,7 @@ const pickaxe = (x) =>
     .use(remarkObsidian)
     .use(remarkLinks, { permalinks, pathFormat: "obsidian-short" })
 
-    .use(remarkUTF8)
+    // .use(remarkUTF8)
     .use(remarkFrontmatter, ["yaml"])
     .use(remarkParseFrontmatter)
 
@@ -151,8 +151,9 @@ const postfix = pipe(
   // fixEntities,
   // fixSoloChevron,
   // trace("YOOO"),
-  // replace(/\<pre\>\<code\>/g, "<pre><code>{`"),
-  // replace(/\<\/pre>\<\/code\>/g, "`}</pre></code>"),
+  replace(/<pre><code>/g, "<pre><code>{`"),
+  replace(/<\/code><\/pre>/g, "`}</code></pre>"),
+  replace(/<pre><code className="(.*)">/g, '<pre><code className="$1">{`'),
 )
 
 const readObsidian = (raw) =>
