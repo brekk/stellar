@@ -125,6 +125,11 @@ const fixCode = pipe(
     /<pre><code className="language-(.*)">/g,
     '<pre className={bem("language", "$1")} data-lang="$1"><code className="language-$1">{`',
   ),
+
+  replace(
+    /<code>([A-Za-z:\s\-=<>{}]*)<\/code>/g,
+    `<code className={bem("code", "inline")}>{\`$1\`}</code>`,
+  ),
 )
 
 const fixHeaders = pipe(

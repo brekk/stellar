@@ -80,14 +80,15 @@ code {
       }
     }
     &--section,
-    &--subsection {
+    &--subsection,
+    &--example {
       &::before {
         content: "✦";
         position: absolute;
         color: currentColor;
         left: -1rem;
         // bottom: -3.5rem;
-        font-size: 0.35em;
+        font-size: 0.4em;
         padding-bottom: 0.5rem;
         vertical-align: top;
         margin-right: 0.5rem;
@@ -121,7 +122,7 @@ code {
       color: $color-orange;
       font-size: 1.6rem;
       &::before {
-        font-size: 0.75rem;
+        content: "▲";
       }
       &::after {
         border-bottom-color: $color-orange;
