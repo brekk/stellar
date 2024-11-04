@@ -27,7 +27,7 @@ code {
     border-radius: 100%;
     margin-left: 0.5rem;
     background-color: $color-green;
-    color: $color-bg;
+    color: $color-fg;
     width: 2rem;
     height: 2rem;
 
@@ -63,6 +63,7 @@ code {
     &--subsection,
     &--example,
     &--summary {
+      mix-blend-mode: color-dodge;
       border-bottom: 1px solid $color-white50;
       margin: 2rem 0 1rem;
       padding-bottom: 0.75rem;
@@ -76,6 +77,7 @@ code {
         color: $color-orange;
       }
       &::after {
+        mix-blend-mode: color-dodge;
         content: "";
         position: absolute;
         border-bottom: 0.25rem solid $color-fg;
