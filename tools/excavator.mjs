@@ -55,6 +55,9 @@ import {
 // import rehypeReact from "rehype-react"
 
 import { getPermalinks } from "@portaljs/remark-wiki-link"
+
+import { inspectWhere, traceWhere } from "./rehype-plugin.mjs"
+
 const HERE = path.resolve(process.cwd(), "mad-notes/notes")
 // console.log("HERE", HERE)
 const permalinks = await getPermalinks(HERE)
@@ -128,6 +131,7 @@ const blockWalker = curry((tag, select, ast) => {
   // return ast
 })
 
+/*
 function fixCodeBlocks() {
   const settings = {
     quoteSmart: false,
@@ -154,6 +158,7 @@ function fixCodeBlocks() {
     return tree
   }
 }
+*/
 
 const pickaxe = (x) =>
   unified()
@@ -164,8 +169,8 @@ const pickaxe = (x) =>
     .use(remarkFrontmatter, ["yaml"])
     .use(remarkParseFrontmatter)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(inspectWhere("element", "YOOO"))
     .use(rehypeRaw, { passThrough: nodeTypes })
-    // .use(blockWalker("HYPE PRE", "code"))
     /* these don't seem to work:
     .use(rehypeSlug)
     .use(rehypeHeading)

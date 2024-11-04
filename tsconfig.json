@@ -24,7 +24,8 @@
       "@/data/*": ["./data/*"],
       "@/styles/*": ["./styles/*"],
       "@/pages/*": ["./pages/*"],
-      "@/types/*": ["./types/*"]
+      "@/types/*": ["./types/*"],
+      "@/tools/*": ["./tools/*"]
     },
     "baseUrl": "."
   },
