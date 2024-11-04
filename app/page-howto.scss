@@ -63,7 +63,7 @@ code {
     &--subsection,
     &--example,
     &--summary {
-      mix-blend-mode: color-dodge;
+      // mix-blend-mode: color-dodge;
       border-bottom: 1px solid $color-white50;
       margin: 2rem 0 1rem;
       padding-bottom: 0.75rem;
