@@ -90,8 +90,11 @@ code {
         font-size: 1em;
         background-color: transparent;
         border: none;
+        vertical-align: baseline;
         @include fontAntonio;
-        color: $color-orange;
+        // color: $color-yellow;
+      mix-blend-mode: color-dodge;
+      text-shadow: 0 0 0.5rem rgba(29, 230, 29, 0.4);
       }
       &::after {
         // mix-blend-mode: color-dodge;
