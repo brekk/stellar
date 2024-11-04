@@ -208,6 +208,8 @@ ${renderOrdinal(_1)}
 const jsxify = curry((name, raw) => {
   return `import blem from "blem"
 
+import CopyMe from "@/assets/copy-me.svg"
+
 // This file was automatically generated from:
 // ${name}
 
@@ -228,7 +230,7 @@ const fixCode = pipe(
   replace(/<\/code><\/pre>/g, "`}</code></pre>"),
   replace(
     /<pre><code className="language-(.*)">/g,
-    '<pre className={bem("language", "$1")} data-lang="$1"><code className="language-$1">{`',
+    '<pre className={bem("language", "$1")} data-lang="$1"><div className={bem("language-meta")}>{`$1`}</div><div className={bem("button", "copy")}><CopyMe /></div><code className={bem("language-content", "$1")}>{`',
   ),
 
   replace(

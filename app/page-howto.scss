@@ -5,13 +5,14 @@
 
 code {
   @include fontFira;
-  background-color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 0 0.5rem;
   border-radius: 0.25rem;
   display: inline-block;
+  vertical-align: middle;
   position: relative;
-  font-size: 0.8rem;
+  font-size: 0.75em;
 }
 
 .HowToGuide {
@@ -21,6 +22,18 @@ code {
   flex-direction: column;
   // text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
   // mix-blend-mode: color-dodge;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    max-width: 42rem;
+  }
+  code {
+    max-width: 40rem;
+  }
   &__index--ordinal {
     @include fontFira;
     font-size: 1rem;
@@ -65,7 +78,8 @@ code {
     &--subsection,
     &--example,
     &--summary {
-      // mix-blend-mode: color-dodge;
+      mix-blend-mode: hard-light;
+      text-shadow: 0 0 0.5rem rgba(230, 29, 29, 0.69);
       border-bottom: 1px solid $color-white50;
       margin: 2rem 0 1rem;
       padding-bottom: 0.75rem;
@@ -177,8 +191,47 @@ code {
     width: 100%;
     overflow: hidden;
     position: relative;
+
+    code {
+      z-index: 10;
+      display: block;
+      padding: 0.5rem;
+      // box-decoration-break: clone;
+    }
+    .HowToGuide__button--copy {
+      z-index: 10;
+      // position: absolute;
+      // right: 0.5rem;
+      // bottom: 0.5rem;
+      // display: none;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      right: 0.5rem;
+      bottom: 0.5rem;
+      // opacity: 0;
+      transition: top 0.3s ease-out, left 0.3s ease-out, opacity 0.3s ease-out;
+      pointer-events: none;
+      .copy-me_svg__base {
+        fill: $color-fg;
+      }
+      &:hover {
+.copy-me_svg__base {
+        fill: $color-pink;
+      }
+      }
+    }
+    &__language--mad {
+      .HowToGuide__button--copy {
+        opacity: 1;
+      }
+      .doc {
+        fill: $color-yellow;
+      }
+    }
     &:not(.HowToGuide__language--none) {
-      &::before {
+      .HowToGuide__language-meta {
+        // user-select: none;
         @include fontAntonio;
         content: attr(data-lang);
         position: absolute;
@@ -186,7 +239,7 @@ code {
         top: 0;
         background-color: $color-bg;
         color: $color-blue;
-        border: 1px solid $color-blue;
+        border: 2px solid $color-blue;
         border-left-color: transparent;
         border-bottom-color: transparent;
         font-size: 0.75rem;
@@ -196,13 +249,6 @@ code {
         z-index: 20;
         text-shadow: none;
       }
-    }
-    code {
-      z-index: 10;
-      overflow-x: auto;
-      display: block;
-      padding: 0.5rem;
-      // box-decoration-break: clone;
     }
   }
 }
