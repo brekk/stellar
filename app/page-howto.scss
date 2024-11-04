@@ -42,7 +42,8 @@ code {
     border-radius: 100%;
     margin-left: 0.5rem;
     background-color: $color-green;
-    color: $color-fg;
+    color: $color-bg;
+    text-shadow: 0 0 10px rgba(0,0,0,0.4);
     width: 2rem;
     height: 2rem;
 
@@ -80,7 +81,7 @@ code {
     &--summary {
       mix-blend-mode: hard-light;
       text-shadow: 0 0 0.5rem rgba(230, 29, 29, 0.69);
-      border-bottom: 1px solid $color-white50;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
       margin: 2rem 0 1rem;
       padding-bottom: 0.75rem;
       position: relative;
