@@ -208,7 +208,8 @@ ${renderOrdinal(_1)}
 const jsxify = curry((name, raw) => {
   return `import blem from "blem"
 
-import CopyMe from "@/assets/copy-me.svg"
+// import CopyMe from "@/assets/copy-me.svg"
+import Code from "@/components/Code"
 
 // This file was automatically generated from:
 // ${name}
@@ -226,11 +227,12 @@ export default COMPONENT
 
 const fixClassNames = replace(/class=/g, "className=")
 const fixCode = pipe(
-  replace(/<pre><code>/g, '<pre className={bem("language", "none")}><code>{`'),
-  replace(/<\/code><\/pre>/g, "`}</code></pre>"),
+  replace(/<pre><code>/g, '<Code language="none">{`'),
+  replace(/<\/code><\/pre>/g, "`}</Code>"),
   replace(
     /<pre><code className="language-(.*)">/g,
-    '<pre className={bem("language", "$1")} data-lang="$1"><div className={bem("language-meta")}>{`$1`}</div><div className={bem("button", "copy")}><CopyMe /></div><code className={bem("language-content", "$1")}>{`',
+    '<Code language="$1">{`',
+    //'<pre className={bem("language", "$1")} data-lang="$1"><div className={bem("language-meta")}>{`$1`}</div>{/*<div className={bem("button", "copy")}><CopyMe /></div>*/}<code className={bem("language-content", "$1")}>{`',
   ),
 
   replace(
