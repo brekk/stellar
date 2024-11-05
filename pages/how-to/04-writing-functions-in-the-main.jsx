@@ -50,11 +50,7 @@ export const COMPONENT = () => {
         <code className={bem("code", "inline")}>{`main`}</code> file. Open up
         your favorite text editor and write the following
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`import IO from "IO"
+      <Code language="mad">{`import IO from "IO"
 
 say :: String -> String -> String
 say = (word, subject) => word ++ " " ++ subject
@@ -65,9 +61,7 @@ main = () => {
     IO.putLine
   )("world")
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Save this file as{" "}
         <code className={bem("code", "inline")}>{`Say.main.mad`}</code> or
@@ -78,15 +72,9 @@ main = () => {
         We can run this file standalone with the command{" "}
         <code className={bem("code", "inline")}>{`madlib run`}</code>:
       </p>
-      <pre className={bem("language", "sh")} data-lang="sh">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "sh")}>
-          <div className={bem("language-meta")}>{`sh`}</div>
-          {`> madlib run Say.main.mad
+      <Code language="sh">{`> madlib run Say.main.mad
 hello world
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Let's talk through exactly what we've done here, as there's a few
         pieces.
@@ -114,14 +102,8 @@ hello world
         implementations here, but they'd normally be required in order to be
         syntactically valid):
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`func :: Integer -> String
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`func :: Integer -> String
+`}</Code>
       <p>
         The function above takes an{" "}
         <a
@@ -136,14 +118,8 @@ hello world
         </a>
         .
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`otherFunc :: Float -> Float -> Float -> List Float
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`otherFunc :: Float -> Float -> Float -> List Float
+`}</Code>
       <p>
         This <code className={bem("code", "inline")}>{`otherFunc`}</code> takes
         three{" "}
@@ -156,14 +132,8 @@ hello world
         </a>{" "}
         of floating point numbers.
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`thirdFunction :: Char -> String -> Boolean
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`thirdFunction :: Char -> String -> Boolean
+`}</Code>
       <p>
         This <code className={bem("code", "inline")}>{`thirdFunction`}</code>{" "}
         takes a{" "}
@@ -186,15 +156,9 @@ hello world
         <code className={bem("code", "inline")}>{`say`}</code> function we
         defined earlier, let's talk through its actual implementation details:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`say :: String -> String -> String
+      <Code language="mad">{`say :: String -> String -> String
 say = (word, subject) => word ++ " " ++ subject
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         This definition allows us to associate a concrete implementation with
         the types in the signature. So{" "}
@@ -218,20 +182,13 @@ say = (word, subject) => word ++ " " ++ subject
         value, after the <code className={bem("code", "inline")}>{` =>`}</code>.
       </p>
       <p>Let's see what happens if we define the function with curly braces:</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`say :: String -> String -> String
+      <Code language="mad">{`say :: String -> String -> String
 say = (word, subject) => {
   word ++ " " ++ subject
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>This causes the compiler to be unhappy:</p>
-      <pre className={bem("language", "none")}>
-        <code>{`[error]: Type error
+      <Code language="none">{`[error]: Type error
      ╭──▶ /how-to/Say.main.mad@6:1-8:1
      │
    6 │ ╭┤ say :: String -> String -> String
@@ -245,8 +202,7 @@ say = (word, subject) => {
      •      String -> String -> {}
      •
 ─────╯
-`}</code>
-      </pre>
+`}</Code>
       <p>
         You can see from the error that this change has caused the function to
         no longer return a String, but instead this set of empty curly braces:{" "}
@@ -266,32 +222,20 @@ say = (word, subject) => {
         >{`String -> String -> {}`}</code>
         )
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`say :: String -> String -> String
+      <Code language="mad">{`say :: String -> String -> String
 say = (word, subject) => {
   return word ++ " " ++ subject
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <h3 className={bem("header", "subsection")}>Function invocation</h3>
       <p>To see this in action, we need to call the function:</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`main = () => {
+      <Code language="mad">{`main = () => {
   pipe(
     say("hello"),
     IO.putLine
   )("world")
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>This adds a few minor wrinkles, so let's talk through them.</p>
       <h3 className={bem("header", "subsection")}>A main function</h3>
       <p>
@@ -313,46 +257,28 @@ say = (word, subject) => {
         <code className={bem("code", "inline")}>{`Math.max`}</code>, we passed
         in two parameters in the same invocation:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> Math.max(100, 20)
+      <Code language="mad">{`> Math.max(100, 20)
 100 :: Integer
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         If we chose to, we could call our{" "}
         <code className={bem("code", "inline")}>{`say`}</code> function in this
         same manner
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`main = () => {
+      <Code language="mad">{`main = () => {
   say("hello", "world")
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         However, this will run but not print anything. That's because we've now
         omitted the{" "}
         <code className={bem("code", "inline")}>{`IO.putLine`}</code> function,
         which actually prints the input.
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`main = () => {
+      <Code language="mad">{`main = () => {
   IO.putLine(say("hello", "world"))
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         <strong>Now</strong> this function will print correctly.
       </p>
@@ -364,15 +290,13 @@ say = (word, subject) => {
         <code className={bem("code", "inline")}>{`say`}</code> function.
         Consider this bit of code:
       </p>
-      <pre className={bem("language", "none")}>
-        <code>{`main = () => {
+      <Code language="none">{`main = () => {
   hi = say("hello")
   IO.putLine(hi("world")) // "hello world"
   IO.putLine(hi("there")) // "hello there"
   IO.putLine(hi("hey")) // "hello hey"
 }
-`}</code>
-      </pre>
+`}</Code>
       <p>
         Recall that our <code className={bem("code", "inline")}>{`say`}</code>{" "}
         function takes two parameters. Unlike some other more imperative
@@ -385,16 +309,14 @@ say = (word, subject) => {
         If we come back to our definition, you can think of this as crossing off
         one of the values in the signature:
       </p>
-      <pre className={bem("language", "none")}>
-        <code>{`// this function is curried!
+      <Code language="none">{`// this function is curried!
 say :: String -> String -> String
 say = (word, subject) => word ++ " " ++ subject
 
 // partial application
 hi :: String -> String
 hi = say("hello")
-`}</code>
-      </pre>
+`}</Code>
       <p>
         (Since the Madlib compiler is smart and capable, we don't actually need
         to define the type definition for{" "}
@@ -406,65 +328,39 @@ hi = say("hello")
         If you recall from our original example, we used the special{" "}
         <code className={bem("code", "inline")}>{`pipe`}</code> function:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`main = () => {
+      <Code language="mad">{`main = () => {
   pipe(
     say("hello"),
     IO.putLine
   )("world")
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         This allows us to <em>compose</em> functions together. When we discussed
         partial application above, we named the partially applied version of{" "}
         <code className={bem("code", "inline")}>{`say`}</code>:
       </p>
-      <pre className={bem("language", "none")}>
-        <code>{`hi = say("hello")
-`}</code>
-      </pre>
+      <Code language="none">{`hi = say("hello")
+`}</Code>
       <p>
         And we wrapped its invocation in{" "}
         <code className={bem("code", "inline")}>{`IO.putLine`}</code>:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`IO.putLine(hi("world"))
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`IO.putLine(hi("world"))
+`}</Code>
       <p>
         The <code className={bem("code", "inline")}>{`pipe`}</code> function
         allows us to write things with fewer parentheses and compose operations
         from top to bottom:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`pipe(
+      <Code language="mad">{`pipe(
   say("hello"),
   IO.putLine
 )("world")
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>This is the exact same as:</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`IO.putLine(say("hello")("world"))
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`IO.putLine(say("hello")("world"))
+`}</Code>
       <p>
         This may seem confusing or needless at first, but as we add more
         complexity you'll start to see the utility of this alternative form.
@@ -482,15 +378,9 @@ hi = say("hello")
         <code className={bem("code", "inline")}>{`Math.divide`}</code> function
         like so:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> Math.divide(3, 4)
+      <Code language="mad">{`> Math.divide(3, 4)
 0.75 :: Float
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         This is the same as using the division operator (
         <code className={bem("code", "inline")}>{`/`}</code>):{" "}
@@ -506,11 +396,9 @@ hi = say("hello")
         <code className={bem("code", "inline")}>{`$`}</code>) to make this
         function much more valuable without changing its definition:
       </p>
-      <pre className={bem("language", "none")}>
-        <code>{`half = Math.divide($, 2)
+      <Code language="none">{`half = Math.divide($, 2)
 half(100) // 50
-`}</code>
-      </pre>
+`}</Code>
       <h3 className={bem("header", "subsection")}>
         Applying a function to a List
       </h3>
@@ -518,36 +406,24 @@ half(100) // 50
         When we were discussing partial application before, we had an example
         like this:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`main = () => {
+      <Code language="mad">{`main = () => {
   hi = say("hello")
   IO.putLine(hi("world")) // "hello world"
   IO.putLine(hi("there")) // "hello there"
   IO.putLine(hi("hey")) // "hello hey"
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Using the <code className={bem("code", "inline")}>{`map`}</code>{" "}
         function, we can re-use the same functionality while avoiding
         repetition:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`main = () => {
+      <Code language="mad">{`main = () => {
   x = map(pipe(say("hello"), IO.putLine))(
     ["world", "there", "hey"]
   )
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         However, you'll note that as written, the resulting value{" "}
         <code className={bem("code", "inline")}>{`x`}</code> isn't a List of
@@ -563,11 +439,7 @@ half(100) // 50
         If we wanted to change that, we could do something like this instead, to
         capture the transformed map:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`import IO from "IO"
+      <Code language="mad">{`import IO from "IO"
 import String from "String"
 
 main = () => {
@@ -580,9 +452,7 @@ main = () => {
     IO.putLine
   )(x) // "hello world, hello there, hello hey"
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         NB: If you try to print{" "}
         <code className={bem("code", "inline")}>{`x`}</code> without turning it
@@ -590,8 +460,7 @@ main = () => {
         <code className={bem("code", "inline")}>{`String.join`}</code>, you'll
         see an error similar to this:
       </p>
-      <pre className={bem("language", "none")}>
-        <code>{`[error]: Type error
+      <Code language="none">{`[error]: Type error
      ╭──▶ /how-to/Say.main.mad@30:14-30:15
      │
   30 │   IO.putLine(x)
@@ -603,8 +472,7 @@ main = () => {
      •                   List String
      •
 ─────╯
-`}</code>
-      </pre>
+`}</Code>
       <p>
         This is most easily worked around by calling{" "}
         <code className={bem("code", "inline")}>{`show`}</code> first, like{" "}

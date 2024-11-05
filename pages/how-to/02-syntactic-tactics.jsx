@@ -30,19 +30,13 @@ export const COMPONENT = () => {
         <code className={bem("code", "inline")}>{`*/`}</code> ) for multi-line
         comments.
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`// this is a comment
+      <Code language="mad">{`// this is a comment
 /*
 This is a
 Multiline
 Comment
 */
-`}
-        </code>
-      </pre>
+`}</Code>
       <h3 className={bem("header", "subsection")}>Documentation comments</h3>
       <p>
         Additionally there is a special format for creating comments which can
@@ -50,11 +44,7 @@ Comment
         <a href="https://github.com/madlib-lang/maddoc">secondary tool</a> which
         can then turn this JSON into a website.
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`/**
+      <Code language="mad">{`/**
  * A function for division
  * @since 0.0.1
  * @example
@@ -62,9 +52,7 @@ Comment
  */
 div :: Integer -> Integer -> Float
 div = (n, d) => n / d
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         This is discussed more in{" "}
         <a className="internal" href="/How-To Guides/06 - Developmental Growth">
@@ -78,28 +66,16 @@ div = (n, d) => n / d
       </p>
       <h3 className={bem("header", "subsection")}>Ternary Expressions</h3>
       <p>Ternary conditions can be written in the following way:</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`x = 5
+      <Code language="mad">{`x = 5
 // condition ? truthy case : falsy case
 y = x >= 0 ? “less than zero” : “greater than zero”
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Note the way in which this is a logical expression. If we wanted to nest
         more cases, we could do so:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`y = x == 0 ? “is zero” : x &#x3C; 0 ? “less than zero” : “greater than zero”
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`y = x == 0 ? “is zero” : x &#x3C; 0 ? “less than zero” : “greater than zero”
+`}</Code>
       <h3 className={bem("header", "subsection")}>if … else</h3>
       <p>
         The other way of expressing conditions syntactically in Madlib is using
@@ -117,19 +93,13 @@ y = x >= 0 ? “less than zero” : “greater than zero”
         <code className={bem("code", "inline")}>{`if`}</code> /{" "}
         <code className={bem("code", "inline")}>{`else`}</code> syntax:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`x = 5
+      <Code language="mad">{`x = 5
 y = if (x >= 0) {
   “less than zero”
 } else {
   “greater than zero”
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Note the way in which this is also an expression and it is being
         assigned to <code className={bem("code", "inline")}>{`y`}</code>.
@@ -146,11 +116,7 @@ y = if (x >= 0) {
         Using <code className={bem("code", "inline")}>{`do`}</code> notation
         with conditionals
       </h4>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`import IO from “IO”
+      <Code language="mad">{`import IO from “IO”
 x = 5
 y = if (x >= 0) do {
   IO.putLine(“happy path”)
@@ -158,9 +124,7 @@ y = if (x >= 0) do {
 } else {
   “greater than zero”
 }
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Note the way in which we’ve added both a{" "}
         <code className={bem("code", "inline")}>{`do`}</code> and an explicit{" "}
@@ -209,30 +173,18 @@ y = if (x >= 0) do {
         . They can also use the same syntax to pull in content from local
         modules or 3rd-party modules.
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`import MyLocalModule from "./MyLocalModule"
+      <Code language="mad">{`import MyLocalModule from "./MyLocalModule"
 // or, direct access
 import { method, variable } from "./MyLocalModule"
-`}
-        </code>
-      </pre>
+`}</Code>
       <h3 className={bem("header", "subsection")}>Exports</h3>
       <p>The example above would correspond to a local module like this:</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`localvar = “this value is inaccessible outside of this file”
+      <Code language="mad">{`localvar = “this value is inaccessible outside of this file”
 export variable = “this value is accessible elsewhere”
 
 method :: a -> a
 method = (x) => x
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         We'll discuss more about{" "}
         <a className="internal" href="/How-To Guides/03 - Just My Type">

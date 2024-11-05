@@ -30,29 +30,17 @@ export const COMPONENT = () => {
         </a>
         .
       </p>
-      <pre className={bem("language", "sh")} data-lang="sh">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "sh")}>
-          <div className={bem("language-meta")}>{`sh`}</div>
-          {`npm i @madlib-lang/madlib -g
-`}
-        </code>
-      </pre>
+      <Code language="sh">{`npm i @madlib-lang/madlib -g
+`}</Code>
       <p>
         This should make the{" "}
         <code className={bem("code", "inline")}>{`madlib`}</code> binary
         globally accessible, so you should see a version number when you run{" "}
         <code className={bem("code", "inline")}>{`madlib --version`}</code>:
       </p>
-      <pre className={bem("language", "sh")} data-lang="sh">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "sh")}>
-          <div className={bem("language-meta")}>{`sh`}</div>
-          {`> madlib --version
+      <Code language="sh">{`> madlib --version
 madlib@0.23.13
-`}
-        </code>
-      </pre>
+`}</Code>
       <h2 className={bem("header", "section")}>REPL</h2>
       <p>
         For lightweight or exploratory work, you can work within the Madlib REPL
@@ -64,8 +52,7 @@ madlib@0.23.13
         <code className={bem("code", "inline")}>{`madlib repl`}</code>, which
         should bring up an interactive session that looks like this:
       </p>
-      <pre className={bem("language", "none")}>
-        <code>{`------ REPL - Madlib@0.23.13 -------------------------------
+      <Code language="none">{`------ REPL - Madlib@0.23.13 -------------------------------
 Available commands:
   :help           show help (alias :h)
   :exit           exit the REPL (alias :e)
@@ -75,8 +62,7 @@ Available commands:
 -----------------------------------------------------------
 
 >
-`}</code>
-      </pre>
+`}</Code>
       <p>
         Here are some simple expressions you can start to play with in the REPL
         before we set up a more serious{" "}
@@ -86,11 +72,7 @@ Available commands:
         .
       </p>
       <h3 className={bem("header", "subsection")}>Basic arithmetic</h3>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> 5 + 5
+      <Code language="mad">{`> 5 + 5
 10 :: Integer
 > 10 - 100
 -90 :: Integer
@@ -98,9 +80,7 @@ Available commands:
 420 :: Integer
 > 9 / 6
 1.5 :: Float
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         As you can see, we're not doing anything complex here — but this
         illustrates the way we can write an expression and see the result, along
@@ -112,26 +92,16 @@ Available commands:
         These follow the usual precedence rules, and can be changed by adding
         parentheses:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> 3 * 4 / (5 - 6)
+      <Code language="mad">{`> 3 * 4 / (5 - 6)
 -12 :: Float
 > 3 * 4 / 5 - 6
 -3.6 :: Float
 > 3 * (4 / 5) - 6
 -3.5999999999999996 :: Float
-`}
-        </code>
-      </pre>
+`}</Code>
       <h2 className={bem("header", "section")}>Basic boolean logic</h2>
       <p>Here are some simple boolean expressions.</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> true == false
+      <Code language="mad">{`> true == false
 false :: Boolean
 > true == true
 true :: Boolean
@@ -139,9 +109,7 @@ true :: Boolean
 true :: Boolean
 > !(false == false)
 true :: Boolean
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         As you can see, we have the literals{" "}
         <code className={bem("code", "inline")}>{`true`}</code> and{" "}
@@ -154,11 +122,7 @@ true :: Boolean
       </p>
       <h2 className={bem("header", "section")}>Asserting equality</h2>
       <p>Here we can assert the equality of things:</p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> 5 == 5
+      <Code language="mad">{`> 5 == 5
 true :: Boolean
 > 1 == 0
 false :: Boolean
@@ -166,9 +130,7 @@ false :: Boolean
 true :: Boolean
 > "hello" == "world"
 false :: Boolean
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Here we've shown the equality operator ({" "}
         <code className={bem("code", "inline")}>{`==`}</code>) as well as the
@@ -180,11 +142,7 @@ false :: Boolean
         What happens if we try to do something like add{" "}
         <code className={bem("code", "inline")}>{`5 + "cool"`}</code>?
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> 5 + "cool"
+      <Code language="mad">{`> 5 + "cool"
 Instance not found
 
 No instance for 'Number String' was found.
@@ -192,9 +150,7 @@ No instance for 'Number String' was found.
 Hint: Verify that you imported the module where the Number
 instance for 'String' is defined
 Note: Remember that instance methods are automatically imported when the module is imported, directly, or indirectly.
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         Here Madlib is saying that "cool" is not a number and so it doesn't know
         how to add 5 to it. We'll discuss this kind of error more later on.
@@ -208,14 +164,8 @@ Note: Remember that instance methods are automatically imported when the module 
         shortly, but let's start by importing{" "}
         <code className={bem("code", "inline")}>{`Math`}</code>:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> import Math from "Math"
-`}
-        </code>
-      </pre>
+      <Code language="mad">{`> import Math from "Math"
+`}</Code>
       <p>
         <a href="https://github.com/madlib-lang/madlib/blob/master/prelude/__internal__/Math.mad">
           Math
@@ -223,11 +173,7 @@ Note: Remember that instance methods are automatically imported when the module 
         has a few functions we can play with. We won't go over everything here,
         just enough to give a general sense of how it works.
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> import Math from "Math"
+      <Code language="mad">{`> import Math from "Math"
 > Math.max(100, 20)
 100 :: Integer
 > Math.min(100, 20)
@@ -240,9 +186,7 @@ Note: Remember that instance methods are automatically imported when the module 
 1000 :: Integer
 > x
 0.75 :: Float
-`}
-        </code>
-      </pre>
+`}</Code>
       <p>
         As you can see, functions are invoked by passing them parameters within
         parentheses. We've also assigned some of these results to variables (
@@ -259,11 +203,7 @@ Note: Remember that instance methods are automatically imported when the module 
         . Again, this isn't comprehensive but will give a sense of how they
         work:
       </p>
-      <pre className={bem("language", "mad")} data-lang="mad">
-        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
-        <code className={bem("language-content", "mad")}>
-          <div className={bem("language-meta")}>{`mad`}</div>
-          {`> import List from "List"
+      <Code language="mad">{`> import List from "List"
 > List.range(0, 10)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] :: List Integer
 > nums = [1,2,3,4,500,7,92,30]
@@ -271,9 +211,7 @@ Note: Remember that instance methods are automatically imported when the module 
 500 :: Integer
 > List.reduce((a, b) => a + b, 0, nums)
 639 :: Integer
-`}
-        </code>
-      </pre>
+`}</Code>
       <h5 className={bem("header", "summary")}>Summary</h5>
       <p>In this document, we've discussed:</p>
       <ul>

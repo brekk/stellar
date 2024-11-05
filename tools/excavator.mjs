@@ -6,36 +6,34 @@ import { unified } from "unified"
 import { remark } from "remark"
 import path from "node:path"
 import slug from "slug"
-import * as prettier from "prettier"
-//import remarkObsidian from "@thecae/remark-obsidian"
-// import remarkUTF8 from "remark-utf8"
-//import remarkLinks from "remark-wiki-link-plus"
+// import * as prod from "react/jsx-runtime"
 // import rehypeFormat from "rehype-format"
 // import rehypeHeading from "rehype-autolink-headings"
 // import rehypeHighlight from "rehype-highlight"
-// import rehypePrism from "rehype-prism-plus"
 // import rehypeParse from "rehyp
-import rehypeRaw from "rehype-raw"
+// import rehypePrism from "rehype-prism-plus"
 // import rehypeSlug from "rehype-slug"
-import rehypeStringify from "rehype-stringify"
-import remarkBreaks from "remark-breaks"
 // import remarkCallouts from "@portaljs/remark-callouts"
 // import remarkEmbed from "@portaljs/remark-embed"
 // import remarkGfm from "remark-gfm"
-import remarkLinks from "@portaljs/remark-wiki-link"
-import remarkObsidian from "remark-parse-obsidian"
-import remarkParse from "remark-parse"
-import remarkRehype from "remark-rehype"
+// import remarkReact from "remark-react"
 // import remarkSmart from "remark-smartypants"
 // import remarkStringify from "remark-stringify"
 // import remarkTOC from "remark-toc"
-// import * as prod from "react/jsx-runtime"
-// const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs }
-
-import remarkFrontmatter from "remark-frontmatter"
+// import remarkUTF8 from "remark-utf8"
+//import remarkLinks from "remark-wiki-link-plus"
 //import remarkMDXFrontmatter from "remark-mdx-frontmatter";
+//import remarkObsidian from "@thecae/remark-obsidian"
+import * as prettier from "prettier"
+import rehypeRaw from "rehype-raw"
+import rehypeStringify from "rehype-stringify"
+import remarkBreaks from "remark-breaks"
+import remarkFrontmatter from "remark-frontmatter"
+import remarkLinks from "@portaljs/remark-wiki-link"
+import remarkObsidian from "remark-parse-obsidian"
+import remarkParse from "remark-parse"
 import remarkParseFrontmatter from "remark-parse-frontmatter"
-// import remarkReact from "remark-react"
+import remarkRehype from "remark-rehype"
 import fs from "node:fs"
 import { node, encaseP, chain, map, fork } from "fluture"
 import {
@@ -227,12 +225,9 @@ export default COMPONENT
 
 const fixClassNames = replace(/class=/g, "className=")
 const fixCode = pipe(
-  replace(/<pre><code>/g, '<pre className={bem("language", "none")}><code>{`'),
-  replace(/<\/code><\/pre>/g, "`}</code></pre>"),
-  replace(
-    /<pre><code className="language-(.*)">/g,
-    '<pre className={bem("language", "$1")} data-lang="$1">{/*<div className={bem("button", "copy")}><CopyMe /></div>*/}<code className={bem("language-content", "$1")}><div className={bem("language-meta")}>{`$1`}</div>{`',
-  ),
+  replace(/<pre><code>/g, '<Code language="none">{`'),
+  replace(/<\/code><\/pre>/g, "`}</Code>"),
+  replace(/<pre><code className="language-(.*)">/g, '<Code language="$1">{`'),
 
   replace(
     /<code>(.*?)<\/code>/g,
