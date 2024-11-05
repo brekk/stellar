@@ -31,8 +31,8 @@ code {
   h6 {
     max-width: 42rem;
   }
-  code {
-    max-width: 40rem;
+  p, code {
+    max-width: 36rem;
   }
   &__index--ordinal {
     @include fontFira;
@@ -43,7 +43,7 @@ code {
     margin-left: 0.5rem;
     background-color: $color-green;
     color: $color-bg;
-    text-shadow: 0 0 10px rgba(0,0,0,0.4);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     width: 2rem;
     height: 2rem;
 
@@ -81,7 +81,7 @@ code {
     &--summary {
       mix-blend-mode: hard-light;
       text-shadow: 0 0 0.5rem rgba(230, 29, 29, 0.69);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       margin: 2rem 0 1rem;
       padding-bottom: 0.75rem;
       position: relative;
@@ -93,8 +93,8 @@ code {
         vertical-align: baseline;
         @include fontAntonio;
         // color: $color-yellow;
-      mix-blend-mode: color-dodge;
-      text-shadow: 0 0 0.5rem rgba(29, 230, 29, 0.4);
+        mix-blend-mode: color-dodge;
+        text-shadow: 0 0 0.5rem rgba(29, 230, 29, 0.4);
       }
       &::after {
         // mix-blend-mode: color-dodge;
@@ -214,15 +214,18 @@ code {
       right: 0.5rem;
       bottom: 0.5rem;
       // opacity: 0;
-      transition: top 0.3s ease-out, left 0.3s ease-out, opacity 0.3s ease-out;
+      transition:
+        top 0.3s ease-out,
+        left 0.3s ease-out,
+        opacity 0.3s ease-out;
       pointer-events: none;
       .copy-me_svg__base {
         fill: $color-fg;
       }
       &:hover {
-.copy-me_svg__base {
-        fill: $color-pink;
-      }
+        .copy-me_svg__base {
+          fill: $color-pink;
+        }
       }
     }
     &__language--mad {

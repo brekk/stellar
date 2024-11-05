@@ -1,5 +1,8 @@
 import blem from "blem"
 
+// import CopyMe from "@/assets/copy-me.svg"
+import Code from "@/components/Code"
+
 // This file was automatically generated from:
 // mad-notes/notes/How-To Guides/03 - Just My Type.md
 
@@ -11,7 +14,10 @@ export const COMPONENT = () => {
   const bem = blem("HowToGuide")
   return (
     <article className={bem("")}>
-      <h1 className={bem("header", "main")}>03 &mdash; Just My Type</h1>
+      <h1 className={bem("header", "main")}>
+        <div className={bem("title")}>Just My Type</div>
+        <div className={bem("index", "ordinal")}>03</div>
+      </h1>
       <h2 className={bem("header", "section")}>Summary</h2>
       <ul>
         <li>Types</li>

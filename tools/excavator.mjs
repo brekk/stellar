@@ -231,7 +231,7 @@ const fixCode = pipe(
   replace(/<\/code><\/pre>/g, "`}</code></pre>"),
   replace(
     /<pre><code className="language-(.*)">/g,
-    '<pre className={bem("language", "$1")} data-lang="$1"><div className={bem("language-meta")}>{`$1`}</div>{/*<div className={bem("button", "copy")}><CopyMe /></div>*/}<code className={bem("language-content", "$1")}>{`',
+    '<pre className={bem("language", "$1")} data-lang="$1">{/*<div className={bem("button", "copy")}><CopyMe /></div>*/}<code className={bem("language-content", "$1")}><div className={bem("language-meta")}>{`$1`}</div>{`',
   ),
 
   replace(

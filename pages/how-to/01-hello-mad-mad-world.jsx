@@ -1,5 +1,8 @@
 import blem from "blem"
 
+// import CopyMe from "@/assets/copy-me.svg"
+import Code from "@/components/Code"
+
 // This file was automatically generated from:
 // mad-notes/notes/How-To Guides/01 - Hello mad, mad world.md
 
@@ -28,18 +31,27 @@ export const COMPONENT = () => {
         .
       </p>
       <pre className={bem("language", "sh")} data-lang="sh">
-        <code className="language-sh">{`npm i @madlib-lang/madlib -g
-`}</code>
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "sh")}>
+          <div className={bem("language-meta")}>{`sh`}</div>
+          {`npm i @madlib-lang/madlib -g
+`}
+        </code>
       </pre>
       <p>
-        This should make the <code>madlib</code> binary globally accessible, so
-        you should see a version number when you run{" "}
-        <code>madlib --version</code>:
+        This should make the{" "}
+        <code className={bem("code", "inline")}>{`madlib`}</code> binary
+        globally accessible, so you should see a version number when you run{" "}
+        <code className={bem("code", "inline")}>{`madlib --version`}</code>:
       </p>
       <pre className={bem("language", "sh")} data-lang="sh">
-        <code className="language-sh">{`> madlib --version
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "sh")}>
+          <div className={bem("language-meta")}>{`sh`}</div>
+          {`> madlib --version
 madlib@0.23.13
-`}</code>
+`}
+        </code>
       </pre>
       <h2 className={bem("header", "section")}>REPL</h2>
       <p>
@@ -48,8 +60,9 @@ madlib@0.23.13
         you learn more about Madlib.
       </p>
       <p>
-        The REPL can be accessed with the command <code>madlib repl</code>,
-        which should bring up an interactive session that looks like this:
+        The REPL can be accessed with the command{" "}
+        <code className={bem("code", "inline")}>{`madlib repl`}</code>, which
+        should bring up an interactive session that looks like this:
       </p>
       <pre className={bem("language", "none")}>
         <code>{`------ REPL - Madlib@0.23.13 -------------------------------
@@ -74,7 +87,10 @@ Available commands:
       </p>
       <h3 className={bem("header", "subsection")}>Basic arithmetic</h3>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> 5 + 5
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> 5 + 5
 10 :: Integer
 > 10 - 100
 -90 :: Integer
@@ -82,31 +98,40 @@ Available commands:
 420 :: Integer
 > 9 / 6
 1.5 :: Float
-`}</code>
+`}
+        </code>
       </pre>
       <p>
         As you can see, we're not doing anything complex here — but this
         illustrates the way we can write an expression and see the result, along
         with its type. The type is indicated by the double-colon /{" "}
-        <code>::</code> , which can be read as "has type of".
+        <code className={bem("code", "inline")}>{`::`}</code> , which can be
+        read as "has type of".
       </p>
       <p>
         These follow the usual precedence rules, and can be changed by adding
         parentheses:
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> 3 * 4 / (5 - 6)
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> 3 * 4 / (5 - 6)
 -12 :: Float
 > 3 * 4 / 5 - 6
 -3.6 :: Float
 > 3 * (4 / 5) - 6
 -3.5999999999999996 :: Float
-`}</code>
+`}
+        </code>
       </pre>
       <h2 className={bem("header", "section")}>Basic boolean logic</h2>
       <p>Here are some simple boolean expressions.</p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> true == false
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> true == false
 false :: Boolean
 > true == true
 true :: Boolean
@@ -114,18 +139,26 @@ true :: Boolean
 true :: Boolean
 > !(false == false)
 true :: Boolean
-`}</code>
+`}
+        </code>
       </pre>
       <p>
-        As you can see, we have the literals <code>true</code> and{" "}
-        <code>false</code>, as well as the logical <em>and</em> (<code>==</code>
-        ) and logical <em>or</em> (<code>||</code>) operators. Finally, we have
-        a boolean negation operator (<code>!</code>) which is infixed.
+        As you can see, we have the literals{" "}
+        <code className={bem("code", "inline")}>{`true`}</code> and{" "}
+        <code className={bem("code", "inline")}>{`false`}</code>, as well as the
+        logical <em>and</em> (
+        <code className={bem("code", "inline")}>{`==`}</code>) and logical{" "}
+        <em>or</em> (<code className={bem("code", "inline")}>{`||`}</code>)
+        operators. Finally, we have a boolean negation operator (
+        <code className={bem("code", "inline")}>{`!`}</code>) which is infixed.
       </p>
       <h2 className={bem("header", "section")}>Asserting equality</h2>
       <p>Here we can assert the equality of things:</p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> 5 == 5
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> 5 == 5
 true :: Boolean
 > 1 == 0
 false :: Boolean
@@ -133,18 +166,25 @@ false :: Boolean
 true :: Boolean
 > "hello" == "world"
 false :: Boolean
-`}</code>
+`}
+        </code>
       </pre>
       <p>
-        Here we've shown the equality operator ( <code>==</code>) as well as the
-        inequality operator (<code>!=</code>).
+        Here we've shown the equality operator ({" "}
+        <code className={bem("code", "inline")}>{`==`}</code>) as well as the
+        inequality operator (
+        <code className={bem("code", "inline")}>{`!=`}</code>).
       </p>
       <h2 className={bem("header", "section")}>Try mixing types</h2>
       <p>
-        What happens if we try to do something like add <code>5 + "cool"</code>?
+        What happens if we try to do something like add{" "}
+        <code className={bem("code", "inline")}>{`5 + "cool"`}</code>?
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> 5 + "cool"
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> 5 + "cool"
 Instance not found
 
 No instance for 'Number String' was found.
@@ -152,7 +192,8 @@ No instance for 'Number String' was found.
 Hint: Verify that you imported the module where the Number
 instance for 'String' is defined
 Note: Remember that instance methods are automatically imported when the module is imported, directly, or indirectly.
-`}</code>
+`}
+        </code>
       </pre>
       <p>
         Here Madlib is saying that "cool" is not a number and so it doesn't know
@@ -164,11 +205,16 @@ Note: Remember that instance methods are automatically imported when the module 
       <p>
         In Madlib, we call our standard library <em>Prelude</em> (a name taken
         from Haskell). We'll go over everything it has to offer in more detail
-        shortly, but let's start by importing <code>Math</code>:
+        shortly, but let's start by importing{" "}
+        <code className={bem("code", "inline")}>{`Math`}</code>:
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> import Math from "Math"
-`}</code>
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> import Math from "Math"
+`}
+        </code>
       </pre>
       <p>
         <a href="https://github.com/madlib-lang/madlib/blob/master/prelude/__internal__/Math.mad">
@@ -178,7 +224,10 @@ Note: Remember that instance methods are automatically imported when the module 
         just enough to give a general sense of how it works.
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> import Math from "Math"
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> import Math from "Math"
 > Math.max(100, 20)
 100 :: Integer
 > Math.min(100, 20)
@@ -191,13 +240,16 @@ Note: Remember that instance methods are automatically imported when the module 
 1000 :: Integer
 > x
 0.75 :: Float
-`}</code>
+`}
+        </code>
       </pre>
       <p>
         As you can see, functions are invoked by passing them parameters within
         parentheses. We've also assigned some of these results to variables (
-        <code>x</code>, <code>y</code>, <code>z</code>) and we've shown that the
-        REPL will remember these values in memory.
+        <code className={bem("code", "inline")}>{`x`}</code>,{" "}
+        <code className={bem("code", "inline")}>{`y`}</code>,{" "}
+        <code className={bem("code", "inline")}>{`z`}</code>) and we've shown
+        that the REPL will remember these values in memory.
       </p>
       <p>
         We'll also try playing with a few of the functions defined in{" "}
@@ -208,7 +260,10 @@ Note: Remember that instance methods are automatically imported when the module 
         work:
       </p>
       <pre className={bem("language", "mad")} data-lang="mad">
-        <code className="language-mad">{`> import List from "List"
+        {/*<div className={bem("button", "copy")}><CopyMe /></div>*/}
+        <code className={bem("language-content", "mad")}>
+          <div className={bem("language-meta")}>{`mad`}</div>
+          {`> import List from "List"
 > List.range(0, 10)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] :: List Integer
 > nums = [1,2,3,4,500,7,92,30]
@@ -216,7 +271,8 @@ Note: Remember that instance methods are automatically imported when the module 
 500 :: Integer
 > List.reduce((a, b) => a + b, 0, nums)
 639 :: Integer
-`}</code>
+`}
+        </code>
       </pre>
       <h5 className={bem("header", "summary")}>Summary</h5>
       <p>In this document, we've discussed:</p>
