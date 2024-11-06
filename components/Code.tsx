@@ -26,12 +26,10 @@ const Code = ({ caption, inline = false, children, language }: CodeProps) => {
   const tLines = totalLines(children)
   const len = children
     .split(/\n/g)
-    .map(z => z.trim().length)
+    .map((z) => z.trim().length)
     .reduce((a, b) => (b > a ? b : a), 0)
   if (inline) {
-    return (
-      <code className={bem("inline")}>{children}</code>
-    )
+    return <code className={bem("inline")}>{children}</code>
   }
   return (
     <figure
@@ -45,11 +43,13 @@ const Code = ({ caption, inline = false, children, language }: CodeProps) => {
     >
       <figcaption className={bem("caption")}>{caption}</figcaption>
       <div className={bem("content")}>
-        {language !== "none" ? (
-          <div className={bem("language-meta")}>{language}</div>
-        ) : null}
         <pre className={bem("language", language)}>
-          <code className={bem("language-content", language)}>{children}</code>
+          <code className={bem("language-content", language)}>
+            {language !== "none" ? (
+              <div className={bem("language-meta")}>{language}</div>
+            ) : null}
+            {children}
+          </code>
         </pre>
       </div>
     </figure>

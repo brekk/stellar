@@ -67,7 +67,9 @@
     // user-select: none;
     @include fontAntonio;
     position: absolute;
-    right: calc(2rem - 2px);
+    // right: calc(2rem - 2px);
+    right: 0;
+    top: 0;
     background-color: $color-bg;
     color: $color-blue;
     border: 2px solid $color-blue;

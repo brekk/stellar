@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @import "colors";
 @import "font";
 @import "media";
@@ -91,15 +93,16 @@
         border: none;
         vertical-align: baseline;
         @include fontAntonio;
-        // color: $color-yellow;
-        mix-blend-mode: color-dodge;
-        text-shadow: 0 0 0.5rem rgba(29, 230, 29, 0.4);
+        color: $color-fg;
+        // mix-blend-mode: color-dodge;
+        // color: color.invert($color-yellow);
+        text-shadow: 0 0 0.5rem rgba(230, 50, 104, 0.6);
       }
       &::after {
         // mix-blend-mode: color-dodge;
         content: "";
         position: absolute;
-        border-bottom: 0.25rem solid $color-fg;
+        border-bottom: 1px solid $color-fg;
         box-shadow: 0 0 10px $color-fg;
         width: 4rem;
         height: 1px;
@@ -141,7 +144,7 @@
       font-size: 1.8rem;
 
       &::after {
-        border-bottom: 0.25rem solid $color-yellow;
+        border-bottom: 1px solid $color-yellow;
         box-shadow: 0 0 10px $color-yellow;
       }
     }
