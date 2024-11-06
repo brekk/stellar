@@ -1,24 +1,3 @@
-{
-  basePath: '/Users/brekk/work/stellar',
-  _: [
-    '/opt/homebrew/Cellar/node/22.9.0/bin/node',
-    '/Users/brekk/work/stellar/tools/excavator.mjs',
-    'mad-notes/notes/How-To Guides/02 - Syntactic Tactics.md'
-  ],
-  HELP: 'excavator\n' +
-    '\n' +
-    'EXCAVATOR\n' +
-    '\n' +
-    '  -i / --input\n' +
-    '  \tA file or glob path\n' +
-    '\n' +
-    '  -o / --output\n' +
-    '  \tA directory to write to\n' +
-    '\n' +
-    '  -h / --help\n' +
-    '  \tThis text!'
-}
-path.basename 02-syntactic-tactics
 [
   'import blem from "blem"\n' +
     '\n' +

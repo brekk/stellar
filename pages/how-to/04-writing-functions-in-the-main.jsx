@@ -1,24 +1,3 @@
-{
-  basePath: '/Users/brekk/work/stellar',
-  _: [
-    '/opt/homebrew/Cellar/node/22.9.0/bin/node',
-    '/Users/brekk/work/stellar/tools/excavator.mjs',
-    'mad-notes/notes/How-To Guides/04 - Writing functions, in the main.md'
-  ],
-  HELP: 'excavator\n' +
-    '\n' +
-    'EXCAVATOR\n' +
-    '\n' +
-    '  -i / --input\n' +
-    '  \tA file or glob path\n' +
-    '\n' +
-    '  -o / --output\n' +
-    '  \tA directory to write to\n' +
-    '\n' +
-    '  -h / --help\n' +
-    '  \tThis text!'
-}
-path.basename 04-writing-functions-in-the-main
 [
   'import blem from "blem"\n' +
     '\n' +

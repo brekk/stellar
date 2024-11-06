@@ -155,7 +155,7 @@ const postfix = pipe(
 const slugpath = pipe((x) => path.basename(x, ".md"), slug)
 
 const readObsidian = (raw) => {
-  console.log("path.basename", slugpath(raw))
+  //console.log("path.basename", slugpath(raw))
   //console.log("READ!", slug(raw.slice(raw.lastIndexOf("/"), raw.last)))
   return pipe(
     readFile,
@@ -169,11 +169,12 @@ const readObsidian = (raw) => {
 
 const j2 = (x) => JSON.stringify(x, null, 2)
 const stringifyFrontmatter = pipe(Rpath(["data", "frontmatter"]), j2)
-
+/*
 pipe(
   excavatorWithCancel(() => {}),
   fork(console.warn)(console.log),
 )(process.argv)
+*/
 
 pipe(
   slice(2, Infinity),
