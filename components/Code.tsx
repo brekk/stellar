@@ -39,8 +39,8 @@ const Code = ({ caption, inline = false, children, language }: CodeProps) => {
       data-lines={tLines}
       className={bem("", [
         language,
-        `width-${len < 20 ? "narrow" : len > 60 ? "wide" : "median"}`,
-        `lines-${tLines < 2 ? "small" : tLines > 10 ? "large" : "medium"}`,
+        `width-${len < 36 ? "narrow" : len > 60 ? "wide" : "median"}`,
+        `lines-${tLines < 3 ? "small" : tLines > 10 ? "large" : "medium"}`,
       ])}
     >
       <figcaption className={bem("caption")}>{caption}</figcaption>

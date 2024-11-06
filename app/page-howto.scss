@@ -3,8 +3,6 @@
 @import "media";
 @import "mixins";
 
-
-
 .HowToGuide {
   width: calc(100% - 2rem);
   padding: 1rem;
@@ -12,17 +10,17 @@
   flex-direction: column;
   // text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
   // mix-blend-mode: color-dodge;
-code {
-  @include fontFira;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  padding: 0 0.5rem;
-  border-radius: 0.25rem;
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  font-size: 0.75em;
-}
+  code {
+    @include fontFira;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0 0.5rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    font-size: 0.75em;
+  }
   p,
   h1,
   h2,
@@ -32,33 +30,33 @@ code {
   h6 {
     max-width: 42rem;
   }
-  p, code {
+  p,
+  code {
     max-width: 36rem;
   }
   &__index--ordinal {
     @include fontFira;
-    font-size: 1rem;
-    vertical-align: middle;
-    margin: 0;
-    border-radius: 100%;
-    margin-left: 0.5rem;
-    background-color: $color-green;
-    color: $color-bg;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    width: 2rem;
-    height: 2rem;
-
-    min-width: 2rem;
-    min-height: 2rem;
-
-    max-width: 2rem;
-    min-height: 2rem;
-    display: flex;
     align-items: center;
-    justify-content: center;
     align-self: flex-end;
+    background: linear-gradient(142deg, $color-pink, $color-purple);
+    border-radius: 100%;
+    color: $color-fg;
+    display: flex;
+    font-size: 0.5em;
+    height: 3rem;
+    justify-content: center;
     justify-self: flex-start;
-    line-height: 1rem;
+    line-height: 0.65em;
+    margin-left: 0.5rem;
+    margin: 0;
+    max-width: 3rem;
+    min-height: 3rem;
+    min-height: 3rem;
+    min-width: 3rem;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    vertical-align: middle;
+    mix-blend-mode: color-dodge;
+    width: 3rem;
   }
   &__title {
     margin: 0;
@@ -229,7 +227,5 @@ code {
         }
       }
     }
-    
-    
   }
 }
