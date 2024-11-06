@@ -1,569 +1,306 @@
-import blem from "blem"
-
-// import CopyMe from "@/assets/copy-me.svg"
-import Code from "@/components/Code"
-
-// This file was automatically generated from:
-// mad-notes/notes/How-To Guides/04 - Writing functions, in the main.md
-
-export const NAME = "04-writing-functions-in-the-main"
-export const DATA = {
-  tags: ["functions", "curry", "composition", "guide"],
+{
+  basePath: '/Users/brekk/work/stellar',
+  _: [
+    '/opt/homebrew/Cellar/node/22.9.0/bin/node',
+    '/Users/brekk/work/stellar/tools/excavator.mjs',
+    'mad-notes/notes/How-To Guides/04 - Writing functions, in the main.md'
+  ],
+  HELP: 'excavator\n' +
+    '\n' +
+    'EXCAVATOR\n' +
+    '\n' +
+    '  -i / --input\n' +
+    '  \tA file or glob path\n' +
+    '\n' +
+    '  -o / --output\n' +
+    '  \tA directory to write to\n' +
+    '\n' +
+    '  -h / --help\n' +
+    '  \tThis text!'
 }
-export const COMPONENT = () => {
-  const bem = blem("HowToGuide")
-  return (
-    <article className={bem("")}>
-      <h1 className={bem("header", "main")}>
-        <div className={bem("title")}>Writing functions, in the main</div>
-        <div className={bem("index", "ordinal")}>04</div>
-      </h1>
-      <p>
-        In the{" "}
-        <a className="internal" href="/How-To Guides/01 - Hello mad, mad world">
-          previous guide
-        </a>{" "}
-        we talked through the basics of{" "}
-        <a
-          className="internal"
-          href="/How-To Guides/01 - Hello mad, mad world#installation"
-        >
-          installing
-        </a>{" "}
-        Madlib and running the{" "}
-        <a
-          className="internal"
-          href="/How-To Guides/01 - Hello mad, mad world#repl"
-        >
-          REPL
-        </a>
-        .
-      </p>
-      <p>
-        In this document we'll talk through writing our own{" "}
-        <code className={bem("code", "inline")}>{`main`}</code> function, which
-        will allow us to save and execute code outside of the REPL.
-      </p>
-      <h2 className={bem("header", "section")}>Defining functions</h2>
-      <p>
-        Let's step through the process of defining functions in a standalone{" "}
-        <code className={bem("code", "inline")}>{`main`}</code> file. Open up
-        your favorite text editor and write the following
-      </p>
-      <Code language="mad">{`import IO from "IO"
-
-say :: String -> String -> String
-say = (word, subject) => word ++ " " ++ subject
-
-main = () => {
-  pipe(
-    say("hello"),
-    IO.putLine
-  )("world")
-}
-`}</Code>
-      <p>
-        Save this file as{" "}
-        <code className={bem("code", "inline")}>{`Say.main.mad`}</code> or
-        whatever you like, as long as it ends in{" "}
-        <code className={bem("code", "inline")}>{`.mad`}</code>.
-      </p>
-      <p>
-        We can run this file standalone with the command{" "}
-        <code className={bem("code", "inline")}>{`madlib run`}</code>:
-      </p>
-      <Code language="sh">{`> madlib run Say.main.mad
-hello world
-`}</Code>
-      <p>
-        Let's talk through exactly what we've done here, as there's a few
-        pieces.
-      </p>
-      <h3 className={bem("header", "subsection")}>Type signatures</h3>
-      <p>
-        Firstly, we've defined a function named{" "}
-        <code className={bem("code", "inline")}>{`say`}</code>. It has a{" "}
-        <a className="internal" href="/Reference/Type System/Type Signatures">
-          type signature
-        </a>
-        ,{" "}
-        <code
-          className={bem("code", "inline")}
-        >{`say :: String -> String -> String`}</code>{" "}
-        — this means that it is a binary function, taking two parameters (of
-        type <code className={bem("code", "inline")}>{`String`}</code>), and its
-        return type is also a{" "}
-        <code className={bem("code", "inline")}>{`String`}</code>. Learning to
-        read these type signatures can take some time, but we'll continue to
-        articulate what they mean as we go through this process.
-      </p>
-      <p>
-        Let's see a few examples of more signatures (we're omitting the function
-        implementations here, but they'd normally be required in order to be
-        syntactically valid):
-      </p>
-      <Code language="mad">{`func :: Integer -> String
-`}</Code>
-      <p>
-        The function above takes an{" "}
-        <a
-          className="internal"
-          href="/Reference/Literals/Numeric Types#integer"
-        >
-          Integer
-        </a>{" "}
-        and returns a{" "}
-        <a className="internal" href="/Reference/Literals/String">
-          String
-        </a>
-        .
-      </p>
-      <Code language="mad">{`otherFunc :: Float -> Float -> Float -> List Float
-`}</Code>
-      <p>
-        This <code className={bem("code", "inline")}>{`otherFunc`}</code> takes
-        three{" "}
-        <a className="internal" href="/Reference/Literals/Numeric Types#float">
-          floating point numbers
-        </a>{" "}
-        and returns a{" "}
-        <a className="internal" href="/Reference/Literals/List">
-          List
-        </a>{" "}
-        of floating point numbers.
-      </p>
-      <Code language="mad">{`thirdFunction :: Char -> String -> Boolean
-`}</Code>
-      <p>
-        This <code className={bem("code", "inline")}>{`thirdFunction`}</code>{" "}
-        takes a{" "}
-        <a className="internal" href="/Reference/Literals/Char">
-          Char
-        </a>{" "}
-        and a{" "}
-        <a className="internal" href="/Reference/Literals/String">
-          String
-        </a>{" "}
-        and returns a{" "}
-        <a className="internal" href="/Reference/Literals/Boolean">
-          Boolean
-        </a>
-        .
-      </p>
-      <h3 className={bem("header", "subsection")}>Function implementation</h3>
-      <p>
-        Coming back to the{" "}
-        <code className={bem("code", "inline")}>{`say`}</code> function we
-        defined earlier, let's talk through its actual implementation details:
-      </p>
-      <Code language="mad">{`say :: String -> String -> String
-say = (word, subject) => word ++ " " ++ subject
-`}</Code>
-      <p>
-        This definition allows us to associate a concrete implementation with
-        the types in the signature. So{" "}
-        <code className={bem("code", "inline")}>{`word`}</code> here is a{" "}
-        <a className="internal" href="/Reference/Literals/String">
-          String
-        </a>
-        , as is <code className={bem("code", "inline")}>{`subject`}</code>. The
-        return type is also a String, which works out nicely because the
-        concatenation operator{" "}
-        <code className={bem("code", "inline")}>{`++`}</code> works on Strings
-        and Lists, so{" "}
-        <code
-          className={bem("code", "inline")}
-        >{`word ++ " " ++ subject`}</code>{" "}
-        is a String concatenated with two other Strings.
-      </p>
-      <p>
-        As written above, we're using the lambda form of a function, which has
-        an implicit <code className={bem("code", "inline")}>{`return`}</code>{" "}
-        value, after the <code className={bem("code", "inline")}>{` =>`}</code>.
-      </p>
-      <p>Let's see what happens if we define the function with curly braces:</p>
-      <Code language="mad">{`say :: String -> String -> String
-say = (word, subject) => {
-  word ++ " " ++ subject
-}
-`}</Code>
-      <p>This causes the compiler to be unhappy:</p>
-      <Code language="none">{`[error]: Type error
-     ╭──▶ /how-to/Say.main.mad@6:1-8:1
-     │
-   6 │ ╭┤ say :: String -> String -> String
-   7 │ │  say = (verb, subject) => {
-   8 │ ├┤   verb ++ " " ++ subject
-     • │
-     • ╰╸ expected:
-     •      String -> String -> String
-     •
-     •    but found:
-     •      String -> String -> {}
-     •
-─────╯
-`}</Code>
-      <p>
-        You can see from the error that this change has caused the function to
-        no longer return a String, but instead this set of empty curly braces:{" "}
-        <code className={bem("code", "inline")}>{`{}`}</code> — this is also
-        known as the{" "}
-        <a className="internal" href="/Reference/Literals/Unit">
-          Unit
-        </a>{" "}
-        type.
-      </p>
-      <p>
-        In order to fix this we need to add the explicit{" "}
-        <code className={bem("code", "inline")}>{`return`}</code> keyword (or
-        change the type signature so that it returns Unit instead:{" "}
-        <code
-          className={bem("code", "inline")}
-        >{`String -> String -> {}`}</code>
-        )
-      </p>
-      <Code language="mad">{`say :: String -> String -> String
-say = (word, subject) => {
-  return word ++ " " ++ subject
-}
-`}</Code>
-      <h3 className={bem("header", "subsection")}>Function invocation</h3>
-      <p>To see this in action, we need to call the function:</p>
-      <Code language="mad">{`main = () => {
-  pipe(
-    say("hello"),
-    IO.putLine
-  )("world")
-}
-`}</Code>
-      <p>This adds a few minor wrinkles, so let's talk through them.</p>
-      <h3 className={bem("header", "subsection")}>A main function</h3>
-      <p>
-        In order to call our function from the command line, we need to define a{" "}
-        <code className={bem("code", "inline")}>{`main`}</code> function. This
-        function is special in that it <em>must</em> be named{" "}
-        <code className={bem("code", "inline")}>{`main`}</code> and it needs to
-        return{" "}
-        <a className="internal" href="/Reference/Literals/Unit">
-          Unit
-        </a>{" "}
-        / <code className={bem("code", "inline")}>{`{}`}</code>.
-      </p>
-      <h3 className={bem("header", "subsection")}>
-        Partial application and curry
-      </h3>
-      <p>
-        Recall earlier when we were showing{" "}
-        <code className={bem("code", "inline")}>{`Math.max`}</code>, we passed
-        in two parameters in the same invocation:
-      </p>
-      <Code language="mad">{`> Math.max(100, 20)
-100 :: Integer
-`}</Code>
-      <p>
-        If we chose to, we could call our{" "}
-        <code className={bem("code", "inline")}>{`say`}</code> function in this
-        same manner
-      </p>
-      <Code language="mad">{`main = () => {
-  say("hello", "world")
-}
-`}</Code>
-      <p>
-        However, this will run but not print anything. That's because we've now
-        omitted the{" "}
-        <code className={bem("code", "inline")}>{`IO.putLine`}</code> function,
-        which actually prints the input.
-      </p>
-      <Code language="mad">{`main = () => {
-  IO.putLine(say("hello", "world"))
-}
-`}</Code>
-      <p>
-        <strong>Now</strong> this function will print correctly.
-      </p>
-      <p>
-        <em>So why did the original version work?</em>
-      </p>
-      <p>
-        This is because we had <em>partially-applied</em> the{" "}
-        <code className={bem("code", "inline")}>{`say`}</code> function.
-        Consider this bit of code:
-      </p>
-      <Code language="none">{`main = () => {
-  hi = say("hello")
-  IO.putLine(hi("world")) // "hello world"
-  IO.putLine(hi("there")) // "hello there"
-  IO.putLine(hi("hey")) // "hello hey"
-}
-`}</Code>
-      <p>
-        Recall that our <code className={bem("code", "inline")}>{`say`}</code>{" "}
-        function takes two parameters. Unlike some other more imperative
-        languages, if we invoke a function with fewer parameters than it needs,
-        in Madlib we get back a function which expects the remaining parameters.
-        This is called currying a function. <em>All functions</em> in Madlib are
-        curried.
-      </p>
-      <p>
-        If we come back to our definition, you can think of this as crossing off
-        one of the values in the signature:
-      </p>
-      <Code language="none">{`// this function is curried!
-say :: String -> String -> String
-say = (word, subject) => word ++ " " ++ subject
-
-// partial application
-hi :: String -> String
-hi = say("hello")
-`}</Code>
-      <p>
-        (Since the Madlib compiler is smart and capable, we don't actually need
-        to define the type definition for{" "}
-        <code className={bem("code", "inline")}>{`hi`}</code>, but we've done so
-        here for illustrative porpoises.)
-      </p>
-      <h3 className={bem("header", "subsection")}>Composition</h3>
-      <p>
-        If you recall from our original example, we used the special{" "}
-        <code className={bem("code", "inline")}>{`pipe`}</code> function:
-      </p>
-      <Code language="mad">{`main = () => {
-  pipe(
-    say("hello"),
-    IO.putLine
-  )("world")
-}
-`}</Code>
-      <p>
-        This allows us to <em>compose</em> functions together. When we discussed
-        partial application above, we named the partially applied version of{" "}
-        <code className={bem("code", "inline")}>{`say`}</code>:
-      </p>
-      <Code language="none">{`hi = say("hello")
-`}</Code>
-      <p>
-        And we wrapped its invocation in{" "}
-        <code className={bem("code", "inline")}>{`IO.putLine`}</code>:
-      </p>
-      <Code language="mad">{`IO.putLine(hi("world"))
-`}</Code>
-      <p>
-        The <code className={bem("code", "inline")}>{`pipe`}</code> function
-        allows us to write things with fewer parentheses and compose operations
-        from top to bottom:
-      </p>
-      <Code language="mad">{`pipe(
-  say("hello"),
-  IO.putLine
-)("world")
-`}</Code>
-      <p>This is the exact same as:</p>
-      <Code language="mad">{`IO.putLine(say("hello")("world"))
-`}</Code>
-      <p>
-        This may seem confusing or needless at first, but as we add more
-        complexity you'll start to see the utility of this alternative form.
-      </p>
-      <h3 className={bem("header", "subsection")}>
-        Function application operator
-      </h3>
-      <p>
-        We've managed to articulate quite a few things with this simple example.
-        Let's add two more things to our understanding before we present you
-        with a challenge.
-      </p>
-      <p>
-        If you recall above, we used the{" "}
-        <code className={bem("code", "inline")}>{`Math.divide`}</code> function
-        like so:
-      </p>
-      <Code language="mad">{`> Math.divide(3, 4)
-0.75 :: Float
-`}</Code>
-      <p>
-        This is the same as using the division operator (
-        <code className={bem("code", "inline")}>{`/`}</code>):{" "}
-        <code className={bem("code", "inline")}>{`3 / 4`}</code>
-      </p>
-      <p>
-        If we wanted to partially apply the{" "}
-        <code className={bem("code", "inline")}>{`Math.divide`}</code> function,
-        we'd always be passing in the numerator{" "}
-        <code className={bem("code", "inline")}>{`3`}</code> before the
-        denominator <code className={bem("code", "inline")}>{`4`}</code>.
-        However, we can use the function application operator (
-        <code className={bem("code", "inline")}>{`$`}</code>) to make this
-        function much more valuable without changing its definition:
-      </p>
-      <Code language="none">{`half = Math.divide($, 2)
-half(100) // 50
-`}</Code>
-      <h3 className={bem("header", "subsection")}>
-        Applying a function to a List
-      </h3>
-      <p>
-        When we were discussing partial application before, we had an example
-        like this:
-      </p>
-      <Code language="mad">{`main = () => {
-  hi = say("hello")
-  IO.putLine(hi("world")) // "hello world"
-  IO.putLine(hi("there")) // "hello there"
-  IO.putLine(hi("hey")) // "hello hey"
-}
-`}</Code>
-      <p>
-        Using the <code className={bem("code", "inline")}>{`map`}</code>{" "}
-        function, we can re-use the same functionality while avoiding
-        repetition:
-      </p>
-      <Code language="mad">{`main = () => {
-  x = map(pipe(say("hello"), IO.putLine))(
-    ["world", "there", "hey"]
-  )
-}
-`}</Code>
-      <p>
-        However, you'll note that as written, the resulting value{" "}
-        <code className={bem("code", "inline")}>{`x`}</code> isn't a List of
-        Strings, it's a List of{" "}
-        <a className="internal" href="/Reference/Literals/Unit">
-          Unit
-        </a>
-        : <code className={bem("code", "inline")}>{`[{}, {}, {}]`}</code>. This
-        is because <code className={bem("code", "inline")}>{`IO.putLine`}</code>{" "}
-        prints a value but doesn't return it.
-      </p>
-      <p>
-        If we wanted to change that, we could do something like this instead, to
-        capture the transformed map:
-      </p>
-      <Code language="mad">{`import IO from "IO"
-import String from "String"
-
-main = () => {
-  x = map(
-    say("hello"),
-    ["world", "there", "hey"]
-  )
-  pipe(
-    String.join(", "),
-    IO.putLine
-  )(x) // "hello world, hello there, hello hey"
-}
-`}</Code>
-      <p>
-        NB: If you try to print{" "}
-        <code className={bem("code", "inline")}>{`x`}</code> without turning it
-        into a String first via{" "}
-        <code className={bem("code", "inline")}>{`String.join`}</code>, you'll
-        see an error similar to this:
-      </p>
-      <Code language="none">{`[error]: Type error
-     ╭──▶ /how-to/Say.main.mad@30:14-30:15
-     │
-  30 │   IO.putLine(x)
-     •              ┬
-     •              ╰╸ expected:
-     •                   String
-     •
-     •                 but found:
-     •                   List String
-     •
-─────╯
-`}</Code>
-      <p>
-        This is most easily worked around by calling{" "}
-        <code className={bem("code", "inline")}>{`show`}</code> first, like{" "}
-        <code className={bem("code", "inline")}>{`IO.putLine(show(x))`}</code> —
-        We won't go into too much detail for the purposes of keeping this
-        document reasonably short, but{" "}
-        <code className={bem("code", "inline")}>{`show`}</code> is a useful and{" "}
-        <a className="internal" href="/Reference/Interfaces/Show">
-          semi-magical function
-        </a>{" "}
-        which coerces values into Strings.
-      </p>
-      <h3 className={bem("header", "subsection")}>Challenge:</h3>
-      <p>
-        In order to test our understanding and comprehension, here's a small
-        challenge:{" "}
-        <a
-          className="internal"
-          href="/Tutorials/Challenges/Say Anything, Say Many Things"
-        >
-          Say Anything, Say Many Things
-        </a>
-      </p>
-      <h3 className={bem("header", "subsection")}>Solution:</h3>
-      <p>
-        See a possible solution to the challenge{" "}
-        <a
-          className="internal"
-          href="/Tutorials/Solutions/Solution - Say Anything, Say Many Things"
-        >
-          here
-        </a>
-      </p>
-      <h2 className={bem("header", "section")}>Summary</h2>
-      <ul>
-        <li>
-          Function{" "}
-          <a
-            className="internal"
-            href="/How-To Guides/04 - Writing functions, in the main#defining-functions"
-          >
-            definitions
-          </a>
-        </li>
-        <li>
-          Defining and running a{" "}
-          <a
-            className="internal"
-            href="/How-To Guides/04 - Writing functions, in the main#a-main-function"
-          >
-            main
-          </a>{" "}
-          function
-        </li>
-        <li>
-          <a
-            className="internal"
-            href="/How-To Guides/04 - Writing functions, in the main#partial-application-and-curry"
-          >
-            Curried
-          </a>{" "}
-          functions and their (partial){" "}
-          <a
-            className="internal"
-            href="/How-To Guides/04 - Writing functions, in the main#function-application-operator"
-          >
-            applications
-          </a>
-        </li>
-        <li>
-          <a
-            className="internal"
-            href="/How-To Guides/04 - Writing functions, in the main#composition"
-          >
-            Composing
-          </a>{" "}
-          functions
-        </li>
-        <li>
-          Applying functions to a List with{" "}
-          <a
-            className="internal"
-            href="/How-To Guides/04 - Writing functions, in the main#applying-a-function-to-a-list"
-          >
-            map
-          </a>
-        </li>
-      </ul>
-    </article>
-  )
-}
-
-export default COMPONENT
-
+path.basename 04-writing-functions-in-the-main
+[
+  'import blem from "blem"\n' +
+    '\n' +
+    '// import CopyMe from "@/assets/copy-me.svg"\n' +
+    'import Code from "@/components/Code"\n' +
+    '\n' +
+    '// This file was automatically generated from:\n' +
+    '// mad-notes/notes/How-To Guides/04 - Writing functions, in the main.md\n' +
+    '\n' +
+    'export const NAME = "04-writing-functions-in-the-main"\n' +
+    'export const DATA = {\n' +
+    '  tags: ["functions", "curry", "composition", "guide"],\n' +
+    '}\n' +
+    'export const COMPONENT = () => {\n' +
+    '  const bem = blem("HowToGuide")\n' +
+    '  return (\n' +
+    '    <article className={bem("")}>\n' +
+    '      <h1 className={bem("header", "main")}>\n' +
+    '        <div className={bem("title")}>Writing functions, in the main</div>\n' +
+    '        <div className={bem("index", "ordinal")}>04</div>\n' +
+    '      </h1>\n' +
+    '      <p>\n' +
+    '        In the{" "}\n' +
+    '        <a className="internal" href="/How-To Guides/01 - Hello mad, mad world">\n' +
+    '          previous guide\n' +
+    '        </a>{" "}\n' +
+    '        we talked through the basics of{" "}\n' +
+    '        <a\n' +
+    '          className="internal"\n' +
+    '          href="/How-To Guides/01 - Hello mad, mad world#installation"\n' +
+    '        >\n' +
+    '          installing\n' +
+    '        </a>{" "}\n' +
+    '        Madlib and running the{" "}\n' +
+    '        <a\n' +
+    '          className="internal"\n' +
+    '          href="/How-To Guides/01 - Hello mad, mad world#repl"\n' +
+    '        >\n' +
+    '          REPL\n' +
+    '        </a>\n' +
+    '        .\n' +
+    '      </p>\n' +
+    '      <p>\n' +
+    `        In this document we'll talk through writing our own{" "}\n` +
+    '        <code className={bem("code", "inline")}>{`main`}</code> function, which\n' +
+    '        will allow us to save and execute code outside of the REPL.\n' +
+    '      </p>\n' +
+    '      <h2 className={bem("header", "section")}>Defining functions</h2>\n' +
+    '      <p>\n' +
+    `        Let's step through the process of defining functions in a standalone{" "}\n` +
+    '        <code className={bem("code", "inline")}>{`main`}</code> file. Open up\n' +
+    '        your favorite text editor and write the following\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`import IO from "IO"\n' +
+    '\n' +
+    'say :: String -> String -> String\n' +
+    'say = (word, subject) => word ++ " " ++ subject\n' +
+    '\n' +
+    'main = () => {\n' +
+    '  pipe(\n' +
+    '    say("hello"),\n' +
+    '    IO.putLine\n' +
+    '  )("world")\n' +
+    '}\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        Save this file as{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`Say.main.mad`}</code> or\n' +
+    '        whatever you like, as long as it ends in{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`.mad`}</code>.\n' +
+    '      </p>\n' +
+    '      <p>\n' +
+    '        We can run this file standalone with the command{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`madlib run`}</code>:\n' +
+    '      </p>\n' +
+    '      <Code language="sh">{`> madlib run Say.main.mad\n' +
+    'hello world\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    "        Let's talk through exactly what we've done here, as there's a few\n" +
+    '        pieces.\n' +
+    '      </p>\n' +
+    '      <h3 className={bem("header", "subsection")}>Type signatures</h3>\n' +
+    '      <p>\n' +
+    `        Firstly, we've defined a function named{" "}\n` +
+    '        <code className={bem("code", "inline")}>{`say`}</code>. It has a{" "}\n' +
+    '        <a className="internal" href="/Reference/Type System/Type Signatures">\n' +
+    '          type signature\n' +
+    '        </a>\n' +
+    '        ,{" "}\n' +
+    '        <code\n' +
+    '          className={bem("code", "inline")}\n' +
+    '        >{`say :: String -> String -> String`}</code>{" "}\n' +
+    '        — this means that it is a binary function, taking two parameters (of\n' +
+    '        type <code className={bem("code", "inline")}>{`String`}</code>), and its\n' +
+    '        return type is also a{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`String`}</code>. Learning to\n' +
+    "        read these type signatures can take some time, but we'll continue to\n" +
+    '        articulate what they mean as we go through this process.\n' +
+    '      </p>\n' +
+    '      <p>\n' +
+    "        Let's see a few examples of more signatures (we're omitting the function\n" +
+    "        implementations here, but they'd normally be required in order to be\n" +
+    '        syntactically valid):\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`func :: Integer -> String\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        The function above takes an{" "}\n' +
+    '        <a\n' +
+    '          className="internal"\n' +
+    '          href="/Reference/Literals/Numeric Types#integer"\n' +
+    '        >\n' +
+    '          Integer\n' +
+    '        </a>{" "}\n' +
+    '        and returns a{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/String">\n' +
+    '          String\n' +
+    '        </a>\n' +
+    '        .\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`otherFunc :: Float -> Float -> Float -> List Float\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        This <code className={bem("code", "inline")}>{`otherFunc`}</code> takes\n' +
+    '        three{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/Numeric Types#float">\n' +
+    '          floating point numbers\n' +
+    '        </a>{" "}\n' +
+    '        and returns a{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/List">\n' +
+    '          List\n' +
+    '        </a>{" "}\n' +
+    '        of floating point numbers.\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`thirdFunction :: Char -> String -> Boolean\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        This <code className={bem("code", "inline")}>{`thirdFunction`}</code>{" "}\n' +
+    '        takes a{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/Char">\n' +
+    '          Char\n' +
+    '        </a>{" "}\n' +
+    '        and a{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/String">\n' +
+    '          String\n' +
+    '        </a>{" "}\n' +
+    '        and returns a{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/Boolean">\n' +
+    '          Boolean\n' +
+    '        </a>\n' +
+    '        .\n' +
+    '      </p>\n' +
+    '      <h3 className={bem("header", "subsection")}>Function implementation</h3>\n' +
+    '      <p>\n' +
+    '        Coming back to the{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`say`}</code> function we\n' +
+    "        defined earlier, let's talk through its actual implementation details:\n" +
+    '      </p>\n' +
+    '      <Code language="mad">{`say :: String -> String -> String\n' +
+    'say = (word, subject) => word ++ " " ++ subject\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        This definition allows us to associate a concrete implementation with\n' +
+    '        the types in the signature. So{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`word`}</code> here is a{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/String">\n' +
+    '          String\n' +
+    '        </a>\n' +
+    '        , as is <code className={bem("code", "inline")}>{`subject`}</code>. The\n' +
+    '        return type is also a String, which works out nicely because the\n' +
+    '        concatenation operator{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`++`}</code> works on Strings\n' +
+    '        and Lists, so{" "}\n' +
+    '        <code\n' +
+    '          className={bem("code", "inline")}\n' +
+    '        >{`word ++ " " ++ subject`}</code>{" "}\n' +
+    '        is a String concatenated with two other Strings.\n' +
+    '      </p>\n' +
+    '      <p>\n' +
+    "        As written above, we're using the lambda form of a function, which has\n" +
+    '        an implicit <code className={bem("code", "inline")}>{`return`}</code>{" "}\n' +
+    '        value, after the <code className={bem("code", "inline")}>{` =>`}</code>.\n' +
+    '      </p>\n' +
+    "      <p>Let's see what happens if we define the function with curly braces:</p>\n" +
+    '      <Code language="mad">{`say :: String -> String -> String\n' +
+    'say = (word, subject) => {\n' +
+    '  word ++ " " ++ subject\n' +
+    '}\n' +
+    '`}</Code>\n' +
+    '      <p>This causes the compiler to be unhappy:</p>\n' +
+    '      <Code language="none">{`[error]: Type error\n' +
+    '     ╭──▶ /how-to/Say.main.mad@6:1-8:1\n' +
+    '     │\n' +
+    '   6 │ ╭┤ say :: String -> String -> String\n' +
+    '   7 │ │  say = (verb, subject) => {\n' +
+    '   8 │ ├┤   verb ++ " " ++ subject\n' +
+    '     • │\n' +
+    '     • ╰╸ expected:\n' +
+    '     •      String -> String -> String\n' +
+    '     •\n' +
+    '     •    but found:\n' +
+    '     •      String -> String -> {}\n' +
+    '     •\n' +
+    '─────╯\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        You can see from the error that this change has caused the function to\n' +
+    '        no longer return a String, but instead this set of empty curly braces:{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`{}`}</code> — this is also\n' +
+    '        known as the{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/Unit">\n' +
+    '          Unit\n' +
+    '        </a>{" "}\n' +
+    '        type.\n' +
+    '      </p>\n' +
+    '      <p>\n' +
+    '        In order to fix this we need to add the explicit{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`return`}</code> keyword (or\n' +
+    '        change the type signature so that it returns Unit instead:{" "}\n' +
+    '        <code\n' +
+    '          className={bem("code", "inline")}\n' +
+    '        >{`String -> String -> {}`}</code>\n' +
+    '        )\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`say :: String -> String -> String\n' +
+    'say = (word, subject) => {\n' +
+    '  return word ++ " " ++ subject\n' +
+    '}\n' +
+    '`}</Code>\n' +
+    '      <h3 className={bem("header", "subsection")}>Function invocation</h3>\n' +
+    '      <p>To see this in action, we need to call the function:</p>\n' +
+    '      <Code language="mad">{`main = () => {\n' +
+    '  pipe(\n' +
+    '    say("hello"),\n' +
+    '    IO.putLine\n' +
+    '  )("world")\n' +
+    '}\n' +
+    '`}</Code>\n' +
+    "      <p>This adds a few minor wrinkles, so let's talk through them.</p>\n" +
+    '      <h3 className={bem("header", "subsection")}>A main function</h3>\n' +
+    '      <p>\n' +
+    '        In order to call our function from the command line, we need to define a{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`main`}</code> function. This\n' +
+    '        function is special in that it <em>must</em> be named{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`main`}</code> and it needs to\n' +
+    '        return{" "}\n' +
+    '        <a className="internal" href="/Reference/Literals/Unit">\n' +
+    '          Unit\n' +
+    '        </a>{" "}\n' +
+    '        / <code className={bem("code", "inline")}>{`{}`}</code>.\n' +
+    '      </p>\n' +
+    '      <h3 className={bem("header", "subsection")}>\n' +
+    '        Partial application and curry\n' +
+    '      </h3>\n' +
+    '      <p>\n' +
+    '        Recall earlier when we were showing{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`Math.max`}</code>, we passed\n' +
+    '        in two parameters in the same invocation:\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`> Math.max(100, 20)\n' +
+    '100 :: Integer\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        If we chose to, we could call our{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`say`}</code> function in this\n' +
+    '        same manner\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`main = () => {\n' +
+    '  say("hello", "world")\n' +
+    '}\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    "        However, this will run but not print anything. That's because we've now\n" +
+    '        omitted the{" "}\n' +
+    '        <code className={bem("code", "inline")}>{`IO.putLine`}</code> function,\n' +
+    '        which actually prints the input.\n' +
+    '      </p>\n' +
+    '      <Code language="mad">{`main = () => {\n' +
+    '  IO.putLine(say("hello", "world"))\n' +
+    '}\n' +
+    '`}</Code>\n' +
+    '      <p>\n' +
+    '        <strong>Now</strong> '... 9530 more characters
+]

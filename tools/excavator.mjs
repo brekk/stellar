@@ -1,29 +1,13 @@
 #!/usr/bin/env node
+import util from "node:util"
+import path from "node:path"
 
 import { nodeTypes } from "@mdx-js/mdx"
-import util from "node:util"
 import { unified } from "unified"
 import { remark } from "remark"
-import path from "node:path"
 import slug from "slug"
-// import * as prod from "react/jsx-runtime"
-// import rehypeFormat from "rehype-format"
-// import rehypeHeading from "rehype-autolink-headings"
-// import rehypeHighlight from "rehype-highlight"
-// import rehypeParse from "rehyp
-// import rehypePrism from "rehype-prism-plus"
-// import rehypeSlug from "rehype-slug"
-// import remarkCallouts from "@portaljs/remark-callouts"
-// import remarkEmbed from "@portaljs/remark-embed"
-// import remarkGfm from "remark-gfm"
-// import remarkReact from "remark-react"
-// import remarkSmart from "remark-smartypants"
-// import remarkStringify from "remark-stringify"
-// import remarkTOC from "remark-toc"
-// import remarkUTF8 from "remark-utf8"
-//import remarkLinks from "remark-wiki-link-plus"
-//import remarkMDXFrontmatter from "remark-mdx-frontmatter";
-//import remarkObsidian from "@thecae/remark-obsidian"
+import { excavatorWithCancel } from "./excavator-runner.mjs"
+
 import * as prettier from "prettier"
 import rehypeRaw from "rehype-raw"
 import rehypeStringify from "rehype-stringify"
@@ -35,10 +19,10 @@ import remarkParse from "remark-parse"
 import remarkParseFrontmatter from "remark-parse-frontmatter"
 import remarkRehype from "remark-rehype"
 import fs from "node:fs"
-import { node, encaseP, chain, map, fork } from "fluture"
+import { encaseP, parallel, chain, fork } from "fluture"
 import {
+  map,
   ifElse,
-  filter,
   includes,
   split,
   replace,
@@ -47,8 +31,9 @@ import {
   slice,
   pipe,
   curry,
-  identity as I,
 } from "ramda"
+import { readDirWithConfigAndCancel } from "destined"
+
 // import * as PROD from "react/jsx-runtime"
 // import rehypeReact from "rehype-react"
 
@@ -67,34 +52,6 @@ const utf8 = (x) => fs.promises.readFile(x, "utf8")
 
 const readFile = encaseP(utf8)
 
-/*
-https://swizec.com/blog/how-to-debug-unified-rehype-or-remark-and-fix-bugs-in-markdown-processing/
-function debugCodeBlocks() {
-  function findCodeBlocks(node) {
-    let nodes = []
-
-    if (node.tagName === "pre") {
-      nodes.push(node) // <pre> nodes are code blocks
-    } else if (node.children) {
-      // recursively walk through child nodes
-      for (let child of node.children) {
-        nodes.push(...findCodeBlocks(child))
-      }
-    }
-
-    return nodes
-  }
-
-  return (tree) => {
-    const codeBlocks = findCodeBlocks(tree)
-
-    // deep print the codeBlocks array
-    console.log(require("util").inspect(tree, false, null, true))
-
-    return tree
-  }
-}*/
-
 const xtraceWhen = curry((check, effect, msg, x) => {
   if (check(msg, x)) {
     effect(msg, x)
@@ -104,59 +61,6 @@ const xtraceWhen = curry((check, effect, msg, x) => {
 const xtrace = xtraceWhen(() => true)
 
 const trace = xtrace(console.log)
-
-/*
-const walkChildren = curry((check, agg, node) =>
-  filter(I, [
-    // keep the aggregate
-    ...agg,
-    // add this node maybe
-    check(node) ? node : false,
-    // call walkChildren on the children
-    ...map(walkChildren(check, agg))(node?.children ?? []),
-  ]),
-)
-*/
-
-import { visit } from "unist-util-visit"
-
-const blockWalker = curry((tag, select, ast) => {
-  visit(ast, select, (node) => {
-    console.log(tag)
-    console.log(util.inspect(node, false, null, true))
-  })
-  // if you want to eschew everything
-  // return ast
-})
-
-/*
-function fixCodeBlocks() {
-  const settings = {
-    quoteSmart: false,
-    closeSelfClosing: false,
-    omitOptionalTags: false,
-    entities: { useShortestReferences: true },
-  }
-
-  return (tree) => {
-    // same recursion findCodeBlocks as above
-    const codeBlocks = findCodeBlocks(tree)
-
-    for (let block of codeBlocks) {
-      // copy position info for the whole <pre> so we can fake it later
-      const position = {
-        start: block.children[0].position.start,
-        end: block.children[block.children.length - 1].position.end,
-      }
-
-      // replace children with my fakes
-      block.children = []
-    }
-
-    return tree
-  }
-}
-*/
 
 const pickaxe = (x) =>
   unified()
@@ -248,23 +152,33 @@ const postfix = pipe(
   fixCode,
   fixHeaders,
 )
+const slugpath = pipe((x) => path.basename(x, ".md"), slug)
 
-const readObsidian = (raw) =>
-  pipe(
+const readObsidian = (raw) => {
+  console.log("path.basename", slugpath(raw))
+  //console.log("READ!", slug(raw.slice(raw.lastIndexOf("/"), raw.last)))
+  return pipe(
     readFile,
     chain(encaseP(pickaxe)),
-    // map(trace("YO")),
     map(jsxify(raw)),
     map(postfix),
     chain(prettify),
+    //chain(writeFile(slug(raw)))
   )(raw)
+}
 
 const j2 = (x) => JSON.stringify(x, null, 2)
 const stringifyFrontmatter = pipe(Rpath(["data", "frontmatter"]), j2)
 
 pipe(
+  excavatorWithCancel(() => {}),
+  fork(console.warn)(console.log),
+)(process.argv)
+
+pipe(
   slice(2, Infinity),
   head,
-  readObsidian,
+  readDirWithConfigAndCancel(() => {}, { ignore: ["node_modules/**"] }),
+  chain(pipe(map(readObsidian), parallel(10))),
   fork(console.warn)(console.log),
 )(process.argv)
