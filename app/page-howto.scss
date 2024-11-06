@@ -1,4 +1,4 @@
-@use 'sass:color';
+@use "sass:color";
 
 @import "colors";
 @import "font";
@@ -32,8 +32,7 @@
   h6 {
     max-width: 42rem;
   }
-  p,
-  code {
+  p {
     max-width: 36rem;
   }
   &__index--ordinal {
@@ -104,10 +103,10 @@
         position: absolute;
         border-bottom: 1px solid $color-fg;
         box-shadow: 0 0 10px $color-fg;
-        width: 4rem;
+        width: 2rem;
         height: 1px;
         right: 0;
-        bottom: -4px;
+        bottom: -1px;
       }
     }
     &--section,

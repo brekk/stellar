@@ -43,11 +43,12 @@ const Code = ({ caption, inline = false, children, language }: CodeProps) => {
     >
       <figcaption className={bem("caption")}>{caption}</figcaption>
       <div className={bem("content")}>
+        {language !== "none" ? (
+          <div className={bem("language-meta")}>{language}</div>
+        ) : null}
         <pre className={bem("language", language)}>
           <code className={bem("language-content", language)}>
-            {language !== "none" ? (
-              <div className={bem("language-meta")}>{language}</div>
-            ) : null}
+
             {children}
           </code>
         </pre>
